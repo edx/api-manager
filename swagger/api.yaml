@@ -1,0 +1,43 @@
+# Swagger specification for the Open edX API
+# Note: not all API endpoints need to be listed here, just those that
+#  are part of your Open edX installation's "public API".
+
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "Open edX"
+host: "api.your-open-edx-here.org"
+basePath: "/"
+schemes:
+- "https"
+
+# Complete set of whitelisted routes.
+# Upstream API owners: provide an fixed URI ref for each route.
+paths:
+
+  # OAuth2
+  "/oauth2/v1/access_token":
+    $ref: "./oauth.yaml#/endpoints/request_access_token"
+
+  # Discovery IDA
+  "/discovery/v1/catalogs":
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/a504273/api.yaml#/endpoints/v1/catalogs"
+  "/discovery/v1/catalogs/{id}":
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/a504273/api.yaml#/endpoints/v1/catalogsById"
+
+# Shared definitions, referenced by various API fragments
+# Note: AWS API Gateway requires that definitions are exclusively alphanumeric for now.
+definitions:
+  Bearer:
+    $ref: "./oauth.yaml#/definitions/Bearer"
+
+# edX extension point. Lists the vendors in use and their specific 
+#  parameters that are expected by upstream refs. 
+# Upstream API owners: document your dependencies in this index file to
+#  avoid conflicts with other upstreams.
+x-edx-api-vendors:
+  aws_apigateway:
+    stage_variables:
+    - "edxapp_host"
+    - "discovery_host"
