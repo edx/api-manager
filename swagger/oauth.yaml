@@ -32,6 +32,11 @@ endpoints:
           required: false
           type: string
           format: password
+        - in: formData
+          name: refresh_token
+          required: false
+          type: string
+          format: password
       consumes:
         - application/x-www-form-urlencoded
       produces:
@@ -77,8 +82,15 @@ endpoints:
 
 definitions:
   Bearer:
+    required:
+      - access_token
+      - scope
+      - token_type
+      - expires_in
     properties:
       access_token:
+        type: "string"
+      refresh_token:
         type: "string"
       scope:
         type: "string"
