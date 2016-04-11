@@ -1,0 +1,89 @@
+---
+# This is a Swagger (swagger.org) specification fragment. It is
+# designed to be included into a top-level Swagger 'index', not
+# as a standalone document.
+
+endpoints:
+  request_access_token:
+    post:
+      operationId: request_access_token
+      tags:
+        - oauth2
+      parameters:
+        - in: formData
+          name: grant_type
+          required: true
+          type: string
+        - in: formData
+          name: client_id
+          required: true
+          type: string
+        - in: formData
+          name: client_secret
+          required: false
+          type: string
+          format: password
+        - in: formData
+          name: username
+          required: false
+          type: string
+        - in: formData
+          name: password
+          required: false
+          type: string
+          format: password
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/Bearer"
+        400:
+          description: "Bad Request"
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: "Not Found"
+        429:
+          description: "Too Many Requests"
+        500:
+          description: "Internal Server Error"
+      x-amazon-apigateway-auth:
+        type: none
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        responses:
+          200:
+            statusCode: "200"
+          401:
+            statusCode: "401"
+          403:
+            statusCode: "403"
+          404:
+            statusCode: "404"
+          429:
+            statusCode: "429"
+          500:
+            statusCode: "500"
+          default:
+            statusCode: "400"
+        type: http
+        uri: "https://${stageVariables.edxapp_host}/oauth2/access_token"
+
+definitions:
+  Bearer:
+    properties:
+      access_token:
+        type: "string"
+      scope:
+        type: "string"
+      token_type:
+        type: "string"
+      expires_in:
+        type: "integer"
+        format: "int64"
