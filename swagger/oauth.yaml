@@ -45,7 +45,7 @@ endpoints:
         200:
           description: OK
           schema:
-            $ref: "#/definitions/Bearer"
+            $ref: "#/definitions/bearer"
         400:
           description: "Bad Request"
         401:
@@ -81,7 +81,7 @@ endpoints:
         uri: "https://${stageVariables.edxapp_host}/oauth2/access_token"
 
 definitions:
-  Bearer:
+  bearer:
     required:
       - access_token
       - scope
