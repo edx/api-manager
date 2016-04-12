@@ -16,6 +16,10 @@ schemes:
 # Upstream API owners: provide an fixed URI ref for each route.
 paths:
 
+  # Heartbeat
+  "/heartbeat":
+    $ref: "./heartbeat.yaml#/endpoints/heartbeat"
+
   # OAuth2
   "/oauth2/v1/access_token":
     $ref: "./oauth.yaml#/endpoints/request_access_token"
@@ -26,11 +30,16 @@ paths:
   "/discovery/v1/catalogs/{id}":
     $ref: "https://raw.githubusercontent.com/edx/course-discovery/a504273/api.yaml#/endpoints/v1/catalogsById"
 
-# Shared definitions, referenced by various API fragments
-# Note: AWS API Gateway requires that definitions are exclusively alphanumeric for now.
+# swagger-codegen automatically generates "inline_response_*" models for inline schemas.
+#   Unfortunately, AWS API Gateway can only handle alphanumeric model names (facepalm).
+#   So, at least for now, you can't inline schemas until AWS fixes this, and you need to
+#   declare any referenced definitions here because Swagger doesn't let you actually import
+#   document fragments, you're really importing path and definition fragments separately. Yay!
 definitions:
-  Bearer:
-    $ref: "./oauth.yaml#/definitions/Bearer"
+  heartbeat:
+    $ref: "./heartbeat.yaml#/definitions/heartbeat"
+  bearer:
+    $ref: "./oauth.yaml#/definitions/bearer"
 
 # edX extension point. Lists the vendors in use and their specific 
 #  parameters that are expected by upstream refs. 
@@ -39,5 +48,6 @@ definitions:
 x-edx-api-vendors:
   aws_apigateway:
     stage_variables:
+    - "id"
     - "edxapp_host"
     - "discovery_host"

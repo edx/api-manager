@@ -1,0 +1,44 @@
+---
+# This is a Swagger (swagger.org) specification fragment. It is
+# designed to be included into a top-level Swagger 'index', not
+# as a standalone document.
+
+endpoints:
+  heartbeat:
+    get:
+      operationId: "get_heartbeat"
+      tags:
+        - heartbeat
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/heartbeat"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: |
+                {
+                    "version": "1.0.0",
+                    "id": "${stageVariables['id']}"
+                }
+        requestTemplates:
+          application/json: |
+                {"statusCode": 200}
+        type: "mock"
+
+definitions:
+  heartbeat:
+    required:
+      - version
+    properties:
+      version:
+        type: "string" 
+      id:
+        type: "string"
