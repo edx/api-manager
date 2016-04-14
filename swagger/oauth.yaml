@@ -9,6 +9,11 @@ endpoints:
       operationId: request_access_token
       tags:
         - oauth2
+      description: |
+        To request an access token, the client obtains authorization from the
+        resource owner.  The authorization is expressed in the form of an
+        authorization grant, which the client uses to request the access
+        token. See https://tools.ietf.org/html/rfc6749#section-4 for more detail.
       parameters:
         - in: formData
           name: grant_type
@@ -82,20 +87,34 @@ endpoints:
 
 definitions:
   bearer:
+    properties:
+      access_token:
+        type: "string"
+        description: "The access token issued by the authorization server."
+        example: "2YotnFZFEjr1zCsicMWpAA"
+      refresh_token:
+        type: "string"
+        description: |
+          Refresh tokens are credentials used to obtain new access tokens once
+          authorization has already been granted.
+        example: "tGzv3JOkF0XG5Qx2TlKWIA"
+      scope:
+        type: "string"
+        description: |
+          Whitespace-delimited list of associated scopes. Can be an empty string.
+          See https://tools.ietf.org/html/rfc6749#section-3.3 for more detail.
+        example: "read write"
+      token_type:
+        type: "string"
+        description: "The type of the token issued. Value is case insensitive."
+        example: "Bearer"
+      expires_in:
+        type: "integer"
+        format: "int64"
+        description: "The lifetime in seconds of the access token."
+        example: 60
     required:
       - access_token
       - scope
       - token_type
       - expires_in
-    properties:
-      access_token:
-        type: "string"
-      refresh_token:
-        type: "string"
-      scope:
-        type: "string"
-      token_type:
-        type: "string"
-      expires_in:
-        type: "integer"
-        format: "int64"
