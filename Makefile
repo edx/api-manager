@@ -25,8 +25,8 @@ fast_validate_python: clean
 	make quality
 
 quality:
-	pep8 --config=.pep8 .
-	pylint --rcfile=pylintrc .
+	pep8 --config=.pep8 scripts/aws
+	pylint --rcfile=pylintrc scripts/aws
 
 validate: validate_python
 
