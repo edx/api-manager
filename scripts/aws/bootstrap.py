@@ -177,7 +177,10 @@ if __name__ == '__main__':
     create_route53_rs(args.route53_hosted_zone, args.api_base_domain, domain['distributionDomainName'])
 
     # Phase 2, create the api gateway and dummy base path mapping
-    if not get_base_path(args.api_base_domain):
+
+    base_path = get_base_path(args.api_base_domain)
+
+    if not base_path:
 
         #  Create new dummy API Gateway object and deploy to a stage
         api_id = bootstrap_api(args.stage_name)
@@ -188,4 +191,7 @@ if __name__ == '__main__':
         logging.info('Bootstrap successful.')
 
     else:
+        api_id = base_path['restApiId']
         logging.info('Bootstrap not necessary.')
+
+    logging.info("Completed bootstrapping for API {api_id}.".format(api_id=api_id))
