@@ -1,0 +1,32 @@
+# .gitignore for edx-platform.
+# There's a lot here, please try to keep it organized.
+
+### Python artifacts
+*.pyc
+
+### Editor and IDE artifacts
+*~
+*.swp
+*.orig
+/nbproject
+.idea/
+.redcar/
+codekit-config.json
+.pycharm_helpers/
+
+### NFS artifacts
+.nfs*
+
+### OS X artifacts
+*.DS_Store
+.AppleDouble
+:2e_*
+:2e#
+
+### Installation artifacts
+*.egg-info
+.pip_download_cache/
+.prereqs_cache
+
+### IPython Notebooks
+*.ipynb
