@@ -7,6 +7,7 @@ import logging
 import botocore.session
 import botocore.exceptions
 
+
 def test_domain_exists(client, api_base):
     """Make sure the domain of interest actually exists before bootstrapping."""
     try:
@@ -16,6 +17,7 @@ def test_domain_exists(client, api_base):
         sys.exit(1)
 
     return True
+
 
 def test_no_base_path_exists(client, api_base):
     """Get the current live API ID and stage tied to this base path."""
@@ -27,9 +29,10 @@ def test_no_base_path_exists(client, api_base):
         logging.info('No base path exists yet, proceeding with bootstrap.')
         return True
 
-    logging.error('Found existing base path mapping for API ID "%s", stage "%s"',\
-        mapping['restApiId'], mapping['stage'])
+    logging.error('Found existing base path mapping for API ID "%s", stage "%s"',
+                  mapping['restApiId'], mapping['stage'])
     return False
+
 
 def bootstrap_api(client, stage_name):
     """
@@ -49,6 +52,7 @@ def bootstrap_api(client, stage_name):
 
     return response['id']
 
+
 def create_base_path_mapping(client, api_id, api_base, stage_name):
     """Link a custom domain with an API Gateway object stage"""
 
@@ -58,9 +62,10 @@ def create_base_path_mapping(client, api_id, api_base, stage_name):
         basePath='(none)',
         restApiId=api_id,
         stage=stage_name
-        )
+    )
     logging.info("Domain '%s' now pointed to '%s':'%s'", api_base, api_id, stage_name)
     return response
+
 
 def main(log_level=20):
     """Update an AWS API Gateway object from a Swagger configuration file."""
@@ -91,6 +96,7 @@ def main(log_level=20):
 
     else:
         logging.info('Bootstrap not necessary.')
+
 
 if __name__ == '__main__':
     main()
