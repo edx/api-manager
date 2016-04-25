@@ -194,4 +194,4 @@ if __name__ == '__main__':
         api_id = base_path['restApiId']
         logging.info('Bootstrap not necessary.')
 
-    logging.info("Completed bootstrapping for API {api_id}.".format(api_id=api_id))
+    logging.info('Completed bootstrapping for API "%s".', api_id)
