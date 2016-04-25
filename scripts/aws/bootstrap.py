@@ -15,7 +15,7 @@ CLOUDFRONT_HOSTED_ZONE = "Z2FDTNDATAQYW2"
 def get_domain(api_base):
     """Returns a dictionary response for the specified domain or None if the domain does not exit"""
 
-    client =  boto3.client('apigateway', region_name=args.aws_region)
+    client = boto3.client('apigateway', region_name=args.aws_region)
 
     try:
         response = client.get_domain_name(domainName=api_base)
@@ -28,7 +28,7 @@ def get_domain(api_base):
 def get_base_path(api_base):
     """Returns a dictionary response for the specified base path or None if the base path does not exist"""
 
-    client =  boto3.client('apigateway', region_name=args.aws_region)
+    client = boto3.client('apigateway', region_name=args.aws_region)
 
     try:
         mapping = client.get_base_path_mapping(
@@ -43,7 +43,7 @@ def get_base_path(api_base):
 def create_apigw_custom_domain_name(domain_name, cert_name, cert_body, cert_pk, cert_chain):
     """Creates an api gateway custom domain entity"""
 
-    client =  boto3.client('apigateway', region_name=args.aws_region)
+    client = boto3.client('apigateway', region_name=args.aws_region)
 
     try:
         response = client.create_domain_name(
@@ -85,7 +85,7 @@ def bootstrap_api(stage_name):
     with environment-specific variables.
     """
 
-    client =  boto3.client('apigateway', region_name=args.aws_region)
+    client = boto3.client('apigateway', region_name=args.aws_region)
 
     # bootstrap.json is relative to me; where am I?
     my_dir = os.path.dirname(os.path.realpath(__file__))
@@ -106,7 +106,7 @@ def bootstrap_api(stage_name):
 def create_base_path_mapping(api_id, api_base, stage_name):
     """Link a custom domain with an API Gateway object stage"""
 
-    client =  boto3.client('apigateway', region_name=args.aws_region)
+    client = boto3.client('apigateway', region_name=args.aws_region)
 
     # Note: this will fail if a mapping already exists (bootstrapping is not idempotent).
     response = client.create_base_path_mapping(
@@ -171,7 +171,7 @@ if __name__ == '__main__':
     if not domain:
         logging.info("Custom domain does not exist, creating")
         domain = create_apigw_custom_domain_name(args.api_base_domain, args.ssl_cert_name,
-                               ssl_cert,ssl_pk, ssl_cert_chain)
+                                                 ssl_cert, ssl_pk, ssl_cert_chain)
 
     logging.info("Upserting DNS for the custom domain.")
     create_route53_rs(args.route53_hosted_zone, args.api_base_domain, domain['distributionDomainName'])
