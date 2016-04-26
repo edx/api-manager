@@ -8,6 +8,7 @@ import logging
 import botocore.session
 import botocore.exceptions
 
+
 def get_api_id(client, api_base):
     """Get the current live API ID and stage tied to this base path."""
     try:
@@ -17,10 +18,11 @@ def get_api_id(client, api_base):
     except botocore.exceptions.ClientError:
         raise ValueError('No mapping found for "%s"', api_base)
 
-    logging.info('Found existing base path mapping for API ID "%s", stage "%s"',\
-        mapping['restApiId'], mapping['stage'])
+    logging.info('Found existing base path mapping for API ID "%s", stage "%s"',
+                 mapping['restApiId'], mapping['stage'])
 
     return (mapping['restApiId'], mapping['stage'])
+
 
 def get_next_stage(rotation, cur_stage):
     """
@@ -49,6 +51,7 @@ def get_next_stage(rotation, cur_stage):
     logging.info('Rotating from stage "%s" to "%s".', cur_stage, next_stage)
     return next_stage
 
+
 def deploy_api(client, api_id, swagger_filename, stage_name, stage_config):
     """
     Upload the Swagger document to an existing API Gateway object and set it live
@@ -66,6 +69,7 @@ def deploy_api(client, api_id, swagger_filename, stage_name, stage_config):
 
     logging.info('API ID "%s" deployed (deployment ID %s)', api_id, deployment['id'])
 
+
 def update_stage(client, api_id, stage_name, stage_config):
     """
     Modify deployed stage with throttling, logging and caching settings.
@@ -79,15 +83,16 @@ def update_stage(client, api_id, stage_name, stage_config):
         restApiId=api_id,
         stageName=stage_name,
         patchOperations=[
-            {'op':'replace', 'path':'/*/*/logging/loglevel', 'value': settings['log_level']},
-            {'op':'replace', 'path':'/*/*/metrics/enabled', 'value': settings['metrics']},
-            {'op':'replace', 'path':'/*/*/caching/enabled', 'value': settings['caching']},
-            {'op':'replace', 'path':'/*/*/throttling/rateLimit', 'value': settings['rate_limit']},
-            {'op':'replace', 'path':'/*/*/throttling/burstLimit', 'value': settings['burst_limit']}
+            {'op': 'replace', 'path': '/*/*/logging/loglevel', 'value': settings['log_level']},
+            {'op': 'replace', 'path': '/*/*/metrics/enabled', 'value': settings['metrics']},
+            {'op': 'replace', 'path': '/*/*/caching/enabled', 'value': settings['caching']},
+            {'op': 'replace', 'path': '/*/*/throttling/rateLimit', 'value': settings['rate_limit']},
+            {'op': 'replace', 'path': '/*/*/throttling/burstLimit', 'value': settings['burst_limit']}
         ])
 
-    logging.info('API ID "%s", stage "%s" updated with settings: %s',\
-        api_id, stage_name, stage_update['methodSettings'])
+    logging.info('API ID "%s", stage "%s" updated with settings: %s',
+                 api_id, stage_name, stage_update['methodSettings'])
+
 
 def main(log_level=20):
     """Update an AWS API Gateway object from a Swagger configuration file."""
@@ -135,6 +140,7 @@ def main(log_level=20):
 
     # Return new stage name.
     print next_stage
+
 
 if __name__ == '__main__':
     main()
