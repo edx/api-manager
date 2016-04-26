@@ -29,6 +29,10 @@ endpoints:
           type: string
           format: password
         - in: formData
+          name: token_type
+          required: false
+          type: string
+        - in: formData
           name: username
           required: false
           type: string
