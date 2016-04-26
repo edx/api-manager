@@ -26,9 +26,11 @@ paths:
 
   # Discovery IDA
   "/discovery/v1/catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/a504273/api.yaml#/endpoints/v1/catalogs"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogs"
   "/discovery/v1/catalogs/{id}":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/a504273/api.yaml#/endpoints/v1/catalogsById"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogById"
+  "/discovery/v1/catalogs/{id}/courses":
+      $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogCourses"
 
 # swagger-codegen automatically generates "inline_response_*" models for inline schemas.
 #   Unfortunately, AWS API Gateway can only handle alphanumeric model names (facepalm).
