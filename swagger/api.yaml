@@ -24,12 +24,12 @@ paths:
   "/oauth2/v1/access_token":
     $ref: "./oauth.yaml#/endpoints/request_access_token"
 
-  # Discovery IDA
-  "/discovery/v1/catalogs":
+  # Catalog IDA
+  "/catalog/v1/catalogs":
     $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogs"
-  "/discovery/v1/catalogs/{id}":
+  "/catalog/v1/catalogs/{id}":
     $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogById"
-  "/discovery/v1/catalogs/{id}/courses":
+  "/catalog/v1/catalogs/{id}/courses":
       $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogCourses"
 
 # swagger-codegen automatically generates "inline_response_*" models for inline schemas.
