@@ -1,0 +1,32 @@
+---
+# This is a Swagger (swagger.org) specification fragment. It is
+# designed to be included into a top-level Swagger 'index', not
+# as a standalone document.
+
+endpoints:
+  index:
+    get:
+      operationId: "get_index"
+      tags:
+        - index
+      description: |
+        This endpoint returns a redirect to the API's landing page
+        (documentation, developer portal, etc). It is optional.
+      produces:
+        - "text/html"
+      responses:
+        302:
+          description: "Redirect"
+          headers:
+            Location:
+              type: "string"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "302"
+            responseParameters:
+              method.response.header.Location: "stageVariables.landing_page"
+        requestTemplates:
+          application/json: |
+                {"statusCode": 302}
+        type: "mock"
