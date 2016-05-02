@@ -5,9 +5,9 @@
 ---
 swagger: "2.0"
 info:
-  version: "1.0"
+  version: "1.0.0"
   title: "Open edX"
-host: "api.your-open-edx-here.org"
+host: "{{host}}"
 basePath: "/"
 schemes:
 - "https"

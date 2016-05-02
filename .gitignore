@@ -31,3 +31,5 @@ codekit-config.json
 ### IPython Notebooks
 *.ipynb
 
+### Pip artifacts
+python-libs/
