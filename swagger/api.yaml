@@ -16,6 +16,10 @@ schemes:
 # Upstream API owners: provide an fixed URI ref for each route.
 paths:
 
+  # Index
+  "/":
+    $ref: "./index.yaml#/endpoints/index"
+
   # Heartbeat
   "/heartbeat":
     $ref: "./heartbeat.yaml#/endpoints/heartbeat"
@@ -51,5 +55,6 @@ x-edx-api-vendors:
   aws_apigateway:
     stage_variables:
     - "id"
+    - "landing_page"
     - "edxapp_host"
     - "discovery_host"

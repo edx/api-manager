@@ -15,7 +15,7 @@ def get_api_id(client, api_base_domain):
             domainName=api_base_domain,
             basePath='(none)')
     except botocore.exceptions.ClientError:
-        raise ValueError('No mapping found for "%s"', api_base_domain)
+        raise ValueError('No mapping found for "%s"' % api_base_domain)
 
     logging.info('Found existing base path mapping for API ID "%s", stage "%s"',
                  response['restApiId'], response['stage'])
@@ -120,6 +120,8 @@ if __name__ == '__main__':
                         help="Default per-resource average rate limit")
     parser.add_argument("--burst-limit", required=False, default="1000", type=str,
                         help="Default per-resource maximum rate limit")
+    parser.add_argument("--landing-page", required=True,
+                        help="Location of landing page for 'root' level requests")
     parser.add_argument("--edxapp-host", required=True,
                         help="Location of edxapp for request routing")
     parser.add_argument("--catalog-host", required=True,
@@ -138,9 +140,10 @@ if __name__ == '__main__':
 
     # Activate the API with the requested stage variables.
     deploy_api(apig, api_id, args.swagger_filename, new_stage, {
+        'id': args.tag,
+        'landing_page': args.landing_page,
         'edxapp_host': args.edxapp_host,
-        'discovery_host': args.catalog_host,
-        'id': args.tag
+        'discovery_host': args.catalog_host
     })
 
     # Apply stage setting updates.
