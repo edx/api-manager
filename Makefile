@@ -20,7 +20,7 @@ validate_python: clean
 
 quality:
 	pep8 --config=.pep8 scripts/aws
-	pylint --rcfile=pylintrc scripts/aws
+	pylint --rcfile=.pylintrc scripts/aws
 
 validate: validate_python
 

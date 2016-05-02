@@ -4,9 +4,9 @@
 
 import os
 import logging
+import argparse
 import boto3
 import botocore.exceptions
-import argparse
 
 
 CLOUDFRONT_HOSTED_ZONE = "Z2FDTNDATAQYW2"
@@ -103,7 +103,7 @@ def bootstrap_api(stage_name):
     return response['id']
 
 
-def create_base_path_mapping(api_id, api_base, stage_name):
+def create_base_path_mapping(rest_api_id, api_base, stage_name):
     """Link a custom domain with an API Gateway object stage"""
 
     client = boto3.client('apigateway', region_name=args.aws_region)
@@ -112,10 +112,10 @@ def create_base_path_mapping(api_id, api_base, stage_name):
     response = client.create_base_path_mapping(
         domainName=api_base,
         basePath='(none)',
-        restApiId=api_id,
+        restApiId=rest_api_id,
         stage=stage_name
     )
-    logging.info("Domain '%s' now pointed to '%s':'%s'", api_base, api_id, stage_name)
+    logging.info("Domain '%s' now pointed to '%s':'%s'", api_base, rest_api_id, stage_name)
     return response
 
 
