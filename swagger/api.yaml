@@ -7,7 +7,7 @@ swagger: "2.0"
 info:
   version: "1.0.0"
   title: "Open edX"
-host: "{{host}}"
+host: "your-open-edx-site.org"
 basePath: "/"
 schemes:
 - "https"

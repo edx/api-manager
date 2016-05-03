@@ -33,3 +33,6 @@ codekit-config.json
 
 ### Pip artifacts
 python-libs/
+
+### Test artifacts
+*.cache
