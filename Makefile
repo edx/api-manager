@@ -15,8 +15,12 @@ requirements:
 clean:
 	find . -name '*.pyc' -delete
 
+test_scripts:
+	cd scripts/aws && python -m pytest -v tests/test_deploy.py
+
 validate_python: clean
 	make quality
+	make test_scripts
 
 quality:
 	pep8 --config=.pep8 scripts/aws
