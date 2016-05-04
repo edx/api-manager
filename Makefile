@@ -10,15 +10,16 @@ help:
 	@echo '                                                                                     		'
 
 requirements:
-	pip install -qr requirements/local.txt --exists-action w
+	pip install -qr requirements/test.txt --exists-action w
 
 clean:
 	find . -name '*.pyc' -delete
 
 test_scripts:
-	cd scripts/aws && python -m pytest -v tests/test_deploy.py
+	cd scripts/aws && python -m pytest
 
-validate_python: clean
+validate_python:
+	make clean
 	make quality
 	make test_scripts
 

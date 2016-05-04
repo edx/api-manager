@@ -1,0 +1,12 @@
+# Travis CI configuration file for running tests
+sudo: false
+language: python
+branches:
+    only:
+      - master
+python:
+  - "2.7"
+install:
+  - make requirements
+script:
+  - make validate
