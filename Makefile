@@ -16,7 +16,8 @@ clean:
 	find . -name '*.pyc' -delete
 
 test_scripts:
-	cd scripts/aws && python -m pytest -v tests/test_deploy.py
+	pip install -qr requirements/test.txt --exists-action w
+	cd scripts/aws && python -m pytest
 
 validate_python: clean
 	make quality
