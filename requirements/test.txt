@@ -1,6 +1,7 @@
 # Packages required for testing
 -r base.txt
 
-pep8==1.7.0
-pytest==2.9.1
 moto==0.4.24
+pep8==1.7.0
+pylint==1.5.5
+pytest==2.9.1
