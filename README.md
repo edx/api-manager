@@ -1,4 +1,4 @@
-# api-manager
+# api-manager [![Build Status](https://travis-ci.org/edx/api-manager.svg?branch=master)](https://travis-ci.org/edx/api-manager)
 Specifications and optional lightweight service for routing clients of the Open edX REST API to various endpoints within the platform.
 
 ## About
