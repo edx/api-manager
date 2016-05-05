@@ -32,12 +32,17 @@ class DeployTest(TestCase):
         expected_rotations = [
             {'current': 'red', 'next': 'black'},
             {'current': 'black', 'next': 'turquoise'},
-            {'current': 'turquoise', 'next': 'red'}
+            {'current': 'turquoise', 'next': 'red'},
+            {'current': 'not-in-rotation', 'next': 'red'}
         ]
 
         for expected_rotation in expected_rotations:
             actual_next_stage = get_next_stage(self.rotation, expected_rotation['current'])
             self.assertEqual(expected_rotation['next'], actual_next_stage)
+
+        # test behavior with a bad rotation
+        with self.assertRaises(ValueError):
+            get_next_stage([], 'red')
 
     @pytest.mark.skip(reason="moto does not yet support AWS:ApiGateway:PutRestApi")
     @mock_apigateway
