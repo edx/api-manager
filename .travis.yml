@@ -6,7 +6,33 @@ branches:
       - master
 python:
   - "2.7"
+before_install:
+  # The travis container already has java 7 installed, so no installation action is needed for that.
+  - wget http://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.1.6/swagger-codegen-cli-2.1.6.jar -O swagger-codegen-cli.jar
 install:
   - make requirements
+before_script:
+  # Create the mock server from the swagger docs.
+  # This assumes that you have java 7 installed and
+  # the swagger-codegen.jar already downloaded on your system.
+  - java -jar swagger-codegen-cli.jar generate -l nodejs-server -i swagger/api.yaml -o edx-api-mock-server
+  # CD into the newly-created server directory.
+  - cd edx-api-mock-server
+  # Install the generated mock server (using its package.json file).
+  - npm install
+  # Start up the mock server.
+  # Running under development mode will turn on stubs (mock mode).
+  - NODE_ENV=development node index.js > $TRAVIS_BUILD_DIR/node_run.log &
+  # Give it a few secs to start up.
+  - sleep 5
+  # Cat the log file. This should show that the server started up.
+  # The server runs on port 8080 (see index.js).
+  - cat $TRAVIS_BUILD_DIR/node_run.log
+  # Return to the default directory and continue.
+  - cd $TRAVIS_BUILD_DIR
 script:
   - make validate
+after_script:
+  - killall -9 node
+after_failure:
+  - cat $TRAVIS_BUILD_DIR/node_run.log

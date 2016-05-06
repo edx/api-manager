@@ -36,3 +36,5 @@ python-libs/
 
 ### Test artifacts
 *.cache
+swagger-codegen-cli.jar
+edx-api-mock-server/
