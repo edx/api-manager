@@ -23,11 +23,16 @@ validate_python:
 	make quality
 	make test_scripts
 
+validate_swagger_doc:
+	curl http://localhost:8080/heartbeat
+
 quality:
 	pep8 --config=.pep8 scripts/aws
 	pylint --rcfile=.pylintrc scripts/aws
 
-validate: validate_python
+validate:
+	make validate_python
+	make validate_swagger_doc
 
 # Targets in a Makefile which do not produce an output file with the same name as the target name
 .PHONY: help requirements clean validate_python quality fast_validate_python
