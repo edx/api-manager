@@ -1,0 +1,39 @@
+---
+- config:
+    - testset: 'Oauth API'
+
+- test:
+    - name: 'The GET method is not defined for this endpoint'
+    - url: '/oauth2/v1/access_token'
+    - method: 'GET'
+    - expected_status: [405]
+
+- test:
+    - name: 'POST request with only grant_type parameter returns a 400 code'
+    - url: '/oauth2/v1/access_token'
+    - method: 'POST'
+    - headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    - body: 'grant_type=foo'
+    - expected_status: [400]
+
+- test:
+    - name: 'POST request with only client_id parameter returns a 400 code'
+    - url: '/oauth2/v1/access_token'
+    - method: 'POST'
+    - headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    - body: 'client_id=foo'
+    - expected_status: [400]
+
+- test:
+    - name: 'POST request with required parameters succeeds'
+    - url: '/oauth2/v1/access_token'
+    - method: 'POST'
+    - headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    - body: 'grant_type=foo&client_id=bar'
+    - expected_status: [200]
+    - validators:
+        - compare: {jsonpath_mini: 'access_token', comparator: 'eq', expected: 'Sample text'}
+        - compare: {jsonpath_mini: 'refresh_token', comparator: 'eq', expected: 'Sample text'}
+        - compare: {jsonpath_mini: 'scope', comparator: 'eq', expected: 'Sample text'}
+        - compare: {jsonpath_mini: 'token_type', comparator: 'eq', expected: 'Sample text'}
+        - compare: {jsonpath_mini: 'expires_in', comparator: 'eq', expected: 1}

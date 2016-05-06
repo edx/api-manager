@@ -8,5 +8,10 @@ python:
   - "2.7"
 install:
   - make requirements
+before_install:
+  - make run &>$TRAVIS_BUILD_DIR/node_run.log &
 script:
-  - make validate
+  - make test
+  - make test_swagger
+after_script:
+  - killall -9 node

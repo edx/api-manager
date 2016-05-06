@@ -1,0 +1,12 @@
+---
+- config:
+    - testset: 'Heartbeat API'
+
+- test:
+    - name: 'Endpoint returns HTTP 200 with version and id information'
+    - url: '/heartbeat'
+    - method: 'GET'
+    - expected_status: [200]
+    - validators:
+        - compare: {jsonpath_mini: 'version', comparator: 'eq', expected: 'Sample text'}
+        - compare: {jsonpath_mini: 'id', comparator: 'eq', expected: 'Sample text'}
