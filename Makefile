@@ -14,11 +14,11 @@ help:
 	@echo '    make test             Run all tests                                                 '
 	@echo '                                                                                        '
 
-clean: 
-	find . -name '*.pyc .cache __pycache__' -delete
+clean:
+	find . -name '*.pyc' -delete
+	find . -name '__pycache__' -type d -delete
 	rm -rf $(BUILD_OUTPUT_DIR)
 	rm -rf $(STUB_SERVER_DIR)
-	rm -f node_run.log
 
 requirements:
 	pip install -qr requirements/test.txt --exists-action w
@@ -44,13 +44,12 @@ test_python: clean requirements
 test_swagger: codegen.download
 	java -jar swagger-codegen-cli.jar generate -l nodejs-server -i swagger/api.yaml -o $(STUB_SERVER_DIR)
 	cd $(STUB_SERVER_DIR) && npm install
-	cd $(STUB_SERVER_DIR) && NODE_ENV=development node index.js &
+	cd $(STUB_SERVER_DIR) && NODE_ENV=development node index.js 2> /dev/null &
 	sleep 5
 	pyresttest --url=http://localhost:8080 --test=tests/test_all.yaml
 	killall -9 node
 
-test:
-	make clean
+test: clean
 	make quality
 	make test_python
 	make test_swagger
