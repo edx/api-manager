@@ -25,8 +25,6 @@ codekit-config.json
 
 ### Installation artifacts
 *.egg-info
-.pip_download_cache/
-.prereqs_cache
 
 ### IPython Notebooks
 *.ipynb
@@ -35,4 +33,6 @@ codekit-config.json
 python-libs/
 
 ### Test artifacts
-*.cache
+.cache
+swagger-codegen-cli.jar
+edx-api-stub-server/
