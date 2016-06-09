@@ -1,4 +1,8 @@
 /**
+ * According to our AWS correspondent this blueprint code is under the following license:
+ * https://creativecommons.org/publicdomain/zero/1.0/
+ *
+ *
  * Splunk-enabled logging function
  *
  * This function logs to a Splunk host using Splunk's event collector
@@ -155,8 +159,8 @@ var Logger = function(context) {
 // User code
 
 var loggerInfo = {
-    splunkHost: 'https://<splunk host:port>/services/collector', // Fill in with your Splunk host IP/DNS and port (step 1 above)
-    base64EncodedEncryptedToken: '<token>', // Fill in with base64-encoded, encrypted Splunk token here (step 5 above)
+    splunkHost: 'https://{{ splunk_ip }}/services/collector', // Fill in with your Splunk host IP/DNS and port (step 1 above)
+    base64EncodedEncryptedToken: '{{ token }}', // Fill in with base64-encoded, encrypted Splunk token here (step 5 above)
     lambdaFunctionName: 'cloudwatch-logs-splunk'
 };
 

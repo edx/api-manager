@@ -11,12 +11,15 @@
 #
 
 import logging
-import os
 import time
 import argparse
+import tempfile
+import shutil
 from zipfile import ZipFile
+from os.path import os, basename
 import botocore.session
 import botocore.exceptions
+from jinja2 import Environment, FileSystemLoader
 
 
 def create_api_alarm(cw_session, alarm_name, metric,
@@ -41,45 +44,23 @@ def create_api_alarm(cw_session, alarm_name, metric,
                  response['ResponseMetadata'])
 
 
-def create_firehose_stream(firehose, stream_name, arn, bucket_arn):
-    """Setup a stream(if required) to export cloudwatch logs to s3"""
-    response = firehose.create_delivery_stream(
-        DeliveryStreamName=stream_name,
-        S3DestinationConfiguration={
-            'RoleARN': arn,
-            'BucketARN': bucket_arn,
-            'Prefix': '',
-            'BufferingHints': {
-                'SizeInMBs': 5,
-                'IntervalInSeconds': 300
-            },
-            'CompressionFormat': 'UNCOMPRESSED',
-            'EncryptionConfiguration': {
-                'NoEncryptionConfig': 'NoEncryption',
-            },
-            'CloudWatchLoggingOptions': {
-                'Enabled': False,
-            }
-        })
-
-    logging.info('response for creating firehose stream = "%s"',
-                 response)
-
-
-def create_lambda_function_zip(splunk_host, splunk_token):
+def create_lambda_function_zip(temp_dir, splunk_host, splunk_token):
     """Updates and Zips the lambda function file"""
 
-    with open('index.js', "wt") as lambda_function_file:
-        with open('index.js.template', 'rt') as lambda_function_template:
-            for line in lambda_function_template:
-                lambda_function_file.write(line.replace('<splunk host:port>',
-                                                        splunk_host).replace('<token>',
-                                                                             splunk_token))
-    zip_file = 'lambda.zip'
+    j2_env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
+                         trim_blocks=False)
+    splunk_values = {
+        'splunk_ip': splunk_host,
+        'token': splunk_token,
+    }
+    js_file = temp_dir + '/index.js'
+    with open(js_file, 'w') as lambda_function_file:
+        lf_data = j2_env.get_template('index.j2').render(splunk_values)
+        lambda_function_file.write(lf_data)
 
+    zip_file = temp_dir + '/lambda.zip'
     with ZipFile(zip_file, 'w') as lambda_zip:
-        lambda_zip.write('index.js')
-
+        lambda_zip.write(js_file, basename(js_file))
     return zip_file
 
 
@@ -143,14 +124,6 @@ def get_topic_arn(client, topic_name):
             return None
 
 
-def cleanup():
-    """Cleans the extra files generated"""
-    logging.info('The lambda function is created, now in order to provide'
-                 ' event source to it, go to aws console, select the cloudwatch '
-                 'log group and select the action Start streaming to lambda')
-    os.system("rm -rf lambda.zip index.js")
-
-
 if __name__ == '__main__':
 
     logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(levelname)s %(message)s')
@@ -195,12 +168,20 @@ if __name__ == '__main__':
                            '{"Service": "lambda.amazonaws.com"},"Action": "sts:AssumeRole"}]}',
                            open(os.path.join(os.path.dirname(__file__), 'lambda_exec_policy.json')).read())
 
+    logging.info('Waiting for the newly created role to be available')
+    # Sleep for 10 seconds to allow the role created above to be avialable for lambda function creation
     time.sleep(10)
     lambda_client = session.create_client('lambda', args.aws_region)
-    zip_file_name = create_lambda_function_zip(args.splunk_host, args.splunk_token)
+    tmpdirname = tempfile.mkdtemp()
+    zip_file_name = create_lambda_function_zip(tmpdirname, args.splunk_host, args.splunk_token)
     create_lambda_function(lambda_client, 'cloudwatch-logs-splunk', 'nodejs4.3', role_arn,
                            'index.handler', zip_file_name,
                            'Demonstrates logging events to Splunk HTTP Event '
                            'Collector.', 10, 512)
-    time.sleep(2)
-    cleanup()
+    try:
+        shutil.rmtree(tmpdirname)
+    except OSError as exc:
+        logging.info(exc)
+    logging.info('The lambda function is created, now in order to provide'
+                 ' event source to it, go to aws console, select the cloudwatch '
+                 'log group and select the action Start streaming to lambda')
