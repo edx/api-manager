@@ -8,7 +8,7 @@
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ],
-      "Resource": "arn:aws:logs:*:*:*"
+      "Resource": "arn:aws:logs:{{ region }}:{{ acct_id }}:log-group:/aws/lambda/{{ func_name }}:*"
     }
   ]
 }

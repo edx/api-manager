@@ -6,8 +6,12 @@
 # --api-gw (name of the api_gateway)
 # --splunk-host (splunk host IP and port)
 # --splunk-token (splunk access token)
+# --acct-id (aws account id)
+# --lambda-timeout (The function execution time)
+# --lambda-memory (The amount of memory, in MB, your Lambda function is given)
 # e.g.
-# python monitor.py --aws-profile test --api-gw api --splunk-host 10.2.1.2:99 --splunk-token xxx
+# python monitor.py --aws-profile test --api-gw api --splunk-host 10.2.1.2:99 --splunk-token xxx --acct-id 000 \
+# --lambda-timeout 10 --lambda-memory 512
 #
 
 import logging
@@ -44,24 +48,36 @@ def create_api_alarm(cw_session, alarm_name, metric,
                  response['ResponseMetadata'])
 
 
-def create_lambda_function_zip(temp_dir, splunk_host, splunk_token):
+def create_lambda_function_zip(jinja_env, temp_dir, splunk_host, splunk_token, lf_name):
     """Updates and Zips the lambda function file"""
-
-    j2_env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
-                         trim_blocks=False)
     splunk_values = {
         'splunk_ip': splunk_host,
         'token': splunk_token,
+        'lambda_function_name': lf_name,
     }
     js_file = temp_dir + '/index.js'
     with open(js_file, 'w') as lambda_function_file:
-        lf_data = j2_env.get_template('index.j2').render(splunk_values)
+        lf_data = jinja_env.get_template('index.js.j2').render(splunk_values)
         lambda_function_file.write(lf_data)
 
     zip_file = temp_dir + '/lambda.zip'
     with ZipFile(zip_file, 'w') as lambda_zip:
         lambda_zip.write(js_file, basename(js_file))
     return zip_file
+
+
+def get_policy_json(jinja_env, temp_dir, region, acct_id, func_name):
+    """updates the policy json and returns it"""
+    resource_values = {
+        'region': region,
+        'acct_id': acct_id,
+        'func_name': func_name,
+    }
+    json_file = temp_dir + '/lambda_exec_policy.json'
+    with open(json_file, 'w') as json_policy_file:
+        json_data = jinja_env.get_template('lambda_exec_policy.json.j2').render(resource_values)
+        json_policy_file.write(json_data)
+    return json_file
 
 
 def role_exists(iam, role_name):
@@ -77,6 +93,15 @@ def get_role_arn(iam, role_name):
     """Gets the ARN of role"""
     response = iam.get_role(RoleName=role_name)
     return response['Role']['Arn']
+
+
+def lambda_exists(client, function_name):
+    """Checks if the function exists already"""
+    try:
+        client.get_function(FunctionName=function_name)
+    except botocore.exceptions.ClientError:
+        return False
+    return True
 
 
 def create_role(iam, policy_name, assume_role_policy_document, policy_str):
@@ -96,21 +121,35 @@ def create_role(iam, policy_name, assume_role_policy_document, policy_str):
 def create_lambda_function(client, function_name, runtime, role,
                            handler, zip_file, description, timeout, mem_size):
     """Create a lambda function to pull data from cloudwatch event"""
-    response = client.create_function(
-        FunctionName=function_name,
-        Runtime=runtime,
-        Role=role,
-        Handler=handler,
-        Code={
-            'ZipFile': open(zip_file, 'rb').read(),
-        },
-        Description=description,
-        Timeout=timeout,
-        MemorySize=mem_size,
-        Publish=True)
+    try:
+        code_file = open(zip_file, 'rb')
+        if lambda_exists(client, function_name):
+            logging.info('"%s" function already exists. Updating its code', function_name)
+            response = client.update_function_code(
+                FunctionName=function_name,
+                ZipFile=code_file.read(),
+                Publish=True)
 
-    logging.info('response for creating lambda function = "%s"',
-                 response)
+        else:
+            response = client.create_function(
+                FunctionName=function_name,
+                Runtime=runtime,
+                Role=role,
+                Handler=handler,
+                Code={
+                    'ZipFile': code_file.read(),
+                },
+                Description=description,
+                Timeout=timeout,
+                MemorySize=mem_size,
+                Publish=True)
+
+        logging.info('response for lambda function = "%s"',
+                     response)
+    except IOError:
+        logging.error('Unable to open the zip file')
+    finally:
+        code_file.close()
 
 
 def get_topic_arn(client, topic_name):
@@ -134,6 +173,9 @@ if __name__ == '__main__':
     parser.add_argument("--api-gw", required=True)
     parser.add_argument("--splunk-host", required=True)
     parser.add_argument("--splunk-token", required=True)
+    parser.add_argument("--acct-id", required=True)
+    parser.add_argument("--lambda-timeout", required=True)
+    parser.add_argument("--lambda-memory", required=True)
 
     args = parser.parse_args()
     session = botocore.session.Session(profile=args.aws_profile)
@@ -162,26 +204,31 @@ if __name__ == '__main__':
                      4, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_gw}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
+    j2_env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
+                         trim_blocks=False)
+    lambda_function_name = 'cloudwatch-logs-splunk'
+    tmpdirname = tempfile.mkdtemp()
     iam_client = session.create_client('iam', args.aws_region)
-    role_arn = create_role(iam_client, 'lambda_basic_execution_monitor',
+    role_arn = create_role(iam_client, 'lambda_basic_execution_monitor_cloudwatch_logs',
                            '{"Version": "2012-10-17","Statement": [{"Effect": "Allow","Principal": '
                            '{"Service": "lambda.amazonaws.com"},"Action": "sts:AssumeRole"}]}',
-                           open(os.path.join(os.path.dirname(__file__), 'lambda_exec_policy.json')).read())
+                           open(get_policy_json(j2_env, tmpdirname, args.aws_region, args.acct_id,
+                                                lambda_function_name)).read())
 
     logging.info('Waiting for the newly created role to be available')
     # Sleep for 10 seconds to allow the role created above to be avialable for lambda function creation
     time.sleep(10)
     lambda_client = session.create_client('lambda', args.aws_region)
-    tmpdirname = tempfile.mkdtemp()
-    zip_file_name = create_lambda_function_zip(tmpdirname, args.splunk_host, args.splunk_token)
-    create_lambda_function(lambda_client, 'cloudwatch-logs-splunk', 'nodejs4.3', role_arn,
+    zip_file_name = create_lambda_function_zip(j2_env, tmpdirname, args.splunk_host,
+                                               args.splunk_token, lambda_function_name)
+    create_lambda_function(lambda_client, lambda_function_name, 'nodejs4.3', role_arn,
                            'index.handler', zip_file_name,
                            'Demonstrates logging events to Splunk HTTP Event '
-                           'Collector.', 10, 512)
+                           'Collector.', args.lambda_timeout, args.lambda_memory)
     try:
         shutil.rmtree(tmpdirname)
     except OSError as exc:
-        logging.info(exc)
+        logging.error(exc)
     logging.info('The lambda function is created, now in order to provide'
                  ' event source to it, go to aws console, select the cloudwatch '
                  'log group and select the action Start streaming to lambda')

@@ -161,7 +161,7 @@ var Logger = function(context) {
 var loggerInfo = {
     splunkHost: 'https://{{ splunk_ip }}/services/collector', // Fill in with your Splunk host IP/DNS and port (step 1 above)
     base64EncodedEncryptedToken: '{{ token }}', // Fill in with base64-encoded, encrypted Splunk token here (step 5 above)
-    lambdaFunctionName: 'cloudwatch-logs-splunk'
+    lambdaFunctionName: '{{ lambda_function_name }}'
 };
 
 initSplunkTokenAsync(loggerInfo);
