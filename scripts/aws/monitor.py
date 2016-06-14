@@ -171,6 +171,7 @@ if __name__ == '__main__':
     parser.add_argument("--aws-profile", required=True)
     parser.add_argument("--aws-region", default="us-east-1")
     parser.add_argument("--api-gw", required=True)
+    parser.add_argument("--api-stage", required=True)
     parser.add_argument("--splunk-host", required=True)
     parser.add_argument("--splunk-token", required=True)
     parser.add_argument("--acct-id", required=True)
@@ -186,22 +187,22 @@ if __name__ == '__main__':
     create_api_alarm(cw, 'api_count', 'Count', 'ApiGateway',
                      'Average', 'GreaterThanOrEqualToThreshold',
                      'Average API count for a period of 5 min', 50, 300, 1,
-                     [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_gw}],
+                     [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_stage}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     create_api_alarm(cw, 'api_latency', 'Latency', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average API Latency for a period of 5 min',
-                     3, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_gw}],
+                     3, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_stage}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     create_api_alarm(cw, 'api_errors_4xx', '4XXError', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average 4XX errors for a period of 5 min',
-                     4, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_gw}],
+                     4, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_stage}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     create_api_alarm(cw, 'api_errors_5xx', '5XXError', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average 5XX errors for a period of 5 min',
-                     4, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_gw}],
+                     4, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_stage}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     j2_env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
