@@ -4,14 +4,15 @@
 # This script requires following arguments
 # --aws-profile (name of the profile to use for aws credentials)
 # --api-gw (name of the api_gateway)
+# --api-stage (value of label in dimension for the metric)
 # --splunk-host (splunk host IP and port)
 # --splunk-token (splunk access token)
 # --acct-id (aws account id)
 # --lambda-timeout (The function execution time)
 # --lambda-memory (The amount of memory, in MB, your Lambda function is given)
 # e.g.
-# python monitor.py --aws-profile test --api-gw api --splunk-host 10.2.1.2:99 --splunk-token xxx --acct-id 000 \
-# --lambda-timeout 10 --lambda-memory 512
+# python monitor.py --aws-profile test --api-gw api --api-stage blue --splunk-host 10.2.1.2:99 --splunk-token xxx \
+# --acct-id 000 --lambda-timeout 10 --lambda-memory 512
 #
 
 import logging
@@ -66,7 +67,7 @@ def create_lambda_function_zip(jinja_env, temp_dir, splunk_host, splunk_token, l
     return zip_file
 
 
-def get_policy_json(jinja_env, temp_dir, region, acct_id, func_name):
+def get_lambda_exec_policy(jinja_env, temp_dir, region, acct_id, func_name):
     """updates the policy json and returns it"""
     resource_values = {
         'region': region,
@@ -104,8 +105,8 @@ def lambda_exists(client, function_name):
     return True
 
 
-def create_role(iam, policy_name, assume_role_policy_document, policy_str):
-    """Creates a new role if there is not already a role by that name"""
+def create_role_with_inline_policy(iam, policy_name, assume_role_policy_document, policy_str):
+    """Creates a new role with inline policy if there is not already a role by that name"""
     if role_exists(iam, policy_name):
         logging.info('Role "%s" already exists. Assuming correct values.', policy_name)
         return get_role_arn(iam, policy_name)
@@ -114,6 +115,20 @@ def create_role(iam, policy_name, assume_role_policy_document, policy_str):
                                    AssumeRolePolicyDocument=assume_role_policy_document)
         iam.put_role_policy(RoleName=policy_name,
                             PolicyName='inlinepolicy', PolicyDocument=policy_str)
+        logging.info('response for creating role = "%s"', response)
+        return response['Role']['Arn']
+
+
+def create_role_with_managed_policy(iam, role_name, assume_role_policy_document, policy_arn):
+    """Creates a new role with managed policy if there is not already a role by that name"""
+    if role_exists(iam, role_name):
+        logging.info('Role "%s" already exists. Assuming correct values.', role_name)
+        return get_role_arn(iam, role_name)
+    else:
+        response = iam.create_role(RoleName=role_name,
+                                   AssumeRolePolicyDocument=assume_role_policy_document)
+        iam.attach_role_policy(RoleName=role_name,
+                               PolicyArn=policy_arn)
         logging.info('response for creating role = "%s"', response)
         return response['Role']['Arn']
 
@@ -163,6 +178,13 @@ def get_topic_arn(client, topic_name):
             return None
 
 
+def add_cloudwatchlog_role_to_apigateway(client, role_arn):
+    """updates the role ARN to allow api gateway to push logs to cloudwatch"""
+    response = client.update_account(
+        patchOperations=[{'op': 'replace', 'path': '/cloudwatchRoleArn', 'value': role_arn}, ])
+    logging.info('response for updating role = "%s"', response)
+
+
 if __name__ == '__main__':
 
     logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(levelname)s %(message)s')
@@ -175,11 +197,29 @@ if __name__ == '__main__':
     parser.add_argument("--splunk-host", required=True)
     parser.add_argument("--splunk-token", required=True)
     parser.add_argument("--acct-id", required=True)
-    parser.add_argument("--lambda-timeout", required=True)
-    parser.add_argument("--lambda-memory", required=True)
+    parser.add_argument("--lambda-timeout", type=int, required=True)
+    parser.add_argument("--lambda-memory", type=int, required=True)
 
     args = parser.parse_args()
     session = botocore.session.Session(profile=args.aws_profile)
+    j2_env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
+                         trim_blocks=False)
+    tmpdirname = tempfile.mkdtemp()
+
+    iam_client = session.create_client('iam', args.aws_region)
+    cloudwatch_log_role_arn = create_role_with_managed_policy(iam_client, 'apigateway_to_cloudwatch_logs',
+                                                              '{"Version": "2012-10-17","Statement": '
+                                                              '[{"Sid": "","Effect": "Allow","Principal": '
+                                                              '{"Service": "apigateway.amazonaws.com"},'
+                                                              '"Action": "sts:AssumeRole"}]}',
+                                                              'arn:aws:iam::aws:policy/service-role/'
+                                                              'AmazonAPIGatewayPushToCloudWatchLogs')
+
+    logging.info('Waiting for the newly created role to be available')
+    # Sleep for 10 seconds to allow the role created above to be avialable
+    time.sleep(10)
+    api_client = session.create_client('apigateway', args.aws_region)
+    add_cloudwatchlog_role_to_apigateway(api_client, cloudwatch_log_role_arn)
 
     sns_client = session.create_client('sns', args.aws_region)
     cw = session.create_client('cloudwatch', args.aws_region)
@@ -205,16 +245,16 @@ if __name__ == '__main__':
                      4, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_stage}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
-    j2_env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
-                         trim_blocks=False)
     lambda_function_name = 'cloudwatch-logs-splunk'
-    tmpdirname = tempfile.mkdtemp()
-    iam_client = session.create_client('iam', args.aws_region)
-    role_arn = create_role(iam_client, 'lambda_basic_execution_monitor_cloudwatch_logs',
-                           '{"Version": "2012-10-17","Statement": [{"Effect": "Allow","Principal": '
-                           '{"Service": "lambda.amazonaws.com"},"Action": "sts:AssumeRole"}]}',
-                           open(get_policy_json(j2_env, tmpdirname, args.aws_region, args.acct_id,
-                                                lambda_function_name)).read())
+    lambda_exec_role_arn = create_role_with_inline_policy(iam_client, 'lambda_basic_execution_monitor_cloudwatch_logs',
+                                                          '{"Version": "2012-10-17","Statement": '
+                                                          '[{"Effect": "Allow","Principal": '
+                                                          '{"Service": "lambda.amazonaws.com"},'
+                                                          '"Action": "sts:AssumeRole"}]}',
+                                                          open(get_lambda_exec_policy(j2_env, tmpdirname,
+                                                                                      args.aws_region,
+                                                                                      args.acct_id,
+                                                                                      lambda_function_name)).read())
 
     logging.info('Waiting for the newly created role to be available')
     # Sleep for 10 seconds to allow the role created above to be avialable for lambda function creation
@@ -222,7 +262,7 @@ if __name__ == '__main__':
     lambda_client = session.create_client('lambda', args.aws_region)
     zip_file_name = create_lambda_function_zip(j2_env, tmpdirname, args.splunk_host,
                                                args.splunk_token, lambda_function_name)
-    create_lambda_function(lambda_client, lambda_function_name, 'nodejs4.3', role_arn,
+    create_lambda_function(lambda_client, lambda_function_name, 'nodejs4.3', lambda_exec_role_arn,
                            'index.handler', zip_file_name,
                            'Demonstrates logging events to Splunk HTTP Event '
                            'Collector.', args.lambda_timeout, args.lambda_memory)
