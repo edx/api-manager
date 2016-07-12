@@ -9,6 +9,16 @@
         "logs:PutLogEvents"
       ],
       "Resource": "arn:aws:logs:{{ region }}:{{ acct_id }}:log-group:/aws/lambda/{{ func_name }}:*"
+    },
+    {
+        "Sid": "Stmt1443036478000",
+        "Effect": "Allow",
+        "Action": [
+            "kms:Decrypt"
+            ],
+        "Resource": [
+            "arn:aws:kms:{{ region }}:{{ acct_id }}:key/{{ kms_key }}"
+            ]
     }
   ]
 }

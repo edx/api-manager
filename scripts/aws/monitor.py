@@ -6,13 +6,14 @@
 # --api-gw (name of the api_gateway)
 # --api-stage (value of label in dimension for the metric)
 # --splunk-host (splunk host IP and port)
-# --splunk-token (splunk access token)
+# --splunk-token (base-64 encoded splunk access token)
 # --acct-id (aws account id)
 # --lambda-timeout (The function execution time)
 # --lambda-memory (The amount of memory, in MB, your Lambda function is given)
+# --kms-key (The KMS key)
 # e.g.
 # python monitor.py --aws-profile test --api-gw api --api-stage blue --splunk-host 10.2.1.2:99 --splunk-token xxx \
-# --acct-id 000 --lambda-timeout 10 --lambda-memory 512
+# --acct-id 000 --lambda-timeout 10 --lambda-memory 512 --kms-key xxxx-xx-xx-xxx
 #
 
 import logging
@@ -67,12 +68,13 @@ def create_lambda_function_zip(jinja_env, temp_dir, splunk_host, splunk_token, l
     return zip_file
 
 
-def get_lambda_exec_policy(jinja_env, temp_dir, region, acct_id, func_name):
+def get_lambda_exec_policy(jinja_env, temp_dir, region, acct_id, func_name, kms_key):
     """updates the policy json and returns it"""
     resource_values = {
         'region': region,
         'acct_id': acct_id,
         'func_name': func_name,
+        'kms_key': kms_key,
     }
     json_file = temp_dir + '/lambda_exec_policy.json'
     with open(json_file, 'w') as json_policy_file:
@@ -174,8 +176,7 @@ def get_topic_arn(client, topic_name):
         sns_arn = value['TopicArn']
         if topic_name in str(sns_arn):
             return str(sns_arn)
-        else:
-            return None
+    return None
 
 
 def add_cloudwatchlog_role_to_apigateway(client, role_arn):
@@ -199,6 +200,7 @@ if __name__ == '__main__':
     parser.add_argument("--acct-id", required=True)
     parser.add_argument("--lambda-timeout", type=int, required=True)
     parser.add_argument("--lambda-memory", type=int, required=True)
+    parser.add_argument("--kms-key", required=True)
 
     args = parser.parse_args()
     session = botocore.session.Session(profile=args.aws_profile)
@@ -254,7 +256,8 @@ if __name__ == '__main__':
                                                           open(get_lambda_exec_policy(j2_env, tmpdirname,
                                                                                       args.aws_region,
                                                                                       args.acct_id,
-                                                                                      lambda_function_name)).read())
+                                                                                      lambda_function_name,
+                                                                                      args.kms_key)).read())
 
     logging.info('Waiting for the newly created role to be available')
     # Sleep for 10 seconds to allow the role created above to be avialable for lambda function creation
