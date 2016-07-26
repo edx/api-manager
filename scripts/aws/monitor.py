@@ -35,7 +35,10 @@ from jinja2 import Environment, FileSystemLoader
 def create_api_alarm(cw_session, alarm_name, metric,
                      namespace, stat, comparison, description,
                      threshold, period, eval_period, dimensions, topic):
-    """Create the alarm for appropriate metric in API Gateway"""
+    """Puts data to the metric, then creates the alarm for appropriate metric in API Gateway"""
+    cw_session.put_metric_data(
+        Namespace=namespace,
+        MetricData=[{'MetricName': metric, 'Dimensions': dimensions, 'Value': 0}, ])
     response = cw_session.put_metric_alarm(
         AlarmName=alarm_name,
         AlarmDescription=description,
@@ -255,25 +258,29 @@ if __name__ == '__main__':
     sns_client = session.create_client('sns', args.aws_region)
     cw = session.create_client('cloudwatch', args.aws_region)
 
-    create_api_alarm(cw, 'api_count', 'Count', 'ApiGateway',
+    create_api_alarm(cw, 'api-gateway-count', 'Count', 'ApiGateway',
                      'Average', 'GreaterThanOrEqualToThreshold',
                      'Average API count for a period of 5 min', 50, 300, 1,
-                     [{'Name': 'ApiName', 'Value': api_gateway_name}, {'Name': 'Label', 'Value': args.api_stage}],
+                     [{'Name': 'ApiName', 'Value': api_gateway_name},
+                      {'Name': 'Label', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
-    create_api_alarm(cw, 'api_latency', 'Latency', 'ApiGateway', 'Average',
+    create_api_alarm(cw, 'api-gateway-latency', 'Latency', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average API Latency for a period of 5 min', 3, 300, 1,
-                     [{'Name': 'ApiName', 'Value': api_gateway_name}, {'Name': 'Label', 'Value': args.api_stage}],
+                     [{'Name': 'ApiName', 'Value': api_gateway_name},
+                      {'Name': 'Label', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
-    create_api_alarm(cw, 'api_errors_4xx', '4XXError', 'ApiGateway', 'Average',
+    create_api_alarm(cw, 'api-gateway-errors-4xx', '4XXError', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average 4XX errors for a period of 5 min', 4, 300, 1,
-                     [{'Name': 'ApiName', 'Value': api_gateway_name}, {'Name': 'Label', 'Value': args.api_stage}],
+                     [{'Name': 'ApiName', 'Value': api_gateway_name},
+                      {'Name': 'Label', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
-    create_api_alarm(cw, 'api_errors_5xx', '5XXError', 'ApiGateway', 'Average',
+    create_api_alarm(cw, 'api-gateway-errors-5xx', '5XXError', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average 5XX errors for a period of 5 min', 4, 300, 1,
-                     [{'Name': 'ApiName', 'Value': api_gateway_name}, {'Name': 'Label', 'Value': args.api_stage}],
+                     [{'Name': 'ApiName', 'Value': api_gateway_name},
+                      {'Name': 'Label', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     lambda_function_name = 'cloudwatch-logs-splunk'
