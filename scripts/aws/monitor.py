@@ -262,25 +262,25 @@ if __name__ == '__main__':
                      'Average', 'GreaterThanOrEqualToThreshold',
                      'Average API count for a period of 5 min', 50, 300, 1,
                      [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Label', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
+                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     create_api_alarm(cw, 'api-gateway-latency', 'Latency', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average API Latency for a period of 5 min', 3, 300, 1,
                      [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Label', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
+                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     create_api_alarm(cw, 'api-gateway-errors-4xx', '4XXError', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average 4XX errors for a period of 5 min', 4, 300, 1,
                      [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Label', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
+                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     create_api_alarm(cw, 'api-gateway-errors-5xx', '5XXError', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average 5XX errors for a period of 5 min', 4, 300, 1,
                      [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Label', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
+                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     lambda_function_name = 'cloudwatch-logs-splunk'
