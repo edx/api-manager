@@ -14,10 +14,9 @@
 # --lambda-timeout (The function execution time)
 # --lambda-memory (The amount of memory, in MB, your Lambda function is given)
 # --kms-key (The KMS key)
-# --logging-level (can be one of INFO, ERROR, OFF)
 # e.g.
 # python monitor.py --aws-profile test --gw-id x1xx --api-stage blue --splunk-host 10.2.1.2:99 --splunk-token xxx \
-# --acct-id 000 --lambda-timeout 10 --lambda-memory 512 --kms-key xxxx-xx-xx-xxx --logging-level INFO
+# --acct-id 000 --lambda-timeout 10 --lambda-memory 512 --kms-key xxxx-xx-xx-xxx
 #
 
 import logging
@@ -196,18 +195,6 @@ def get_api_gateway_name(client, gw_id):
     return None
 
 
-def enable_cloudwatchlogs_in_stages(client, gw_id, logging_level):
-    """enables the cloudwatch logs for all the stages"""
-    stage_res = client.get_stages(restApiId=gw_id)
-    for value in stage_res['item']:
-        stage_name = value['stageName']
-        update_res = client.update_stage(
-            restApiId=gw_id,
-            stageName=stage_name,
-            patchOperations=[{'op': 'replace', 'path': '/*/*/logging/loglevel', 'value': logging_level}, ])
-        logging.info('response for enabling cloudwatch logs in stage "%s" = "%s"', stage_name, update_res)
-
-
 def add_cloudwatchlog_role_to_apigateway(client, role_arn):
     """updates the role ARN to allow api gateway to push logs to cloudwatch"""
     response = client.update_account(
@@ -230,7 +217,6 @@ if __name__ == '__main__':
     parser.add_argument("--lambda-timeout", type=int, default=10)
     parser.add_argument("--lambda-memory", type=int, default=512)
     parser.add_argument("--kms-key", required=True)
-    parser.add_argument("--logging-level", default="INFO")
 
     args = parser.parse_args()
     session = botocore.session.Session(profile=args.aws_profile)
@@ -251,7 +237,6 @@ if __name__ == '__main__':
     # Sleep for 10 seconds to allow the role created above to be avialable
     time.sleep(10)
     api_client = session.create_client('apigateway', args.aws_region)
-    enable_cloudwatchlogs_in_stages(api_client, args.gw_id, args.logging_level)
     add_cloudwatchlog_role_to_apigateway(api_client, cloudwatch_log_role_arn)
 
     api_gateway_name = get_api_gateway_name(api_client, args.gw_id)
