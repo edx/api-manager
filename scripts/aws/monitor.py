@@ -1,9 +1,12 @@
 #!/usr/bin/python
 #
+# Pre-reqs:
 # Run this script from the directory its in
+#
+# Arguments:
 # This script requires following arguments
 # --aws-profile (name of the profile to use for aws credentials)
-# --api-gw (name of the api_gateway)
+# --gw-id (ID of the api_gateway)
 # --api-stage (value of label in dimension for the metric)
 # --splunk-host (splunk host IP and port)
 # --splunk-token (base-64 encoded splunk access token)
@@ -12,7 +15,7 @@
 # --lambda-memory (The amount of memory, in MB, your Lambda function is given)
 # --kms-key (The KMS key)
 # e.g.
-# python monitor.py --aws-profile test --api-gw api --api-stage blue --splunk-host 10.2.1.2:99 --splunk-token xxx \
+# python monitor.py --aws-profile test --gw-id x1xx --api-stage blue --splunk-host 10.2.1.2:99 --splunk-token xxx \
 # --acct-id 000 --lambda-timeout 10 --lambda-memory 512 --kms-key xxxx-xx-xx-xxx
 #
 
@@ -31,7 +34,10 @@ from jinja2 import Environment, FileSystemLoader
 def create_api_alarm(cw_session, alarm_name, metric,
                      namespace, stat, comparison, description,
                      threshold, period, eval_period, dimensions, topic):
-    """Create the alarm for appropriate metric in API Gateway"""
+    """Puts data to the metric, then creates the alarm for appropriate metric in API Gateway"""
+    cw_session.put_metric_data(
+        Namespace=namespace,
+        MetricData=[{'MetricName': metric, 'Dimensions': dimensions, 'Value': 0}, ])
     response = cw_session.put_metric_alarm(
         AlarmName=alarm_name,
         AlarmDescription=description,
@@ -179,6 +185,16 @@ def get_topic_arn(client, topic_name):
     return None
 
 
+def get_api_gateway_name(client, gw_id):
+    """gets the name of the API Gateway"""
+    gw_res = client.get_rest_apis()
+    for value in gw_res['items']:
+        if value['id'] == gw_id:
+            gw_name = value['name']
+            return str(gw_name)
+    return None
+
+
 def add_cloudwatchlog_role_to_apigateway(client, role_arn):
     """updates the role ARN to allow api gateway to push logs to cloudwatch"""
     response = client.update_account(
@@ -193,13 +209,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--aws-profile", required=True)
     parser.add_argument("--aws-region", default="us-east-1")
-    parser.add_argument("--api-gw", required=True)
+    parser.add_argument("--gw-id", required=True)
     parser.add_argument("--api-stage", required=True)
     parser.add_argument("--splunk-host", required=True)
     parser.add_argument("--splunk-token", required=True)
     parser.add_argument("--acct-id", required=True)
-    parser.add_argument("--lambda-timeout", type=int, required=True)
-    parser.add_argument("--lambda-memory", type=int, required=True)
+    parser.add_argument("--lambda-timeout", type=int, default=10)
+    parser.add_argument("--lambda-memory", type=int, default=512)
     parser.add_argument("--kms-key", required=True)
 
     args = parser.parse_args()
@@ -223,28 +239,33 @@ if __name__ == '__main__':
     api_client = session.create_client('apigateway', args.aws_region)
     add_cloudwatchlog_role_to_apigateway(api_client, cloudwatch_log_role_arn)
 
+    api_gateway_name = get_api_gateway_name(api_client, args.gw_id)
     sns_client = session.create_client('sns', args.aws_region)
     cw = session.create_client('cloudwatch', args.aws_region)
 
-    create_api_alarm(cw, 'api_count', 'Count', 'ApiGateway',
+    create_api_alarm(cw, 'api-gateway-count', 'Count', 'ApiGateway',
                      'Average', 'GreaterThanOrEqualToThreshold',
                      'Average API count for a period of 5 min', 50, 300, 1,
-                     [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_stage}],
+                     [{'Name': 'ApiName', 'Value': api_gateway_name},
+                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
-    create_api_alarm(cw, 'api_latency', 'Latency', 'ApiGateway', 'Average',
-                     'GreaterThanOrEqualToThreshold', 'Average API Latency for a period of 5 min',
-                     3, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_stage}],
+    create_api_alarm(cw, 'api-gateway-latency', 'Latency', 'ApiGateway', 'Average',
+                     'GreaterThanOrEqualToThreshold', 'Average API Latency for a period of 5 min', 3, 300, 1,
+                     [{'Name': 'ApiName', 'Value': api_gateway_name},
+                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
-    create_api_alarm(cw, 'api_errors_4xx', '4XXError', 'ApiGateway', 'Average',
-                     'GreaterThanOrEqualToThreshold', 'Average 4XX errors for a period of 5 min',
-                     4, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_stage}],
+    create_api_alarm(cw, 'api-gateway-errors-4xx', '4XXError', 'ApiGateway', 'Average',
+                     'GreaterThanOrEqualToThreshold', 'Average 4XX errors for a period of 5 min', 4, 300, 1,
+                     [{'Name': 'ApiName', 'Value': api_gateway_name},
+                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
-    create_api_alarm(cw, 'api_errors_5xx', '5XXError', 'ApiGateway', 'Average',
-                     'GreaterThanOrEqualToThreshold', 'Average 5XX errors for a period of 5 min',
-                     4, 300, 1, [{'Name': 'ApiName', 'Value': args.api_gw}, {'Name': 'Label', 'Value': args.api_stage}],
+    create_api_alarm(cw, 'api-gateway-errors-5xx', '5XXError', 'ApiGateway', 'Average',
+                     'GreaterThanOrEqualToThreshold', 'Average 5XX errors for a period of 5 min', 4, 300, 1,
+                     [{'Name': 'ApiName', 'Value': api_gateway_name},
+                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     lambda_function_name = 'cloudwatch-logs-splunk'
