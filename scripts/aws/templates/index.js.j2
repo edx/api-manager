@@ -51,6 +51,7 @@
 // Library code
 var url = require('url');
 var AWS = require('aws-sdk');
+var zlib = require('zlib');
 
 var initSplunkTokenAsync = function(loggerInfo) {
     var encryptedTokenBuf = new Buffer(loggerInfo.base64EncodedEncryptedToken, 'base64');
@@ -127,7 +128,6 @@ var Logger = function(context) {
             rejectUnauthorized: false,
         };
         var requester = require(parsed.protocol.substring(0, parsed.protocol.length - 1));
-        console.log('Sending event');
         var req = requester.request(options, function(res) {
             res.setEncoding('utf8');
 
@@ -137,7 +137,6 @@ var Logger = function(context) {
                     throw new Error("error: statusCode=" + res.statusCode + "\n\n" + data);
                 }
                 payloads.length = 0;
-                console.log('Sent');
                 if (typeof callback !== 'undefined') {
                     callback();
                 }
@@ -173,19 +172,22 @@ glogger.flushAsync();
 exports.handler = function(event, context) {
     var logger = new Logger(context);
     
-    //log strings
-    logger.log('value1 =', event.key1);
-    logger.log('value2 =', event.key2);
-    logger.log('value3 =', event.key3);
-    
-    //log JSON objects
-    logger.log(event);
-    
-    //specify the timestamp explicitly, useful for forwarding events like from AWS IOT
-    logger.logWithTime(Date.now(), event);
+    var decode = new Buffer(event.awslogs.data, 'base64');
+    zlib.gunzip(decode, function(e, result) {
+        if (e) {
+            context.fail(e);
+        } else {
+            result = JSON.parse(result.toString('ascii'));
+            event.awslogs.data = result;
 
-    //send all the events in a single batch to Splunk
-    logger.flushAsync(function() {
-        context.succeed(event.key1);  // Echo back the first key value
+            //log JSON objects
+            logger.log(event);
+            logger.logWithTime(Date.now(), event);
+
+            //send all the events in a single batch to Splunk
+            logger.flushAsync(function() {
+                context.succeed(event.key1);  // Echo back the first key value
+            });
+        }
     });
 };
