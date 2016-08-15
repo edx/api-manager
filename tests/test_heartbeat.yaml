@@ -8,5 +8,5 @@
     - method: 'GET'
     - expected_status: [200]
     - validators:
-        - compare: {jsonpath_mini: 'version', comparator: 'eq', expected: 'Sample text'}
-        - compare: {jsonpath_mini: 'id', comparator: 'eq', expected: 'Sample text'}
+        - compare: {jsonpath_mini: 'version', comparator: 'eq', expected: 'aeiou'}
+        - compare: {jsonpath_mini: 'id', comparator: 'eq', expected: 'aeiou'}

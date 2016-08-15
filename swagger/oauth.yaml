@@ -54,7 +54,38 @@ endpoints:
         200:
           description: OK
           schema:
-            $ref: "#/definitions/bearer"
+            title: "bearer"
+            properties:
+              access_token:
+                type: "string"
+                description: "The access token issued by the authorization server."
+                # example: "2YotnFZFEjr1zCsicMWpAA"
+              refresh_token:
+                type: "string"
+                description: |
+                  Refresh tokens are credentials used to obtain new access tokens once
+                  authorization has already been granted.
+                # example: "tGzv3JOkF0XG5Qx2TlKWIA"
+              scope:
+                type: "string"
+                description: |
+                  Whitespace-delimited list of associated scopes. Can be an empty string.
+                  See https://tools.ietf.org/html/rfc6749#section-3.3 for more detail.
+                # example: "read write"
+              token_type:
+                type: "string"
+                description: "The type of the token issued. Value is case insensitive."
+                # example: "Bearer"
+              expires_in:
+                type: "integer"
+                format: "int64"
+                description: "The lifetime in seconds of the access token."
+                # example: 60
+            required:
+              - access_token
+              - scope
+              - token_type
+              - expires_in
         400:
           description: "Bad Request"
         401:
@@ -88,37 +119,3 @@ endpoints:
             statusCode: "400"
         type: http
         uri: "https://${stageVariables.edxapp_host}/oauth2/access_token"
-
-definitions:
-  bearer:
-    properties:
-      access_token:
-        type: "string"
-        description: "The access token issued by the authorization server."
-        # example: "2YotnFZFEjr1zCsicMWpAA"
-      refresh_token:
-        type: "string"
-        description: |
-          Refresh tokens are credentials used to obtain new access tokens once
-          authorization has already been granted.
-        # example: "tGzv3JOkF0XG5Qx2TlKWIA"
-      scope:
-        type: "string"
-        description: |
-          Whitespace-delimited list of associated scopes. Can be an empty string.
-          See https://tools.ietf.org/html/rfc6749#section-3.3 for more detail.
-        # example: "read write"
-      token_type:
-        type: "string"
-        description: "The type of the token issued. Value is case insensitive."
-        # example: "Bearer"
-      expires_in:
-        type: "integer"
-        format: "int64"
-        description: "The lifetime in seconds of the access token."
-        # example: 60
-    required:
-      - access_token
-      - scope
-      - token_type
-      - expires_in

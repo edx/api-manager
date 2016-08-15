@@ -35,4 +35,6 @@ python-libs/
 ### Test artifacts
 .cache
 swagger-codegen-cli.jar
+swagger.yaml
+.swagger-codegen-ignore
 edx-api-stub-server/
