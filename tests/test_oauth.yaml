@@ -32,8 +32,8 @@
     - body: 'grant_type=foo&client_id=bar'
     - expected_status: [200]
     - validators:
-        - compare: {jsonpath_mini: 'access_token', comparator: 'eq', expected: 'Sample text'}
-        - compare: {jsonpath_mini: 'refresh_token', comparator: 'eq', expected: 'Sample text'}
-        - compare: {jsonpath_mini: 'scope', comparator: 'eq', expected: 'Sample text'}
-        - compare: {jsonpath_mini: 'token_type', comparator: 'eq', expected: 'Sample text'}
-        - compare: {jsonpath_mini: 'expires_in', comparator: 'eq', expected: 1}
+        - compare: {jsonpath_mini: 'access_token', comparator: 'eq', expected: 'aeiou'}
+        - compare: {jsonpath_mini: 'refresh_token', comparator: 'eq', expected: 'aeiou'}
+        - compare: {jsonpath_mini: 'scope', comparator: 'eq', expected: 'aeiou'}
+        - compare: {jsonpath_mini: 'token_type', comparator: 'eq', expected: 'aeiou'}
+        - compare: {jsonpath_mini: 'expires_in', comparator: 'eq', expected: 123456789}

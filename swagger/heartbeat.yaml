@@ -21,7 +21,23 @@ endpoints:
         200:
           description: "OK"
           schema:
-            $ref: "#/definitions/heartbeat"
+            title: "heartbeat"
+            properties:
+              version:
+                type: "string"
+                description: |
+                  Open edX API version, typically represented as "major.minor.micro".
+                  The versioning lifecycle rules will be specific to your Open edX installation.
+                # example: "1.0.0"
+              id:
+                type: "string"
+                description: |
+                  Unique configuration deployment identification code, optional and specific to
+                  your Open edX installation. For example, this value could be the git hash of
+                  the configuration used to spin up the API manager.
+                # example: "7effb8a"
+            required:
+              - version
       x-amazon-apigateway-integration:
         responses:
           default:
@@ -36,22 +52,3 @@ endpoints:
           application/json: |
                 {"statusCode": 200}
         type: "mock"
-
-definitions:
-  heartbeat:
-    properties:
-      version:
-        type: "string" 
-        description: |
-          Open edX API version, typically represented as "major.minor.micro".
-          The versioning lifecycle rules will be specific to your Open edX installation.
-        # example: "1.0.0"
-      id:
-        type: "string"
-        description: |
-          Unique configuration deployment identification code, optional and specific to
-          your Open edX installation. For example, this value could be the git hash of
-          the configuration used to spin up the API manager.
-        # example: "7effb8a"
-    required:
-      - version
