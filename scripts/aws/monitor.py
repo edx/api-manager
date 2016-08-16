@@ -6,8 +6,7 @@
 # Arguments:
 # This script requires following arguments
 # --aws-profile (name of the profile to use for aws credentials)
-# --gw-id (ID of the api_gateway)
-# --api-stage (value of label in dimension for the metric)
+# --api-base-domain (name of the API Gateway domain)
 # --splunk-host (splunk host IP and port)
 # --splunk-token (base-64 encoded splunk access token)
 # --acct-id (aws account id)
@@ -19,7 +18,7 @@
 # --environment (the environment where lambda function is to be created)
 # --deployment (the deployment for which lambda function is created)
 # e.g.
-# python monitor.py --aws-profile test --gw-id x1xx --api-stage blue --splunk-host 10.2.1.2:99 --splunk-token xxx \
+# python monitor.py --aws-profile test --api-base-domain test.edx.org --splunk-host 10.2.1.2:99 --splunk-token xxx \
 # --acct-id 000 --lambda-timeout 10 --lambda-memory 512 --kms-key xxxx-xx-xx-xxx
 # --subnet-list subnet-112 subnet-113 --sg-list sg-899 sg-901 --environment stage --deployment edx
 #
@@ -34,6 +33,21 @@ from os.path import os, basename
 import botocore.session
 import botocore.exceptions
 from jinja2 import Environment, FileSystemLoader
+
+
+def get_api_id(client, api_base_domain):
+    """Get the current live API ID and stage tied to this base path."""
+    try:
+        response = client.get_base_path_mapping(
+            domainName=api_base_domain,
+            basePath='(none)')
+    except botocore.exceptions.ClientError:
+        raise ValueError('No mapping found for "%s"' % api_base_domain)
+
+    logging.info('Found existing base path mapping for API ID "%s", stage "%s"',
+                 response['restApiId'], response['stage'])
+
+    return (response['restApiId'], response['stage'])
 
 
 def create_api_alarm(cw_session, alarm_name, metric,
@@ -223,8 +237,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--aws-profile", required=True)
     parser.add_argument("--aws-region", default="us-east-1")
-    parser.add_argument("--gw-id", required=True)
-    parser.add_argument("--api-stage", required=True)
+    parser.add_argument("--api-base-domain", required=True)
     parser.add_argument("--splunk-host", required=True)
     parser.add_argument("--splunk-token", required=True)
     parser.add_argument("--acct-id", required=True)
@@ -257,9 +270,10 @@ if __name__ == '__main__':
     # Sleep for 10 seconds to allow the role created above to be avialable
     time.sleep(10)
     api_client = session.create_client('apigateway', args.aws_region)
+    (api_id, api_stage) = get_api_id(api_client, args.api_base_domain)
     add_cloudwatchlog_role_to_apigateway(api_client, cloudwatch_log_role_arn)
 
-    api_gateway_name = get_api_gateway_name(api_client, args.gw_id)
+    api_gateway_name = get_api_gateway_name(api_client, api_id)
     sns_client = session.create_client('sns', args.aws_region)
     cw = session.create_client('cloudwatch', args.aws_region)
 
@@ -267,25 +281,25 @@ if __name__ == '__main__':
                      'Average', 'GreaterThanOrEqualToThreshold',
                      'Average API count for a period of 5 min', 50, 300, 1,
                      [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
+                      {'Name': 'Stage', 'Value': api_stage}, {'Name': 'ApiId', 'Value': api_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     create_api_alarm(cw, 'api-gateway-latency', 'Latency', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average API Latency for a period of 5 min', 3, 300, 1,
                      [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
+                      {'Name': 'Stage', 'Value': api_stage}, {'Name': 'ApiId', 'Value': api_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     create_api_alarm(cw, 'api-gateway-errors-4xx', '4XXError', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average 4XX errors for a period of 5 min', 4, 300, 1,
                      [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
+                      {'Name': 'Stage', 'Value': api_stage}, {'Name': 'ApiId', 'Value': api_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     create_api_alarm(cw, 'api-gateway-errors-5xx', '5XXError', 'ApiGateway', 'Average',
                      'GreaterThanOrEqualToThreshold', 'Average 5XX errors for a period of 5 min', 4, 300, 1,
                      [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Stage', 'Value': args.api_stage}, {'Name': 'ApiId', 'Value': args.gw_id}],
+                      {'Name': 'Stage', 'Value': api_stage}, {'Name': 'ApiId', 'Value': api_id}],
                      get_topic_arn(sns_client, 'aws-non-critical-alert'))
 
     lambda_exec_role_arn = create_role_with_inline_policy(iam_client, lambda_role_name,
