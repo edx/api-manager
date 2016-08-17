@@ -5,7 +5,6 @@
 #
 # Arguments:
 # This script requires following arguments
-# --aws-profile (name of the profile to use for aws credentials)
 # --api-base-domain (name of the API Gateway domain)
 # --splunk-host (splunk host IP and port)
 # --splunk-token (base-64 encoded splunk access token)
@@ -18,7 +17,7 @@
 # --environment (the environment where lambda function is to be created)
 # --deployment (the deployment for which lambda function is created)
 # e.g.
-# python monitor.py --aws-profile test --api-base-domain test.edx.org --splunk-host 10.2.1.2:99 --splunk-token xxx \
+# python monitor.py --api-base-domain test.edx.org --splunk-host 10.2.1.2:99 --splunk-token xxx \
 # --acct-id 000 --lambda-timeout 10 --lambda-memory 512 --kms-key xxxx-xx-xx-xxx
 # --subnet-list subnet-112 subnet-113 --sg-list sg-899 sg-901 --environment stage --deployment edx
 #
@@ -235,7 +234,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(levelname)s %(message)s')
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--aws-profile", required=True)
     parser.add_argument("--aws-region", default="us-east-1")
     parser.add_argument("--api-base-domain", required=True)
     parser.add_argument("--splunk-host", required=True)
@@ -250,7 +248,7 @@ if __name__ == '__main__':
     parser.add_argument("--deployment", required=True)
 
     args = parser.parse_args()
-    session = botocore.session.Session(profile=args.aws_profile)
+    session = botocore.session.get_session()
     j2_env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
                          trim_blocks=False)
     tmpdirname = tempfile.mkdtemp()
