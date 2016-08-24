@@ -176,8 +176,7 @@ def create_lambda_function(client, function_name, runtime, role,
             response = client.update_function_code(
                 FunctionName=function_name,
                 ZipFile=code_file.read(),
-                Publish=True,
-                VpcConfig=vpc)
+                Publish=True)
 
         else:
             response = client.create_function(
