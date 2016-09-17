@@ -1,4 +1,4 @@
-boto3==1.4.0
+boto3==1.3.0
 botocore==1.4.53
 jmespath==0.9.0
 six==1.10.0
