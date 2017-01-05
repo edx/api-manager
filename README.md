@@ -1,5 +1,5 @@
 # api-manager
-[![Build Status](https://travis-ci.org/edx/api-manager.svg?branch=master)](https://travis-ci.org/edx/api-manager) [![Dependency Status](https://www.versioneye.com/user/projects/58594cff4d64660032bc381a/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58594cff4d64660032bc381a)
+[![Build Status](https://travis-ci.org/edx/api-manager.svg?branch=master)](https://travis-ci.org/edx/api-manager) [![Dependency Status](https://www.versioneye.com/user/projects/586e7b9340543800417e5806/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/586e7b9340543800417e5806)
 
 Specifications and optional lightweight service for routing clients of the Open edX REST API to various endpoints within the platform.
 
