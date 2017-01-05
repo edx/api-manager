@@ -1,5 +1,5 @@
 boto3==1.4.3
-botocore==1.4.90
+botocore==1.4.92
 jmespath==0.9.0
 six==1.10.0
-Jinja2==2.8
+Jinja2==2.8.1
