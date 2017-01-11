@@ -1,0 +1,12 @@
+---
+- config:
+    - testset: 'User API'
+
+- test:
+    - name: 'Endpoint returns HTTP 200 with username'
+    - url: '/user/v1/me'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+    - validators:
+        - compare: {jsonpath_mini: 'username', comparator: 'eq', expected: 'aeiou'}
