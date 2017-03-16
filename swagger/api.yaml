@@ -12,6 +12,13 @@ basePath: "/"
 schemes:
 - "https"
 
+# Allow endpoints to optionally require an API key header
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "x-api-key"
+    in: "header"
+
 # Complete set of whitelisted routes.
 # Upstream API owners: provide an fixed URI ref for each route.
 paths:
@@ -34,7 +41,11 @@ paths:
   "/catalog/v1/catalogs/{id}":
     $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogById"
   "/catalog/v1/catalogs/{id}/courses":
-      $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogCourses"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogCourses"
+
+  # User (requires API key)
+  "/user/v1/me":
+    $ref: "./user.yaml#/endpoints/me"
 
 # edX extension point. Lists the vendors in use and their specific 
 #  parameters that are expected by upstream refs. 
