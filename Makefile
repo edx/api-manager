@@ -27,10 +27,10 @@ quality:
 	pep8 --config=.pep8 scripts/aws
 	pylint --rcfile=.pylintrc scripts/aws
 
-# Download the swagger codegen jar if you don't already have it.
+# Download the swagger codegen jar
 # TODO: verify via checksum that the file is valid.
 codegen.download:
-	-wget $(SWAGGER_CODEGEN_JAR) -O swagger-codegen-cli.jar --no-clobber
+	-curl $(SWAGGER_CODEGEN_JAR) -o swagger-codegen-cli.jar
 
 # Flatten the swagger docs into a build artifact.
 # Assumes java 7 is installed.
