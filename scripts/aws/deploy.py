@@ -126,8 +126,6 @@ if __name__ == '__main__':
                         help="Location of edxapp for request routing")
     parser.add_argument("--catalog-host", required=True,
                         help="Location of catalog IDA for request routing")
-    parser.add_argument("--enterprise-host", required=False, default='',
-                        help="Location of enterprise IDA for request routing")
 
     args = parser.parse_args()
 
@@ -145,8 +143,7 @@ if __name__ == '__main__':
         'id': args.tag,
         'landing_page': args.landing_page,
         'edxapp_host': args.edxapp_host,
-        'discovery_host': args.catalog_host,
-        'enterprise_host': args.enterprise_host or args.edxapp_host,
+        'discovery_host': args.catalog_host
     })
 
     # Apply stage setting updates.
