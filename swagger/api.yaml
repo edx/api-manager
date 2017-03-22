@@ -36,7 +36,15 @@ paths:
   "/catalog/v1/catalogs/{id}/courses":
       $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogCourses"
 
-# edX extension point. Lists the vendors in use and their specific 
+  # Enterprise IDA
+  "/enterprise/v1/catalogs":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/43ea09b/api.yaml#/endpoints/v1/enterpriseCatalogs"
+  "/enterprise/v1/catalogs/{id}":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/43ea09b/api.yaml#/endpoints/v1/enterpriseCatalogById"
+  "/enterprise/v1/catalogs/{id}/courses":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/43ea09b/api.yaml#/endpoints/v1/enterpriseCatalogCourses"
+
+# edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs. 
 # Upstream API owners: document your dependencies in this index file to
 #  avoid conflicts with other upstreams.
@@ -47,3 +55,4 @@ x-edx-api-vendors:
     - "landing_page"
     - "edxapp_host"
     - "discovery_host"
+    - "enterprise_host"

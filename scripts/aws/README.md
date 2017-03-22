@@ -30,6 +30,7 @@ There are a few custom environment variables required for the `deploy` script to
 * `STAGE_ROTATION_ORDER`: comma-separated list of stages in your "ring". Be aware of your AWS account's limit on stages per gateway. Example: `red,black`
 * `STAGE_EDXAPP_HOST`: the API base of your edx-platform service deployment
 * `STAGE_DISCOVERY_HOST`: the API base of your course-discovery service deployment (just set to an empty or dummy string if you aren't using this in your specific Open edX deployment)
+* `STAGE_ENTERPRISE_HOST`: the API base of your enterprise service deployment (just set to an empty or dummy string if you aren't using this in your specific Open edX deployment)
 
 And some environment variables for provisioning specific stage settings (see the [AWS docs](http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-stage-settings.html) for more on the allowed values and examples):
 * `STAGE_LOG_LEVEL`

@@ -38,3 +38,4 @@ swagger-codegen-cli.jar
 swagger.yaml
 .swagger-codegen-ignore
 edx-api-stub-server/
+swagger-build-artifacts/
