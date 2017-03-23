@@ -30,11 +30,15 @@ paths:
 
   # Catalog IDA
   "/catalog/v1/catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogs"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/cc0f678/api.yaml#/endpoints/v1/catalogs"
   "/catalog/v1/catalogs/{id}":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogById"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/cc0f678/api.yaml#/endpoints/v1/catalogById"
   "/catalog/v1/catalogs/{id}/courses":
-      $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogCourses"
+      $ref: "https://raw.githubusercontent.com/edx/course-discovery/cc0f678/api.yaml#/endpoints/v1/catalogCourses"
+  "/catalog/v1/search/all":
+      $ref: "https://raw.githubusercontent.com/edx/course-discovery/cc0f678/api.yaml#/endpoints/v1/searchAll"
+  "/catalog/v1/search/all/facets":
+        $ref: "https://raw.githubusercontent.com/edx/course-discovery/cc0f678/api.yaml#/endpoints/v1/searchAllFacets"
 
   # Enterprise IDA
   "/enterprise/v1/catalogs":
