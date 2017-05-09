@@ -1,4 +1,6 @@
 # Packages required for testing
+-r base.txt
+
 moto==0.4.31
 pep8==1.7.0
 pylint==1.7.1
