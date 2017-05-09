@@ -143,13 +143,13 @@ def create_role_with_inline_policy(iam, policy_name, assume_role_policy_document
     if role_exists(iam, policy_name):
         logging.info('Role "%s" already exists. Assuming correct values.', policy_name)
         return get_role_arn(iam, policy_name)
-    else:
-        response = iam.create_role(RoleName=policy_name,
-                                   AssumeRolePolicyDocument=assume_role_policy_document)
-        iam.put_role_policy(RoleName=policy_name,
-                            PolicyName='inlinepolicy', PolicyDocument=policy_str)
-        logging.info('response for creating role = "%s"', response)
-        return response['Role']['Arn']
+
+    response = iam.create_role(RoleName=policy_name,
+                               AssumeRolePolicyDocument=assume_role_policy_document)
+    iam.put_role_policy(RoleName=policy_name,
+                        PolicyName='inlinepolicy', PolicyDocument=policy_str)
+    logging.info('response for creating role = "%s"', response)
+    return response['Role']['Arn']
 
 
 def create_role_with_managed_policy(iam, role_name, assume_role_policy_document, policy_arn):
@@ -157,12 +157,12 @@ def create_role_with_managed_policy(iam, role_name, assume_role_policy_document,
     if role_exists(iam, role_name):
         logging.info('Role "%s" already exists. Assuming correct values.', role_name)
         return get_role_arn(iam, role_name)
-    else:
-        response = iam.create_role(RoleName=role_name,
-                                   AssumeRolePolicyDocument=assume_role_policy_document)
-        attach_managed_policy(iam, role_name, policy_arn)
-        logging.info('response for creating role = "%s"', response)
-        return response['Role']['Arn']
+
+    response = iam.create_role(RoleName=role_name,
+                               AssumeRolePolicyDocument=assume_role_policy_document)
+    attach_managed_policy(iam, role_name, policy_arn)
+    logging.info('response for creating role = "%s"', response)
+    return response['Role']['Arn']
 
 
 def create_lambda_function(client, function_name, runtime, role,

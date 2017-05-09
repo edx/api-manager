@@ -32,14 +32,16 @@ def get_next_stage(rotation, cur_stage):
 
     next_index = 0
 
-    if len(rotation) == 0:
+    num_rotations = len(rotation)
+
+    if num_rotations == 0:
         raise ValueError("No rotation order provided, cannot return next stage.")
 
     try:
         cur_index = rotation.index(cur_stage)
 
         # Circular iteration. If we're at the end, go back to the beginning!
-        if cur_index < len(rotation) - 1:
+        if cur_index < num_rotations - 1:
             next_index = cur_index + 1
 
     except ValueError:
