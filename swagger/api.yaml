@@ -28,13 +28,42 @@ paths:
   "/oauth2/v1/access_token":
     $ref: "./oauth.yaml#/endpoints/request_access_token"
 
-  # Catalog IDA
-  "/catalog/v1/catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogs"
-  "/catalog/v1/catalogs/{id}":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogById"
-  "/catalog/v1/catalogs/{id}/courses":
-      $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogCourses"
+  # Catalog API
+  "/catalog/v1/{proxy+}":
+    x-amazon-apigateway-any-method:
+      produces:
+        - application/json
+      parameters:
+        - name: proxy
+          in: path
+          required: true
+          type: string
+      responses: {}
+      x-amazon-apigateway-integration:
+        responses:
+          200:
+            statusCode: "200"
+          401:
+            statusCode: "401"
+          403:
+            statusCode: "403"
+          404:
+            statusCode: "404"
+          429:
+            statusCode: "429"
+          500:
+            statusCode: "500"
+          default:
+            statusCode: "400"
+        requestParameters:
+          integration.request.path.proxy: method.request.path.proxy
+        uri: "https://${stageVariables.discovery_host}/v1/{proxy}"
+        passthroughBehavior: when_no_match
+        httpMethod: ANY
+        cacheNamespace: catalog
+        cacheKeyParameters:
+          - method.request.path.proxy
+        type: http_proxy
 
   # Enterprise IDA
   "/enterprise/v1/catalogs":
