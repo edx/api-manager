@@ -1,0 +1,5 @@
+# Pull all dependencies into one file for static monitoring tools (e.g. Gemnasium)
+# This probably isn't going to be useful for a developer or operator.
+
+-r base.txt
+-r test.txt

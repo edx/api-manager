@@ -21,9 +21,10 @@ clean:
 	rm -rf $(STUB_SERVER_DIR)
 
 requirements:
-	pip install -qr requirements/test.txt --exists-action w
+	pip install -qr requirements/base.txt --exists-action w
 
 quality:
+	pip install -qr requirements/test.txt --exists-action w
 	pep8 --config=.pep8 scripts/aws
 	pylint --rcfile=.pylintrc scripts/aws
 
