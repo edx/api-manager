@@ -1,8 +1,9 @@
 # Packages required for testing
 -r base.txt
 
-moto==0.4.31
+moto==1.0.0
+mock==2.0.0
 pep8==1.7.0
 pylint==1.7.1
 pyresttest==1.7.1
-pytest==3.0.7
+pytest==3.1.0
