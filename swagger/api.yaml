@@ -38,11 +38,11 @@ paths:
 
   # Enterprise IDA
   "/enterprise/v1/catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/cc960ff/api.yaml#/endpoints/v1/enterpriseCatalogs"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/5843507/api.yaml#/endpoints/v1/enterpriseCatalogs"
   "/enterprise/v1/catalogs/{id}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/cc960ff/api.yaml#/endpoints/v1/enterpriseCatalogById"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/5843507/api.yaml#/endpoints/v1/enterpriseCatalogById"
   "/enterprise/v1/catalogs/{id}/courses":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/cc960ff/api.yaml#/endpoints/v1/enterpriseCatalogCourses"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/5843507/api.yaml#/endpoints/v1/enterpriseCatalogCourses"
 
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
