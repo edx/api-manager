@@ -56,3 +56,4 @@ x-edx-api-vendors:
     - "edxapp_host"
     - "discovery_host"
     - "enterprise_host"
+    - "gateway_host"

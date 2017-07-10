@@ -29,6 +29,7 @@ First, make sure `AWS_REGION`, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` a
 There are a few custom environment variables required for the `deploy` script to work. At some point, we'll probably move some of these to be command-line arguments.
 * `STAGE_ROTATION_ORDER`: comma-separated list of stages in your "ring". Be aware of your AWS account's limit on stages per gateway. Example: `red,black`
 * `STAGE_EDXAPP_HOST`: the API base of your edx-platform service deployment
+* `STAGE_GATEWAY_HOST`: the API manager's host
 * `STAGE_DISCOVERY_HOST`: the API base of your course-discovery service deployment (just set to an empty or dummy string if you aren't using this in your specific Open edX deployment)
 * `STAGE_ENTERPRISE_HOST`: the API base of your enterprise service deployment (just set to an empty or dummy string if you aren't using this in your specific Open edX deployment)
 
