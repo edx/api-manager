@@ -24,18 +24,4 @@ The flow is as follows:
 5. *Activation*: the [flip](flip.py) script updates the `aws.apigateway.DomainName` to point to the newly deployed stage - or, more specifically, whatever stage you want. You can also use this script to quickly roll back your API to a previous stage in the ring.
 
 ### Environment
-First, make sure `AWS_REGION`, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are set up as per [AWS' instructions](http://boto3.readthedocs.org/en/latest/guide/configuration.html#environment-variables).
-
-There are a few custom environment variables required for the `deploy` script to work. At some point, we'll probably move some of these to be command-line arguments.
-* `STAGE_ROTATION_ORDER`: comma-separated list of stages in your "ring". Be aware of your AWS account's limit on stages per gateway. Example: `red,black`
-* `STAGE_EDXAPP_HOST`: the API base of your edx-platform service deployment
-* `STAGE_GATEWAY_HOST`: the API manager's host
-* `STAGE_DISCOVERY_HOST`: the API base of your course-discovery service deployment (just set to an empty or dummy string if you aren't using this in your specific Open edX deployment)
-* `STAGE_ENTERPRISE_HOST`: the API base of your enterprise service deployment (just set to an empty or dummy string if you aren't using this in your specific Open edX deployment)
-
-And some environment variables for provisioning specific stage settings (see the [AWS docs](http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-stage-settings.html) for more on the allowed values and examples):
-* `STAGE_LOG_LEVEL`
-* `STAGE_METRICS`
-* `STAGE_CACHING`
-* `STAGE_RATE_LIMIT`
-* `STAGE_BURST_LIMIT`
+Make sure `AWS_REGION`, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are set up as per [AWS' instructions](http://boto3.readthedocs.org/en/latest/guide/configuration.html#environment-variables).
