@@ -130,8 +130,6 @@ if __name__ == '__main__':
                         help="Location of catalog IDA for request routing")
     parser.add_argument("--enterprise-host", required=False, default='',
                         help="Location of enterprise IDA for request routing")
-    parser.add_argument("--gateway-host", required=False, default='localhost',
-                        help="Host name of the api deployment.")
 
     args = parser.parse_args()
 
@@ -151,7 +149,7 @@ if __name__ == '__main__':
         'edxapp_host': args.edxapp_host,
         'discovery_host': args.catalog_host,
         'enterprise_host': args.enterprise_host or args.edxapp_host,
-        'gateway_host': args.gateway_host,
+        'gateway_host': args.api_base_domain,
     })
 
     # Apply stage setting updates.
