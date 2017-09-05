@@ -38,17 +38,19 @@ paths:
 
   # Enterprise IDA
   "/enterprise/v1/catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/be3c590/api.yaml#/endpoints/v1/enterpriseCatalogs"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/9ba6da4/api.yaml#/endpoints/v1/enterpriseCatalogs"
   "/enterprise/v1/catalogs/{id}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/be3c590/api.yaml#/endpoints/v1/enterpriseCatalogById"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/9ba6da4/api.yaml#/endpoints/v1/enterpriseCatalogById"
   "/enterprise/v1/catalogs/{id}/courses":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/be3c590/api.yaml#/endpoints/v1/enterpriseCatalogCourses"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/9ba6da4/api.yaml#/endpoints/v1/enterpriseCatalogCourses"
   "/enterprise/v1/enterprise-catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/be3c590/api.yaml#/endpoints/v1/enterpriseCustomerCatalogs"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/9ba6da4/api.yaml#/endpoints/v1/enterpriseCustomerCatalogs"
   "/enterprise/v1/enterprise-catalogs/{uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/be3c590/api.yaml#/endpoints/v1/enterpriseCustomerCatalogByUuid"
-  "/enterprise/v1/programs/{uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/be3c590/api.yaml#/endpoints/v1/programByUuid"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/9ba6da4/api.yaml#/endpoints/v1/enterpriseCustomerCatalogByUuid"
+  "/enterprise/v1/enterprise-catalogs/{enterprise_customer_catalog_uuid}/course-runs/{course_run_id}":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/9ba6da4/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseRunByUuid"
+  "/enterprise/v1/enterprise-catalogs/{enterprise_customer_catalog_uuid}/programs/{program_uuid}":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/9ba6da4/api.yaml#/endpoints/v1/enterpriseCustomerCatalogProgramByUuid"
 
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
