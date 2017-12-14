@@ -102,3 +102,31 @@
     - url: '/enterprise/v1/enterprise-catalogs/0123456789abcdefg/programs/0123456789abcdefg'
     - method: 'GET'
     - expected_status: [400]
+
+- test:
+    - name: 'Enterprise customer course enrollments endpoint returns HTTP 200'
+    - url: '/enterprise/v1/enterprise-customer/0123456789abcdefg/course-enrollments'
+    - method: 'POST'
+    - headers: {'Authorization': 'aeiou', 'Content-Type': 'application/json'}
+    - body: >
+        [{
+            "course_run_id": "course-v1:edX+DemoX+Demo_Course",
+            "course_mode": "audit",
+            "user_email": "edx@example.com",
+            "email_students": true
+        }]
+    - expected_status: [200]
+
+- test:
+    - name: 'Enterprise customer course enrollments endpoint rejected without authorization'
+    - url: '/enterprise/v1/enterprise-customer/0123456789abcdefg/course-enrollments'
+    - method: 'POST'
+    - headers: {'Content-Type': 'application/json'}
+    - body: >
+        [{
+            "course_run_id": "course-v1:edX+DemoX+Demo_Course",
+            "course_mode": "audit",
+            "user_email": "edx@example.com",
+            "email_students": true
+        }]
+    - expected_status: [400]
