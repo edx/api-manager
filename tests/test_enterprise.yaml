@@ -58,6 +58,13 @@
     - expected_status: [200]
 
 - test:
+    - name: 'Course by key endpoint returns HTTP 200'
+    - url: '/enterprise/v1/enterprise-catalogs/0123456789abcdefg/courses/0123456789abcdefg'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+
+- test:
     - name: 'Program by UUID endpoint returns HTTP 200'
     - url: '/enterprise/v1/enterprise-catalogs/0123456789abcdefg/programs/0123456789abcdefg'
     - method: 'GET'
@@ -85,6 +92,13 @@
     - expected_status: [405]
 
 - test:
+    - name: 'Enterprise course POST is disabled'
+    - url: '/enterprise/v1/enterprise-catalogs/0123456789abcdefg/courses/0123456789abcdefg'
+    - method: 'POST'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [405]
+
+- test:
     - name: 'Enterprise program POST is disabled'
     - url: '/enterprise/v1/enterprise-catalogs/0123456789abcdefg/programs/0123456789abcdefg'
     - method: 'POST'
@@ -94,6 +108,12 @@
 - test:
     - name: 'Enterprise course run GET rejected without authorization'
     - url: '/enterprise/v1/enterprise-catalogs/0123456789abcdefg/course-runs/0123456789abcdefg'
+    - method: 'GET'
+    - expected_status: [400]
+
+- test:
+    - name: 'Enterprise course GET rejected without authorization'
+    - url: '/enterprise/v1/enterprise-catalogs/0123456789abcdefg/courses/0123456789abcdefg'
     - method: 'GET'
     - expected_status: [400]
 
