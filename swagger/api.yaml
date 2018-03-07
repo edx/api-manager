@@ -38,23 +38,23 @@ paths:
 
   # Enterprise IDA
   "/enterprise/v1/catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/a24c69c/api.yaml#/endpoints/v1/enterpriseCatalogs"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCatalogs"
   "/enterprise/v1/catalogs/{id}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/a24c69c/api.yaml#/endpoints/v1/enterpriseCatalogById"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCatalogById"
   "/enterprise/v1/catalogs/{id}/courses":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/a24c69c/api.yaml#/endpoints/v1/enterpriseCatalogCourses"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCatalogCourses"
   "/enterprise/v1/enterprise-catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/a24c69c/api.yaml#/endpoints/v1/enterpriseCustomerCatalogs"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogs"
   "/enterprise/v1/enterprise-catalogs/{uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/a24c69c/api.yaml#/endpoints/v1/enterpriseCustomerCatalogByUuid"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogByUuid"
   "/enterprise/v1/enterprise-catalogs/{uuid}/course-runs/{course_run_id}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/a24c69c/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseRunByUuid"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseRunByUuid"
   "/enterprise/v1/enterprise-catalogs/{uuid}/courses/{course_key}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/a24c69c/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseByKey"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseByKey"
   "/enterprise/v1/enterprise-catalogs/{uuid}/programs/{program_uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/a24c69c/api.yaml#/endpoints/v1/enterpriseCustomerCatalogProgramByUuid"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogProgramByUuid"
   "/enterprise/v1/enterprise-customer/{uuid}/course-enrollments":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/a24c69c/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments"
 
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
