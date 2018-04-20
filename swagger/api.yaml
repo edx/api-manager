@@ -54,7 +54,10 @@ paths:
   "/enterprise/v1/enterprise-catalogs/{uuid}/programs/{program_uuid}":
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogProgramByUuid"
   "/enterprise/v1/enterprise-customer/{uuid}/course-enrollments":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments"
+    post:
+      $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments/post"
+    get:
+      $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/TODO/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments/get"
 
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
@@ -69,3 +72,4 @@ x-edx-api-vendors:
     - "discovery_host"
     - "enterprise_host"
     - "gateway_host"
+    - "analytics_api_host"
