@@ -59,18 +59,32 @@ paths:
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/8fc95e4/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
 
   #Registrar
-  "/registrar/v0/jobs/{job_id}":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/21f6816e2e0d40cd1d65a34ea21723f1bfa3f1b1/.api-generated.yaml#/paths/~1v0~1jobs~1{job_id}~1"
-  "/registrar/v0/programs":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/21f6816e2e0d40cd1d65a34ea21723f1bfa3f1b1/.api-generated.yaml#/paths/~1v0~1programs~1"
-  "/registrar/v0/programs/{program_key}":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/21f6816e2e0d40cd1d65a34ea21723f1bfa3f1b1/.api-generated.yaml#/paths/~1v0~1programs~1{program_key}~1"
-  "/registrar/v0/programs/{program_key}/enrollments":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/21f6816e2e0d40cd1d65a34ea21723f1bfa3f1b1/.api-generated.yaml#/paths/~1v0~1programs~1{program_key}~1enrollments~1"
-  "/registrar/v0/programs/{program_key}/courses":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/21f6816e2e0d40cd1d65a34ea21723f1bfa3f1b1/.api-generated.yaml#/paths/~1v0~1programs~1{program_key}~1courses~1"
-  "/registrar/v0/programs/{program_key}/courses/{course_id}/enrollments":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/21f6816e2e0d40cd1d65a34ea21723f1bfa3f1b1/.api-generated.yaml#/paths/~1v0~1programs~1{program_key}~1courses~1{course_id}~1enrollments~1"
+  "/registrar/":
+    get:
+      operationId: registrar_get_api_docs
+      x-amazon-apigateway-integration:
+        type: http_proxy
+        httpMethod: GET
+        uri: 'https://${stageVariables.registrar_host}/api-docs/'
+  "/registrar/static/{proxy+}":
+    get:
+      operationId: registrar_get_static_asset
+      x-amazon-apigateway-integration:
+        type: http_proxy
+        httpMethod: GET
+        uri: 'https://${stageVariables.registrar_host}/static/{proxy}'
+  "/registrar/v1-mock/jobs/{job_id}":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/442532dade8ef91af6af1d504d326e7cbe38742d/.api-generated.yaml#/paths/~1v1-mock~1jobs~1{job_id}~1"
+  "/registrar/v1-mock/programs":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/442532dade8ef91af6af1d504d326e7cbe38742d/.api-generated.yaml#/paths/~1v1-mock~1programs~1"
+  "/registrar/v1-mock/programs/{program_key}":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/442532dade8ef91af6af1d504d326e7cbe38742d/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1"
+  "/registrar/v1-mock/programs/{program_key}/enrollments":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/442532dade8ef91af6af1d504d326e7cbe38742d/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1enrollments~1"
+  "/registrar/v1-mock/programs/{program_key}/courses":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/442532dade8ef91af6af1d504d326e7cbe38742d/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1courses~1"
+  "/registrar/v1-mock/programs/{program_key}/courses/{course_id}/enrollments":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/442532dade8ef91af6af1d504d326e7cbe38742d/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1courses~1{course_id}~1enrollments~1"
 
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
