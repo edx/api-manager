@@ -3,3 +3,4 @@ botocore==1.5.84
 jmespath==0.9.3
 six==1.10.0
 Jinja2==2.9.6
+google-compute-engine==2.8.12    # not strictly required, see: https://github.com/GoogleCloudPlatform/compute-image-packages/issues/262
