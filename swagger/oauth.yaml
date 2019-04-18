@@ -54,6 +54,7 @@ endpoints:
         200:
           description: OK
           schema:
+            type: object
             title: "bearer"
             properties:
               access_token:
