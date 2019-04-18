@@ -58,38 +58,18 @@ paths:
   "/enterprise/v1/enterprise-customer/{uuid}/learner-summary":
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/8fc95e4/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
 
-  # Registrar IDA
+  # Registrar IDA Proxy
   "/registrar/{proxy+}":
-    get:
+    x-amazon-apigateway-any-method:
       parameters:
-      - in: path
-        name: proxy
+      - name: "proxy"
+        in: "path"
       x-amazon-apigateway-integration:
-        type: http_proxy
-        httpMethod: GET
-        uri: 'https://${stageVariables.registrar_host}/{proxy}/'
+        type: "http_proxy"
+        uri: "https://${stageVariables.registrar_host}/{proxy}/"
+        httpMethod: "ANY"
         requestParameters:
-          integration.request.path.proxy: method.request.path.proxy
-    post:
-      parameters:
-      - in: path
-        name: proxy
-      x-amazon-apigateway-integration:
-        type: http_proxy
-        httpMethod: GET
-        uri: 'https://${stageVariables.registrar_host}/{proxy}/'
-        requestParameters:
-          integration.request.path.proxy: method.request.path.proxy
-    patch:
-      parameters:
-      - in: path
-        name: proxy
-      x-amazon-apigateway-integration:
-        type: http_proxy
-        httpMethod: GET
-        uri: 'https://${stageVariables.registrar_host}/{proxy}/'
-        requestParameters:
-          integration.request.path.proxy: method.request.path.proxy
+          integration.request.path.proxy: "method.request.path.proxy"
 
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
