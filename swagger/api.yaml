@@ -58,6 +58,24 @@ paths:
   "/enterprise/v1/enterprise-customer/{uuid}/learner-summary":
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/8fc95e4/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
 
+  #Registrar
+  "/registrar/":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/7ae77f2b2f59785501f4c7556dc2fa438a8c5cba/.api-generated.yaml#/endpoints/swagger"
+  "/registrar/static/{proxy+}":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/7ae77f2b2f59785501f4c7556dc2fa438a8c5cba/.api-generated.yaml#/endpoints/static"
+  "/registrar/v1-mock/jobs/{job_id}":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/7ae77f2b2f59785501f4c7556dc2fa438a8c5cba/.api-generated.yaml#/paths/~1v1-mock~1jobs~1{job_id}~1"
+  "/registrar/v1-mock/programs":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/7ae77f2b2f59785501f4c7556dc2fa438a8c5cba/.api-generated.yaml#/paths/~1v1-mock~1programs~1"
+  "/registrar/v1-mock/programs/{program_key}":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/7ae77f2b2f59785501f4c7556dc2fa438a8c5cba/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1"
+  "/registrar/v1-mock/programs/{program_key}/enrollments":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/7ae77f2b2f59785501f4c7556dc2fa438a8c5cba/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1enrollments~1"
+  "/registrar/v1-mock/programs/{program_key}/courses":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/7ae77f2b2f59785501f4c7556dc2fa438a8c5cba/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1courses~1"
+  "/registrar/v1-mock/programs/{program_key}/courses/{course_id}/enrollments":
+    $ref: "https://raw.githubusercontent.com/edx/registrar/7ae77f2b2f59785501f4c7556dc2fa438a8c5cba/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1courses~1{course_id}~1enrollments~1"
+
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
 # Upstream API owners: document your dependencies in this index file to
@@ -72,3 +90,4 @@ x-edx-api-vendors:
     - "enterprise_host"
     - "gateway_host"
     - "analytics_api_host"
+    - "registrar_host"

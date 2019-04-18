@@ -22,6 +22,7 @@ endpoints:
           description: "OK"
           schema:
             title: "heartbeat"
+            type: object
             properties:
               version:
                 type: "string"
