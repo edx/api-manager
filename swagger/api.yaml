@@ -60,25 +60,25 @@ paths:
 
   # Registrar IDA
   "/registrar/":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/f5dc0ed8a8c8bb6f5c9d55bd0739036665ee57ea/.api-generated.yaml#/endpoints/swagger"
+    $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/endpoints/swagger"
   "/registrar/login":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/f5dc0ed8a8c8bb6f5c9d55bd0739036665ee57ea/.api-generated.yaml#/endpoints/login"
+    $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/endpoints/login"
   "/registrar/logout":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/f5dc0ed8a8c8bb6f5c9d55bd0739036665ee57ea/.api-generated.yaml#/endpoints/logout"
+    $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/endpoints/logout"
   "/registrar/static/{proxy+}":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/f5dc0ed8a8c8bb6f5c9d55bd0739036665ee57ea/.api-generated.yaml#/endpoints/static"
+    $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/endpoints/static"
   "/registrar/v1-mock/jobs/{job_id}":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/f5dc0ed8a8c8bb6f5c9d55bd0739036665ee57ea/.api-generated.yaml#/paths/~1v1-mock~1jobs~1{job_id}~1"
+    $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/paths/~1v1-mock~1jobs~1{job_id}~1"
   "/registrar/v1-mock/programs":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/f5dc0ed8a8c8bb6f5c9d55bd0739036665ee57ea/.api-generated.yaml#/paths/~1v1-mock~1programs~1"
+    $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/paths/~1v1-mock~1programs~1"
   "/registrar/v1-mock/programs/{program_key}":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/f5dc0ed8a8c8bb6f5c9d55bd0739036665ee57ea/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1"
+    $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1"
   "/registrar/v1-mock/programs/{program_key}/enrollments":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/f5dc0ed8a8c8bb6f5c9d55bd0739036665ee57ea/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1enrollments~1"
+    $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1enrollments~1"
   "/registrar/v1-mock/programs/{program_key}/courses":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/f5dc0ed8a8c8bb6f5c9d55bd0739036665ee57ea/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1courses~1"
+    $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1courses~1"
   "/registrar/v1-mock/programs/{program_key}/courses/{course_id}/enrollments":
-    $ref: "https://raw.githubusercontent.com/edx/registrar/f5dc0ed8a8c8bb6f5c9d55bd0739036665ee57ea/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1courses~1{course_id}~1enrollments~1"
+    $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/paths/~1v1-mock~1programs~1{program_key}~1courses~1{course_id}~1enrollments~1"
 
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
