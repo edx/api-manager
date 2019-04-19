@@ -59,7 +59,7 @@ paths:
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/8fc95e4/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
 
   # Registrar IDA
-  "/registrar/":
+  "/registrar/api-docs":
     $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/endpoints/swagger"
   "/registrar/login":
     $ref: "https://raw.githubusercontent.com/edx/registrar/d3f65155312c2308eb33364457f23260e023da73/.api-generated.yaml#/endpoints/login"
