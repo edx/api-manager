@@ -31,7 +31,7 @@ quality:
 # TODO: verify via checksum that the file is valid.
 codegen.download:
 	-curl $(SWAGGER_CODEGEN_JAR) -o swagger-codegen-cli.jar
-
+wwww
 # Flatten the swagger docs into a build artifact.
 # Assumes java 7 is installed.
 build: codegen.download
