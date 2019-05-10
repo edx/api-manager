@@ -14,7 +14,7 @@ help:
 	@echo '    make test             Run all tests                                                 '
 	@echo '                                                                                        '
 
-clean:
+clean:www
 	find . -name '*.pyc' -delete
 	find . -name '__pycache__' -type d -delete
 	rm -rf $(BUILD_OUTPUT_DIR)
