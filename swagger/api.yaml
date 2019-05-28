@@ -37,12 +37,6 @@ paths:
       $ref: "https://raw.githubusercontent.com/edx/course-discovery/649a4cb/api.yaml#/endpoints/v1/catalogCourses"
 
   # Enterprise IDA
-  "/enterprise/v1/catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCatalogs"
-  "/enterprise/v1/catalogs/{id}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCatalogById"
-  "/enterprise/v1/catalogs/{id}/courses":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCatalogCourses"
   "/enterprise/v1/enterprise-catalogs":
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogs"
   "/enterprise/v1/enterprise-catalogs/{uuid}":
