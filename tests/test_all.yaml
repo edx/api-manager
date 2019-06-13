@@ -2,5 +2,5 @@
 - import: 'tests/test_heartbeat.yaml'
 - import: 'tests/test_index.yaml'
 - import: 'tests/test_oauth.yaml'
-- import: 'tests/test_catalog.yaml'
+- import: 'tests/test_discovery.yaml'
 - import: 'tests/test_enterprise.yaml'

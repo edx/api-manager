@@ -82,7 +82,7 @@ Initially, the most critical feature is clear, updated, documentation, so thatâ€
 ### Authorization
 > Determine which actions an API client (application) is allowed to access, and the allowed frequency.
 
-Note that API authorization is fundamentally different from user authorization, which we currently enforce at the individual service level. Taking the example of a service for managing and querying a catalog, the division of responsibilities would be: the API Manager will determine if an application is allowed to get any Catalog information or not; the Catalog service will then need to determine if the requesting user is allowed to get information on a specific catalog.
+Note that API authorization is fundamentally different from user authorization, which we currently enforce at the individual service level. Taking the example of a service for managing and querying a catalog, the division of responsibilities would be: the API Manager will determine if an application is allowed to get any Catalog information or not; the Discovery service will then need to determine if the requesting user is allowed to get information on a specific catalog.
 
 The eventual Open edX plan is to map scopes to routes, and include scope information in the userâ€™s access token. It is not yet clear how we will manage scopes.
 
