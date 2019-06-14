@@ -7,6 +7,10 @@ branches:
 python:
   - "2.7"
 install:
+  - sudo apt-get install libgnutls28-dev
+  - export PYCURL_SSL_LIBRARY=gnutls
+  - export LDFLAGS=-L/usr/local/opt/gnutls/lib
+  - export CPPFLAGS=-I/usr/local/opt/gnutls/include
   - make requirements
 script:
   - make test
