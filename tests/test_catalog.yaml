@@ -1,0 +1,37 @@
+---
+- config:
+    - testset: 'Catalog API'
+
+- test:
+    - name: 'Catalogs endpoint returns HTTP 200'
+    - url: '/catalog/v1/catalogs'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+
+- test:
+    - name: 'Catalog by ID endpoint returns HTTP 200'
+    - url: '/catalog/v1/catalogs/1'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+
+- test:
+    - name: 'Catalog courses endpoint returns HTTP 200'
+    - url: '/catalog/v1/catalogs/1/courses'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+
+- test:
+    - name: 'POST is disabled for catalogs'
+    - url: '/catalog/v1/catalogs'
+    - method: 'POST'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [405]
+
+- test:
+    - name: 'GET rejected without authorization'
+    - url: '/catalog/v1/catalogs'
+    - method: 'GET'
+    - expected_status: [400]
