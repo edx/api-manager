@@ -29,10 +29,12 @@ paths:
     $ref: "./oauth.yaml#/endpoints/request_access_token"
 
   # Discovery IDA
-  # Base Discovery Endpoints
-  "/v1/courses":
+  # Discovery and Catalog are both actually served from the course-discovery IDA
+  # but we separate them here to distinguish between the different use cases
+  "/discovery/v1/courses":
     $ref: "https://raw.githubusercontent.com/edx/course-discovery/e855990/api.yaml#/endpoints/v1/courses"
-  # Catalog Endpoints
+
+  # Catalog IDA
   "/catalog/v1/catalogs":
     $ref: "https://raw.githubusercontent.com/edx/course-discovery/e855990/api.yaml#/endpoints/v1/catalogs"
   "/catalog/v1/catalogs/{id}":
