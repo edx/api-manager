@@ -1,6 +1,19 @@
 ---
 - config:
-    - testset: 'Catalog API'
+    - testset: 'Discovery API'
+
+- test:
+    - name: 'Base courses endpoint returns HTTP 200'
+    - url: '/v1/courses'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+
+- test:
+    - name: 'Base courses endpoint rejects without authorization'
+    - url: '/v1/courses'
+    - method: 'GET'
+    - expected_status: [400]
 
 - test:
     - name: 'Catalogs endpoint returns HTTP 200'
@@ -17,7 +30,7 @@
     - expected_status: [200]
 
 - test:
-    - name: 'Courses endpoint returns HTTP 200'
+    - name: 'Catalog courses endpoint returns HTTP 200'
     - url: '/catalog/v1/catalogs/1/courses'
     - method: 'GET'
     - headers: {'Authorization': 'aeiou'}
