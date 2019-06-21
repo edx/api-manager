@@ -14,3 +14,30 @@
     - url: '/discovery/v1/courses'
     - method: 'GET'
     - expected_status: [400]
+
+- test:
+    - name: 'Discovery course by UUID endpoint returns HTTP 200'
+    - url: '/discovery/v1/courses/1111111-1111-1111-1111-111111111111'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+
+- test:
+    - name: 'Discovery programs endpoint returns HTTP 200'
+    - url: '/discovery/v1/programs'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+
+- test:
+    - name: 'Discovery programs endpoint rejects without authorization'
+    - url: '/discovery/v1/programs'
+    - method: 'GET'
+    - expected_status: [400]
+
+- test:
+    - name: 'Discovery program by UUID endpoint returns HTTP 200'
+    - url: '/discovery/v1/programs/1111111-1111-1111-1111-111111111111'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
