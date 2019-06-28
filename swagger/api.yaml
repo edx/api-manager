@@ -32,21 +32,21 @@ paths:
   # Discovery and Catalog are both actually served from the course-discovery IDA
   # but we separate them here to distinguish between the different use cases
   "/discovery/v1/courses":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/2556002/api.yaml#/endpoints/v1/courses"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/96ea3a9/api.yaml#/endpoints/v1/courses"
   "/discovery/v1/courses/{uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/2556002/api.yaml#/endpoints/v1/coursesByUuid"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/96ea3a9/api.yaml#/endpoints/v1/coursesByUuid"
   "/discovery/v1/programs":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/2556002/api.yaml#/endpoints/v1/programs"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/96ea3a9/api.yaml#/endpoints/v1/programs"
   "/discovery/v1/programs/{uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/2556002/api.yaml#/endpoints/v1/programsByUuid"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/96ea3a9/api.yaml#/endpoints/v1/programsByUuid"
 
   # Catalog IDA
   "/catalog/v1/catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/2556002/api.yaml#/endpoints/v1/catalogs"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/96ea3a9/api.yaml#/endpoints/v1/catalogs"
   "/catalog/v1/catalogs/{id}":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/2556002/api.yaml#/endpoints/v1/catalogById"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/96ea3a9/api.yaml#/endpoints/v1/catalogById"
   "/catalog/v1/catalogs/{id}/courses":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/2556002/api.yaml#/endpoints/v1/catalogCourses"
+    $ref: "https://raw.githubusercontent.com/edx/course-discovery/96ea3a9/api.yaml#/endpoints/v1/catalogCourses"
 
   # Enterprise IDA
   "/enterprise/v1/enterprise-catalogs":
