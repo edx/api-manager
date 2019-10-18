@@ -106,18 +106,6 @@ paths:
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
-  "/registrar/v1-mock/{proxy+}":
-    x-amazon-apigateway-any-method:
-      parameters:
-      - name: "proxy"
-        in: "path"
-      x-amazon-apigateway-integration:
-        type: "http_proxy"
-        uri: "https://${stageVariables.registrar_host}/api/v1-mock/{proxy}/"
-        httpMethod: "ANY"
-        requestParameters:
-          integration.request.path.proxy: "method.request.path.proxy"
-
   "/registrar/v2/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
