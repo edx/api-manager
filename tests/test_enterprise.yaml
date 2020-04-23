@@ -10,8 +10,22 @@
     - expected_status: [200]
 
 - test:
+    - name: 'Enterprise catalog version 2 endpoint returns HTTP 200'
+    - url: '/enterprise/v2/enterprise-catalogs'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+
+- test:
     - name: 'Enterprise catalog by UUID endpoint returns HTTP 200'
     - url: '/enterprise/v1/enterprise-catalogs/0123456789abcdefg'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+
+- test:
+    - name: 'Enterprise catalog by UUID endpoint version 2 returns HTTP 200'
+    - url: '/enterprise/v2/enterprise-catalogs/0123456789abcdefg'
     - method: 'GET'
     - headers: {'Authorization': 'aeiou'}
     - expected_status: [200]
@@ -45,8 +59,21 @@
     - expected_status: [405]
 
 - test:
+    - name: 'Enterprise catalog version 2 POST is disabled'
+    - url: '/enterprise/v2/enterprise-catalogs'
+    - method: 'POST'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [405]
+
+- test:
     - name: 'Enterprise catalog GET rejected without authorization'
     - url: '/enterprise/v1/enterprise-catalogs'
+    - method: 'GET'
+    - expected_status: [400]
+
+- test:
+    - name: 'Enterprise catalog version 2 GET rejected without authorization'
+    - url: '/enterprise/v2/enterprise-catalogs'
     - method: 'GET'
     - expected_status: [400]
 
