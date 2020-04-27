@@ -134,6 +134,8 @@ if __name__ == '__main__':
                         help="Location of analyitcs-api IDA for request routing")
     parser.add_argument('--registrar-host', required=True,
                         help="Location of registrar IDA for request routing")
+    parser.add_argument('--enterprise-catalog-host', required=True,
+                        help="Location of enterprise catalog IDA for request routing")
 
     args = parser.parse_args()
 
@@ -155,7 +157,8 @@ if __name__ == '__main__':
         'enterprise_host': args.enterprise_host or args.edxapp_host,
         'gateway_host': args.api_base_domain,
         'analytics_api_host': args.analytics_api_host,
-        'registrar_host': args.registrar_host
+        'registrar_host': args.registrar_host,
+        'enterprise_catalog_host': args.enterprise_catalog_host,
     })
 
     # Apply stage setting updates.
