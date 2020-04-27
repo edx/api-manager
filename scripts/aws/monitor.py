@@ -319,7 +319,7 @@ if __name__ == '__main__':
     zip_file_name = create_lambda_function_zip(j2_env, tmpdirname, args.splunk_host,
                                                args.splunk_token, lambda_function_name)
     vpc_config = {'SubnetIds': args.subnet_list, 'SecurityGroupIds': args.sg_list}
-    create_lambda_function(lambda_client, lambda_function_name, 'nodejs4.3', lambda_exec_role_arn,
+    create_lambda_function(lambda_client, lambda_function_name, 'nodejs12.16.2', lambda_exec_role_arn,
                            'index.handler', zip_file_name,
                            'Demonstrates logging events to Splunk HTTP Event '
                            'Collector, accessing resources in a VPC', args.lambda_timeout, args.lambda_memory,
