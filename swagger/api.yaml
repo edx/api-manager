@@ -54,9 +54,9 @@ paths:
   # Enterprise Catalog IDA
   # These are served from the enterprise catalog IDA, but we surface them with the rest of the enterprise endpoints
   "/enterprise/v2/enterprise-catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/enterprise-catalog/c8cfc55/api.yaml#/endpoints/v2/enterpriseCatalogs" 
+    $ref: "https://raw.githubusercontent.com/edx/enterprise-catalog/2877ad7/api.yaml#/endpoints/v2/enterpriseCatalogs"
   "/enterprise/v2/enterprise-catalogs/{uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/enterprise-catalog/c8cfc55/api.yaml#/endpoints/v2/enterpriseCatalogByUuid"
+    $ref: "https://raw.githubusercontent.com/edx/enterprise-catalog/2877ad7/api.yaml#/endpoints/v2/enterpriseCatalogByUuid"
 
   # Registrar API Proxy
   # Note: There's an unresolved issue involving trailing slashes with proxy integrations in API Gateway.
