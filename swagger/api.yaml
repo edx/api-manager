@@ -57,6 +57,17 @@ paths:
     $ref: "https://raw.githubusercontent.com/edx/enterprise-catalog/2877ad7/api.yaml#/endpoints/v2/enterpriseCatalogs"
   "/enterprise/v2/enterprise-catalogs/{uuid}":
     $ref: "https://raw.githubusercontent.com/edx/enterprise-catalog/2877ad7/api.yaml#/endpoints/v2/enterpriseCatalogByUuid"
+  # Add the following v1 endpoints to v2 with the same implementation for ease of use by the ECS team
+  "/enterprise/v2/enterprise-catalogs/{uuid}/course-runs/{course_run_id}":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseRunByUuid"
+  "/enterprise/v2/enterprise-catalogs/{uuid}/courses/{course_key}":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseByKey"
+  "/enterprise/v2/enterprise-catalogs/{uuid}/programs/{program_uuid}":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogProgramByUuid"
+  "/enterprise/v2/enterprise-customer/{uuid}/course-enrollments":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments"
+  "/enterprise/v2/enterprise-customer/{uuid}/learner-summary":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/8fc95e4/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
 
   # Registrar API Proxy
   # Note: There's an unresolved issue involving trailing slashes with proxy integrations in API Gateway.
