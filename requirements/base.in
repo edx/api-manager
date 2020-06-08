@@ -1,0 +1,6 @@
+boto3
+botocore
+jmespath
+six
+Jinja2
+google-compute-engine		# not strictly required, see: https://github.com/GoogleCloudPlatform/compute-image-packages/issues/262

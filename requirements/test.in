@@ -1,0 +1,11 @@
+# Requirements for running tests
+-c constraints.txt
+
+-r base.txt
+
+moto
+mock
+pep8
+pylint
+pyresttest
+pytest

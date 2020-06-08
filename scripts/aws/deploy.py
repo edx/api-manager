@@ -171,4 +171,4 @@ if __name__ == '__main__':
     })
 
     # Return new stage name.
-    print new_stage
+    print(new_stage)
