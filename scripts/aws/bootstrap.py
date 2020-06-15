@@ -53,7 +53,7 @@ def create_apigw_custom_domain_name(domain_name, cert_name, cert_body, cert_pk, 
             certificatePrivateKey=cert_pk,
             certificateChain=cert_chain
         )
-    except Exception, e:
+    except Exception as e:
         raise e
 
     return response

@@ -5,7 +5,8 @@ branches:
     only:
       - master
 python:
-  - "2.7"
+  - 3.5
+  - 3.8
 install:
   - sudo apt-get install libgnutls28-dev
   - export PYCURL_SSL_LIBRARY=gnutls
