@@ -1,5 +1,5 @@
 # api-manager
-[![Build Status](https://travis-ci.org/edx/api-manager.svg?branch=master)](https://travis-ci.org/edx/api-manager)
+[![Build Status](https://github.com/edx/api-manager/workflows/Python%20CI/badge.svg?branch=master)](https://github.com/edx/api-manager/actions?query=workflow%3A%22Python+CI%22)
 
 Specifications and optional lightweight service for routing clients of the Open edX REST API to various endpoints within the platform.
 
