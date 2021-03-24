@@ -4,75 +4,209 @@
 #
 #    make upgrade
 #
-astroid==2.4.2            # via pylint
-attrs==19.3.0             # via jsonschema, pytest
-aws-sam-translator==1.24.0  # via cfn-lint
-aws-xray-sdk==2.5.0       # via moto
-boto3==1.13.24            # via -r requirements/base.txt, aws-sam-translator, moto
-boto==2.49.0              # via -r requirements/base.txt, google-compute-engine, moto
-botocore==1.16.24         # via -r requirements/base.txt, aws-xray-sdk, boto3, moto, s3transfer
-certifi==2020.4.5.2       # via requests
-cffi==1.14.0              # via cryptography
-cfn-lint==0.33.0          # via moto
-chardet==3.0.4            # via requests
-cryptography==2.9.2       # via moto, sshpubkeys
-decorator==4.4.2          # via networkx
-docker==4.2.1             # via moto
-docutils==0.15.2          # via -r requirements/base.txt, botocore
-ecdsa==0.15               # via python-jose, sshpubkeys
-future==0.18.2            # via aws-xray-sdk, pyresttest
-google-compute-engine==2.8.13  # via -r requirements/base.txt
-idna==2.8                 # via moto, requests
-importlib-metadata==1.6.1  # via importlib-resources, jsonpickle, jsonschema, pluggy, pytest
-importlib-resources==1.5.0  # via cfn-lint
-isort==4.3.21             # via pylint
-jinja2==2.11.2            # via -r requirements/base.txt, moto
-jmespath==0.10.0          # via -r requirements/base.txt, boto3, botocore
-jsondiff==1.1.2           # via moto
-jsonpatch==1.25           # via cfn-lint
-jsonpickle==1.4.1         # via aws-xray-sdk
-jsonpointer==2.0          # via jsonpatch
-jsonschema==3.2.0         # via aws-sam-translator, cfn-lint
-junit-xml==1.9            # via cfn-lint
-lazy-object-proxy==1.4.3  # via astroid
-markupsafe==1.1.1         # via -r requirements/base.txt, jinja2
-mccabe==0.6.1             # via pylint
-mock==3.0.5               # via -r requirements/test.in, moto
-more-itertools==8.3.0     # via pytest
-moto==1.3.14              # via -r requirements/test.in
-networkx==2.4             # via cfn-lint
-packaging==20.4           # via pytest
-pathlib2==2.3.5           # via pytest
-pep8==1.7.1               # via -r requirements/test.in
-pluggy==0.13.1            # via pytest
-py==1.8.1                 # via pytest
-pyasn1==0.4.8             # via python-jose, rsa
-pycparser==2.20           # via cffi
-pycurl==7.43.0.5          # via pyresttest
-pylint==2.5.3             # via -r requirements/test.in
-pyparsing==2.4.7          # via packaging
-pyresttest==1.7.1         # via -r requirements/test.in
-pyrsistent==0.16.0        # via jsonschema
-pytest==5.4.3             # via -r requirements/test.in
-python-dateutil==2.8.1    # via -r requirements/base.txt, botocore, moto
-python-jose==3.1.0        # via moto
-pytz==2020.1              # via moto
-pyyaml==5.3.1             # via cfn-lint, moto, pyresttest
-requests==2.23.0          # via docker, moto, responses
-responses==0.10.14        # via moto
-rsa==4.0                  # via python-jose
-s3transfer==0.3.3         # via -r requirements/base.txt, boto3
-six==1.15.0               # via -r requirements/base.txt, astroid, aws-sam-translator, cfn-lint, cryptography, docker, ecdsa, jsonschema, junit-xml, mock, moto, packaging, pathlib2, python-dateutil, python-jose, responses, websocket-client
-sshpubkeys==3.1.0         # via moto
-toml==0.10.1              # via pylint
-typed-ast==1.4.1          # via astroid
-urllib3==1.25.9           # via -r requirements/base.txt, botocore, requests
-wcwidth==0.2.4            # via pytest
-websocket-client==0.57.0  # via docker
-werkzeug==1.0.1           # via moto
-wrapt==1.12.1             # via astroid, aws-xray-sdk
-xmltodict==0.12.0         # via moto
-zipp==1.2.0               # via importlib-metadata, importlib-resources
+astroid==2.4.2
+    # via pylint
+attrs==19.3.0
+    # via
+    #   jsonschema
+    #   pytest
+aws-sam-translator==1.24.0
+    # via cfn-lint
+aws-xray-sdk==2.5.0
+    # via moto
+boto3==1.13.24
+    # via
+    #   -r base.txt
+    #   aws-sam-translator
+    #   moto
+boto==2.49.0
+    # via
+    #   -r base.txt
+    #   google-compute-engine
+    #   moto
+botocore==1.16.24
+    # via
+    #   -r base.txt
+    #   aws-xray-sdk
+    #   boto3
+    #   moto
+    #   s3transfer
+certifi==2020.4.5.2
+    # via requests
+cffi==1.14.0
+    # via cryptography
+cfn-lint==0.33.0
+    # via moto
+chardet==3.0.4
+    # via requests
+cryptography==2.9.2
+    # via
+    #   moto
+    #   sshpubkeys
+decorator==4.4.2
+    # via networkx
+distro==1.5.0
+    # via google-compute-engine
+docker==4.2.1
+    # via moto
+docutils==0.15.2
+    # via
+    #   -r base.txt
+    #   botocore
+ecdsa==0.15
+    # via
+    #   python-jose
+    #   sshpubkeys
+future==0.18.2
+    # via
+    #   aws-xray-sdk
+    #   pyresttest
+google-compute-engine==2.8.13
+    # via -r base.txt
+idna==2.8
+    # via
+    #   moto
+    #   requests
+importlib-metadata==1.6.1
+    # via jsonpickle
+isort==4.3.21
+    # via pylint
+jinja2==2.11.2
+    # via
+    #   -r base.txt
+    #   moto
+jmespath==0.10.0
+    # via
+    #   -r base.txt
+    #   boto3
+    #   botocore
+jsondiff==1.1.2
+    # via moto
+jsonpatch==1.25
+    # via cfn-lint
+jsonpickle==1.4.1
+    # via aws-xray-sdk
+jsonpointer==2.0
+    # via jsonpatch
+jsonschema==3.2.0
+    # via
+    #   aws-sam-translator
+    #   cfn-lint
+junit-xml==1.9
+    # via cfn-lint
+lazy-object-proxy==1.4.3
+    # via astroid
+markupsafe==1.1.1
+    # via
+    #   -r base.txt
+    #   jinja2
+mccabe==0.6.1
+    # via pylint
+mock==3.0.5
+    # via
+    #   -r test.in
+    #   moto
+more-itertools==8.3.0
+    # via pytest
+moto==1.3.14
+    # via -r test.in
+networkx==2.4
+    # via cfn-lint
+packaging==20.4
+    # via pytest
+pep8==1.7.1
+    # via -r test.in
+pluggy==0.13.1
+    # via pytest
+py==1.8.1
+    # via pytest
+pyasn1==0.4.8
+    # via
+    #   python-jose
+    #   rsa
+pycparser==2.20
+    # via cffi
+pycurl==7.43.0.5
+    # via pyresttest
+pylint==2.5.3
+    # via -r test.in
+pyparsing==2.4.7
+    # via packaging
+pyresttest==1.7.1
+    # via -r test.in
+pyrsistent==0.16.0
+    # via jsonschema
+pytest==5.4.3
+    # via -r test.in
+python-dateutil==2.8.1
+    # via
+    #   -r base.txt
+    #   botocore
+    #   moto
+python-jose==3.1.0
+    # via moto
+pytz==2020.1
+    # via moto
+pyyaml==5.3.1
+    # via
+    #   cfn-lint
+    #   moto
+    #   pyresttest
+requests==2.23.0
+    # via
+    #   docker
+    #   moto
+    #   responses
+responses==0.10.14
+    # via moto
+rsa==4.1
+    # via python-jose
+s3transfer==0.3.3
+    # via
+    #   -r base.txt
+    #   boto3
+six==1.15.0
+    # via
+    #   -r base.txt
+    #   astroid
+    #   aws-sam-translator
+    #   cfn-lint
+    #   cryptography
+    #   docker
+    #   ecdsa
+    #   jsonschema
+    #   junit-xml
+    #   mock
+    #   moto
+    #   packaging
+    #   pyrsistent
+    #   python-dateutil
+    #   python-jose
+    #   responses
+    #   websocket-client
+sshpubkeys==3.1.0
+    # via moto
+toml==0.10.1
+    # via pylint
+urllib3==1.25.9
+    # via
+    #   -r base.txt
+    #   botocore
+    #   requests
+wcwidth==0.2.4
+    # via pytest
+websocket-client==0.57.0
+    # via docker
+werkzeug==1.0.1
+    # via moto
+wrapt==1.12.1
+    # via
+    #   astroid
+    #   aws-xray-sdk
+xmltodict==0.12.0
+    # via moto
+zipp==1.2.0
+    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
