@@ -14,8 +14,8 @@ def get_api_id(client, api_base_domain):
         response = client.get_base_path_mapping(
             domainName=api_base_domain,
             basePath='(none)')
-    except botocore.exceptions.ClientError:
-        raise ValueError('No mapping found for "%s"' % api_base_domain)
+    except botocore.exceptions.ClientError as exc:
+        raise ValueError('No mapping found for "%s"' % api_base_domain) from exc
 
     logging.info('Found existing base path mapping for API ID "%s", stage "%s"',
                  response['restApiId'], response['stage'])
@@ -59,7 +59,7 @@ def deploy_api(client, rest_api_id, swagger_filename, stage_name, stage_variable
     with environment-specific variables.
     """
 
-    swagger = open(swagger_filename, 'r')
+    swagger = open(swagger_filename, 'r')  # pylint: disable=consider-using-with
 
     api_response = client.put_rest_api(restApiId=rest_api_id, mode='overwrite', body=swagger.read())
     logging.info('Existing API ID "%s" updated (name "%s")', api_response['id'], api_response['name'])

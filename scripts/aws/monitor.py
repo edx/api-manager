@@ -40,8 +40,8 @@ def get_api_id(client, api_base_domain):
         response = client.get_base_path_mapping(
             domainName=api_base_domain,
             basePath='(none)')
-    except botocore.exceptions.ClientError:
-        raise ValueError('No mapping found for "%s"' % api_base_domain)
+    except botocore.exceptions.ClientError as exc:
+        raise ValueError('No mapping found for "%s"' % api_base_domain) from exc
 
     logging.info('Found existing base path mapping for API ID "%s", stage "%s"',
                  response['restApiId'], response['stage'])
@@ -170,7 +170,7 @@ def create_lambda_function(client, function_name, runtime, role,
     """Creates a lambda function to pull data from cloudwatch event.
     It only works works in VPC"""
     try:
-        code_file = open(zip_file, 'rb')
+        code_file = open(zip_file, 'rb')  # pylint: disable=consider-using-with
         if lambda_exists(client, function_name):
             logging.info('"%s" function already exists. Updating its code', function_name)
             response = client.update_function_code(

@@ -90,7 +90,7 @@ def bootstrap_api(stage_name):
     # bootstrap.json is relative to me; where am I?
     my_dir = os.path.dirname(os.path.realpath(__file__))
 
-    bootstrap_swagger = open(my_dir + '/bootstrap.json', 'r')
+    bootstrap_swagger = open(my_dir + '/bootstrap.json', 'r')  # pylint: disable=consider-using-with
 
     response = client.import_rest_api(body=bootstrap_swagger.read())
     logging.info('New bootstrap API ID "%s" created', response['id'])
