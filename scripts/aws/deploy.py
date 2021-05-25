@@ -14,8 +14,8 @@ def get_api_id(client, api_base_domain):
         response = client.get_base_path_mapping(
             domainName=api_base_domain,
             basePath='(none)')
-    except botocore.exceptions.ClientError:
-        raise ValueError('No mapping found for "%s"' % api_base_domain)
+    except botocore.exceptions.ClientError as err:
+        raise ValueError('No mapping found for "%s"' % api_base_domain) from err
 
     logging.info('Found existing base path mapping for API ID "%s", stage "%s"',
                  response['restApiId'], response['stage'])
@@ -58,20 +58,19 @@ def deploy_api(client, rest_api_id, swagger_filename, stage_name, stage_variable
     Upload the Swagger document to an existing API Gateway object and set it live
     with environment-specific variables.
     """
+    with open(swagger_filename, 'r') as swagger:
 
-    swagger = open(swagger_filename, 'r')
+        api_response = client.put_rest_api(restApiId=rest_api_id, mode='overwrite', body=swagger.read())
+        logging.info('Existing API ID "%s" updated (name "%s")', api_response['id'], api_response['name'])
 
-    api_response = client.put_rest_api(restApiId=rest_api_id, mode='overwrite', body=swagger.read())
-    logging.info('Existing API ID "%s" updated (name "%s")', api_response['id'], api_response['name'])
+        deployment_response = client.create_deployment(
+            restApiId=rest_api_id,
+            stageName=stage_name,
+            variables=stage_variables)
 
-    deployment_response = client.create_deployment(
-        restApiId=rest_api_id,
-        stageName=stage_name,
-        variables=stage_variables)
+        logging.info('API ID "%s" deployed (deployment ID %s)', rest_api_id, deployment_response['id'])
 
-    logging.info('API ID "%s" deployed (deployment ID %s)', rest_api_id, deployment_response['id'])
-
-    return deployment_response['id']
+        return deployment_response['id']
 
 
 def update_stage(client, rest_api_id, stage_name, stage_settings):

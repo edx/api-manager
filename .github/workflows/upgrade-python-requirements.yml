@@ -35,6 +35,7 @@ jobs:
       - name: make upgrade
         run: |
           cd $GITHUB_WORKSPACE
+          sudo apt-get install libcurl4-openssl-dev libssl-dev
           make upgrade
 
       - name: setup testeng-ci

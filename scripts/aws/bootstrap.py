@@ -90,17 +90,17 @@ def bootstrap_api(stage_name):
     # bootstrap.json is relative to me; where am I?
     my_dir = os.path.dirname(os.path.realpath(__file__))
 
-    bootstrap_swagger = open(my_dir + '/bootstrap.json', 'r')
+    with open(my_dir + '/bootstrap.json', 'r') as bootstrap_swagger:
 
-    response = client.import_rest_api(body=bootstrap_swagger.read())
-    logging.info('New bootstrap API ID "%s" created', response['id'])
+        response = client.import_rest_api(body=bootstrap_swagger.read())
+        logging.info('New bootstrap API ID "%s" created', response['id'])
 
-    client.create_deployment(
-        restApiId=response['id'],
-        stageName=stage_name)
-    logging.info('API ID "%s" deployed to stage "%s"', response['id'], stage_name)
+        client.create_deployment(
+            restApiId=response['id'],
+            stageName=stage_name)
+        logging.info('API ID "%s" deployed to stage "%s"', response['id'], stage_name)
 
-    return response['id']
+        return response['id']
 
 
 def create_base_path_mapping(rest_api_id, api_base, stage_name):

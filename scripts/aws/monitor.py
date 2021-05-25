@@ -40,8 +40,8 @@ def get_api_id(client, api_base_domain):
         response = client.get_base_path_mapping(
             domainName=api_base_domain,
             basePath='(none)')
-    except botocore.exceptions.ClientError:
-        raise ValueError('No mapping found for "%s"' % api_base_domain)
+    except botocore.exceptions.ClientError as err:
+        raise ValueError('No mapping found for "%s"' % api_base_domain) from err
 
     logging.info('Found existing base path mapping for API ID "%s", stage "%s"',
                  response['restApiId'], response['stage'])
@@ -170,31 +170,31 @@ def create_lambda_function(client, function_name, runtime, role,
     """Creates a lambda function to pull data from cloudwatch event.
     It only works works in VPC"""
     try:
-        code_file = open(zip_file, 'rb')
-        if lambda_exists(client, function_name):
-            logging.info('"%s" function already exists. Updating its code', function_name)
-            response = client.update_function_code(
-                FunctionName=function_name,
-                ZipFile=code_file.read(),
-                Publish=True)
+        with open(zip_file, 'rb') as code_file:
+            if lambda_exists(client, function_name):
+                logging.info('"%s" function already exists. Updating its code', function_name)
+                response = client.update_function_code(
+                    FunctionName=function_name,
+                    ZipFile=code_file.read(),
+                    Publish=True)
 
-        else:
-            response = client.create_function(
-                FunctionName=function_name,
-                Runtime=runtime,
-                Role=role,
-                Handler=handler,
-                Code={
-                    'ZipFile': code_file.read(),
-                },
-                Description=description,
-                Timeout=timeout,
-                MemorySize=mem_size,
-                Publish=True,
-                VpcConfig=vpc)
+            else:
+                response = client.create_function(
+                    FunctionName=function_name,
+                    Runtime=runtime,
+                    Role=role,
+                    Handler=handler,
+                    Code={
+                        'ZipFile': code_file.read(),
+                    },
+                    Description=description,
+                    Timeout=timeout,
+                    MemorySize=mem_size,
+                    Publish=True,
+                    VpcConfig=vpc)
 
-        logging.info('response for lambda function = "%s"',
-                     response)
+            logging.info('response for lambda function = "%s"',
+                         response)
     except IOError:
         logging.error('Unable to open the zip file')
     finally:
