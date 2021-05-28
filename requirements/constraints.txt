@@ -1,0 +1,2 @@
+
+moto < 2.0          # To avoid the cryptography version conflict while upgrading requirements
