@@ -153,7 +153,7 @@ python-jose[cryptography]==3.2.0
     # via moto
 pytz==2021.1
     # via moto
-pyyaml==5.2
+pyyaml==5.1.2
     # via
     #   -c requirements/constraints.txt
     #   cfn-lint
