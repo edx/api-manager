@@ -38,6 +38,10 @@ codegen.download:
 build: codegen.download
 	java -jar swagger-codegen-cli.jar generate -l swagger -i swagger/api.yaml -o $(BUILD_OUTPUT_DIR)
 
+# GoCD agents have a version of Java that is not put into the path for some reason. We need to refer to it directly to get access to it.
+build-gocd: codegen.download
+	/gocd-jre/bin/java -jar swagger-codegen-cli.jar generate -l swagger -i swagger/api.yaml -o $(BUILD_OUTPUT_DIR)
+
 test_python: clean requirements
 	cd scripts/aws && python -m pytest
 
