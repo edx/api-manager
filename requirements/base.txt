@@ -5,23 +5,23 @@
 #    make upgrade
 #
 boto3==1.17.77
-    # via -r requirements/base.in
+    # via -r base.in
 boto==2.49.0
     # via google-compute-engine
 botocore==1.20.77
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   boto3
     #   s3transfer
 distro==1.5.0
     # via google-compute-engine
 google-compute-engine==2.8.13
-    # via -r requirements/base.in
+    # via -r base.in
 jinja2==3.0.1
-    # via -r requirements/base.in
+    # via -r base.in
 jmespath==0.10.0
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   boto3
     #   botocore
 markupsafe==2.0.1
@@ -32,9 +32,9 @@ s3transfer==0.4.2
     # via boto3
 six==1.16.0
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   python-dateutil
-urllib3==1.26.4
+urllib3==1.26.5
     # via botocore
 
 # The following packages are considered to be unsafe in a requirements file:
