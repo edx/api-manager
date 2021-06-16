@@ -8,7 +8,7 @@ astroid==2.5.6
     # via pylint
 attrs==21.2.0
     # via pytest
-boto3==1.17.77
+boto3==1.17.95
     # via
     #   -r requirements/base.txt
     #   moto
@@ -16,13 +16,13 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-botocore==1.20.77
+botocore==1.20.95
     # via
     #   -r requirements/base.txt
     #   boto3
     #   moto
     #   s3transfer
-certifi==2020.12.5
+certifi==2021.5.30
     # via requests
 cffi==1.14.5
     # via cryptography
@@ -64,9 +64,9 @@ mccabe==0.6.1
     # via pylint
 mock==4.0.3
     # via -r requirements/test.in
-more-itertools==8.7.0
+more-itertools==8.8.0
     # via moto
-moto==2.0.8
+moto==2.0.9
     # via -r requirements/test.in
 packaging==20.9
     # via pytest
@@ -80,7 +80,7 @@ pycparser==2.20
     # via cffi
 pycurl==7.43.0.6
     # via pyresttest
-pylint==2.8.2
+pylint==2.8.3
     # via -r requirements/test.in
 pyparsing==2.4.7
     # via packaging
@@ -117,7 +117,7 @@ toml==0.10.2
     # via
     #   pylint
     #   pytest
-urllib3==1.26.4
+urllib3==1.26.5
     # via
     #   -r requirements/base.txt
     #   botocore
