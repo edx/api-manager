@@ -40,8 +40,8 @@ def get_api_id(client, api_base_domain):
         response = client.get_base_path_mapping(
             domainName=api_base_domain,
             basePath='(none)')
-    except botocore.exceptions.ClientError as exc:
-        raise ValueError('No mapping found for "%s"' % api_base_domain) from exc
+    except botocore.exceptions.ClientError as exception:
+        raise ValueError('No mapping found for "%s"' % api_base_domain) from exception
 
     logging.info('Found existing base path mapping for API ID "%s", stage "%s"',
                  response['restApiId'], response['stage'])
@@ -304,7 +304,7 @@ if __name__ == '__main__':
                                                           '[{"Effect": "Allow","Principal": '
                                                           '{"Service": "lambda.amazonaws.com"},'
                                                           '"Action": "sts:AssumeRole"}]}',
-                                                          open(get_lambda_exec_policy(j2_env, tmpdirname,
+                                                          open(get_lambda_exec_policy(j2_env, tmpdirname,  # pylint: disable=consider-using-with
                                                                                       args.aws_region,
                                                                                       args.acct_id,
                                                                                       lambda_function_name,
