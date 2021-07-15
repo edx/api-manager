@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.17.106
+boto3==1.17.111
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.20.106
+botocore==1.20.111
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -24,9 +24,9 @@ botocore==1.20.106
     #   s3transfer
 certifi==2021.5.30
     # via requests
-cffi==1.14.5
+cffi==1.14.6
     # via cryptography
-chardet==4.0.0
+charset-normalizer==2.0.1
     # via requests
 cryptography==3.4.7
     # via moto
@@ -38,11 +38,11 @@ future==0.18.2
     # via pyresttest
 google-compute-engine==2.8.13
     # via -r requirements/base.txt
-idna==2.10
+idna==3.2
     # via requests
 iniconfig==1.1.1
     # via pytest
-isort==5.9.1
+isort==5.9.2
     # via pylint
 jinja2==3.0.1
     # via
@@ -66,7 +66,7 @@ mock==4.0.3
     # via -r requirements/test.in
 more-itertools==8.8.0
     # via moto
-moto==2.0.10
+moto==2.0.11
     # via -r requirements/test.in
 packaging==21.0
     # via pytest
@@ -88,7 +88,7 @@ pyresttest==1.7.1
     # via -r requirements/test.in
 pytest==6.2.4
     # via -r requirements/test.in
-python-dateutil==2.8.1
+python-dateutil==2.8.2
     # via
     #   -r requirements/base.txt
     #   botocore
@@ -97,7 +97,7 @@ pytz==2021.1
     # via moto
 pyyaml==5.4.1
     # via pyresttest
-requests==2.25.1
+requests==2.26.0
     # via
     #   moto
     #   responses
