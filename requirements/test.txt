@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.18.13
+boto3==1.18.18
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.21.13
+botocore==1.21.18
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -40,6 +40,8 @@ google-compute-engine==2.8.13
     # via -r requirements/base.txt
 idna==3.2
     # via requests
+importlib-metadata==4.6.3
+    # via moto
 iniconfig==1.1.1
     # via pytest
 isort==5.9.3
@@ -66,7 +68,7 @@ mock==4.0.3
     # via -r requirements/test.in
 more-itertools==8.8.0
     # via moto
-moto==2.2.1
+moto==2.2.2
     # via -r requirements/test.in
 packaging==21.0
     # via pytest
@@ -78,7 +80,7 @@ py==1.10.0
     # via pytest
 pycparser==2.20
     # via cffi
-pycurl==7.43.0.6
+pycurl==7.44.0
     # via pyresttest
 pylint==2.9.6
     # via -r requirements/test.in
@@ -101,7 +103,7 @@ requests==2.26.0
     # via
     #   moto
     #   responses
-responses==0.13.3
+responses==0.13.4
     # via moto
 s3transfer==0.5.0
     # via
@@ -128,6 +130,8 @@ wrapt==1.12.1
     # via astroid
 xmltodict==0.12.0
     # via moto
+zipp==3.5.0
+    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
