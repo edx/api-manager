@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.18.18
+boto3==1.18.23
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.21.18
+botocore==1.21.23
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -40,7 +40,7 @@ google-compute-engine==2.8.13
     # via -r requirements/base.txt
 idna==3.2
     # via requests
-importlib-metadata==4.6.3
+importlib-metadata==4.6.4
     # via moto
 iniconfig==1.1.1
     # via pytest
@@ -68,7 +68,7 @@ mock==4.0.3
     # via -r requirements/test.in
 more-itertools==8.8.0
     # via moto
-moto==2.2.2
+moto==2.2.3
     # via -r requirements/test.in
 packaging==21.0
     # via pytest
@@ -80,7 +80,7 @@ py==1.10.0
     # via pytest
 pycparser==2.20
     # via cffi
-pycurl==7.44.0
+pycurl==7.44.1
     # via pyresttest
 pylint==2.9.6
     # via -r requirements/test.in
