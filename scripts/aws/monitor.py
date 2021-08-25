@@ -82,7 +82,7 @@ def create_lambda_function_zip(jinja_env, temp_dir, splunk_host, splunk_token, l
         'lambda_function_name': lf_name,
     }
     js_file = temp_dir + '/index.js'
-    with open(js_file, 'w') as lambda_function_file:
+    with open(js_file, 'w', encoding='utf-8') as lambda_function_file:
         lf_data = jinja_env.get_template('index.js.j2').render(splunk_values)
         lambda_function_file.write(lf_data)
 
@@ -101,7 +101,7 @@ def get_lambda_exec_policy(jinja_env, temp_dir, region, acct_id, func_name, kms_
         'kms_key': kms_key,
     }
     json_file = temp_dir + '/lambda_exec_policy.json'
-    with open(json_file, 'w') as json_policy_file:
+    with open(json_file, 'w', encoding='utf-8') as json_policy_file:
         json_data = jinja_env.get_template('lambda_exec_policy.json.j2').render(resource_values)
         json_policy_file.write(json_data)
     return json_file
@@ -308,7 +308,8 @@ if __name__ == '__main__':
                                                                                       args.aws_region,
                                                                                       args.acct_id,
                                                                                       lambda_function_name,
-                                                                                      args.kms_key)).read())
+                                                                                      args.kms_key),
+                                                               encoding='utf-8').read())
 
     logging.info('Waiting for the newly created role to be available')
     # Sleep for 10 seconds to allow the role created above to be avialable for lambda function creation
