@@ -90,7 +90,7 @@ def bootstrap_api(stage_name):
     # bootstrap.json is relative to me; where am I?
     my_dir = os.path.dirname(os.path.realpath(__file__))
 
-    bootstrap_swagger = open(my_dir + '/bootstrap.json', 'r')  # pylint: disable=consider-using-with
+    bootstrap_swagger = open(my_dir + '/bootstrap.json', 'r', encoding='utf-8')  # pylint: disable=consider-using-with
 
     response = client.import_rest_api(body=bootstrap_swagger.read())
     logging.info('New bootstrap API ID "%s" created', response['id'])
@@ -121,7 +121,7 @@ def create_base_path_mapping(rest_api_id, api_base, stage_name):
 
 def file_arg_to_string(filename):
 
-    with open(filename, "r") as fin:
+    with open(filename, "r", encoding='utf-8') as fin:
         body = fin.read()
 
     return body

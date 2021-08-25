@@ -59,7 +59,7 @@ def deploy_api(client, rest_api_id, swagger_filename, stage_name, stage_variable
     with environment-specific variables.
     """
 
-    swagger = open(swagger_filename, 'r')  # pylint: disable=consider-using-with
+    swagger = open(swagger_filename, 'r', encoding="utf-8")  # pylint: disable=consider-using-with
 
     api_response = client.put_rest_api(restApiId=rest_api_id, mode='overwrite', body=swagger.read())
     logging.info('Existing API ID "%s" updated (name "%s")', api_response['id'], api_response['name'])
