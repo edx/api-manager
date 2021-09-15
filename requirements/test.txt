@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.18.37
+boto3==1.18.42
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.21.37
+botocore==1.21.42
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -26,7 +26,7 @@ certifi==2021.5.30
     # via requests
 cffi==1.14.6
     # via cryptography
-charset-normalizer==2.0.4
+charset-normalizer==2.0.5
     # via requests
 cryptography==3.4.8
     # via moto
@@ -103,7 +103,7 @@ requests==2.26.0
     # via
     #   moto
     #   responses
-responses==0.13.4
+responses==0.14.0
     # via moto
 s3transfer==0.5.0
     # via
