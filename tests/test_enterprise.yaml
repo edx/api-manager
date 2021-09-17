@@ -231,3 +231,17 @@
             "email_students": true
         }]
     - expected_status: [400]
+
+- test:
+    - name: 'Enterprise learner summary v3 endpoint returns HTTP 200'
+    - url: '/enterprise/v3/enterprise-customer/9101d3de36156cba/learner-summary'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou', 'Content-Type': 'application/json'}
+    - expected_status: [200]
+
+- test:
+    - name: 'Enterprise learner summary v3 endpoint rejected without authorization'
+    - url: '/enterprise/v3/enterprise-customer/9101d3de36156cba/learner-summary'
+    - method: 'POST'
+    - headers: {'Content-Type': 'application/json'}
+    - expected_status: [400]
