@@ -50,7 +50,7 @@ paths:
   "/enterprise/v1/enterprise-customer/{uuid}/course-enrollments":
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments"
   "/enterprise/v1/enterprise-customer/{uuid}/learner-summary":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/8fc95e4/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
   # Enterprise Catalog IDA
   # These are served from the enterprise catalog IDA, but we surface them with the rest of the enterprise endpoints
   "/enterprise/v2/enterprise-catalogs":
@@ -67,7 +67,10 @@ paths:
   "/enterprise/v2/enterprise-customer/{uuid}/course-enrollments":
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments"
   "/enterprise/v2/enterprise-customer/{uuid}/learner-summary":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/8fc95e4/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
+  # Learner Summary endpoint powered by Learner Progress Report V1 API
+  "/enterprise/v3/enterprise-customer/{uuid}/learner-summary":
+    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v2/enterpriseCustomerLearnerSummary"
 
   # Registrar API Proxy
   # Note: There's an unresolved issue involving trailing slashes with proxy integrations in API Gateway.
