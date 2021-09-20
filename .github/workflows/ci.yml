@@ -4,7 +4,6 @@ on:
   push:
     branches: [ 'master' ]
   pull_request:
-    branches: [ 'master' ]
 
 jobs:
   run_tests:
@@ -28,6 +27,7 @@ jobs:
 
     - name: Install Dependencies
       run: |
+        sudo apt-get update
         sudo apt-get install libcurl4-openssl-dev libssl-dev
         make requirements
 
