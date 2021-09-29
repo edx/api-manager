@@ -15,7 +15,7 @@ def get_api_id(client, api_base_domain):
             domainName=api_base_domain,
             basePath='(none)')
     except botocore.exceptions.ClientError as exc:
-        raise ValueError('No mapping found for "%s"' % api_base_domain) from exc
+        raise ValueError('No mapping found for "%s"' % api_base_domain) from exc  # pylint: disable=consider-using-f-string
 
     logging.info('Found existing base path mapping for API ID "%s", stage "%s"',
                  response['restApiId'], response['stage'])
