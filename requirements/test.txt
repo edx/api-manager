@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.18.50
+boto3==1.18.55
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.21.50
+botocore==1.21.55
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -28,7 +28,7 @@ cffi==1.14.6
     # via cryptography
 charset-normalizer==2.0.6
     # via requests
-cryptography==3.4.8
+cryptography==35.0.0
     # via moto
 distro==1.6.0
     # via
@@ -44,7 +44,7 @@ iniconfig==1.1.1
     # via pytest
 isort==5.9.3
     # via pylint
-jinja2==3.0.1
+jinja2==3.0.2
     # via
     #   -r requirements/base.txt
     #   moto
@@ -95,7 +95,7 @@ python-dateutil==2.8.2
     #   -r requirements/base.txt
     #   botocore
     #   moto
-pytz==2021.1
+pytz==2021.3
     # via moto
 pyyaml==5.4.1
     # via pyresttest
@@ -128,7 +128,7 @@ urllib3==1.26.7
     #   botocore
     #   requests
     #   responses
-werkzeug==2.0.1
+werkzeug==2.0.2
     # via moto
 wrapt==1.12.1
     # via astroid
