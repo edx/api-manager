@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-astroid==2.8.3
+astroid==2.8.4
     # via pylint
 attrs==21.2.0
     # via pytest
@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.18.65
+boto3==1.19.4
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.21.65
+botocore==1.22.4
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -66,7 +66,7 @@ mock==4.0.3
     # via -r requirements/test.in
 more-itertools==8.10.0
     # via moto
-moto==2.2.10
+moto==2.2.11
     # via -r requirements/test.in
 packaging==21.0
     # via pytest
@@ -84,7 +84,7 @@ pycurl==7.44.1
     # via pyresttest
 pylint==2.11.1
     # via -r requirements/test.in
-pyparsing==2.4.7
+pyparsing==3.0.1
     # via packaging
 pyresttest==1.7.1
     # via -r requirements/test.in
@@ -103,7 +103,7 @@ requests==2.26.0
     # via
     #   moto
     #   responses
-responses==0.14.0
+responses==0.15.0
     # via moto
 s3transfer==0.5.0
     # via
