@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-astroid==2.8.4
+astroid==2.8.5
     # via pylint
 attrs==21.2.0
     # via pytest
@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.20.2
+boto3==1.20.7
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.23.2
+botocore==1.23.7
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -66,7 +66,7 @@ mock==4.0.3
     # via -r requirements/test.in
 more-itertools==8.11.0
     # via moto
-moto==2.2.13
+moto==2.2.15
     # via -r requirements/test.in
 packaging==21.2
     # via pytest
@@ -103,7 +103,7 @@ requests==2.26.0
     # via
     #   moto
     #   responses
-responses==0.15.0
+responses==0.16.0
     # via moto
 s3transfer==0.5.0
     # via
@@ -118,7 +118,7 @@ toml==0.10.2
     # via
     #   pylint
     #   pytest
-typing-extensions==3.10.0.2
+typing-extensions==4.0.0
     # via
     #   astroid
     #   pylint
