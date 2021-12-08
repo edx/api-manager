@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-astroid==2.8.6
+astroid==2.9.0
     # via pylint
 attrs==21.2.0
     # via pytest
@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.20.12
+boto3==1.20.21
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.23.12
+botocore==1.23.21
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -26,7 +26,7 @@ certifi==2021.10.8
     # via requests
 cffi==1.15.0
     # via cryptography
-charset-normalizer==2.0.7
+charset-normalizer==2.0.9
     # via requests
 cryptography==36.0.0
     # via moto
@@ -64,7 +64,7 @@ mccabe==0.6.1
     # via pylint
 mock==4.0.3
     # via -r requirements/test.in
-moto==2.2.16
+moto==2.2.17
     # via -r requirements/test.in
 packaging==21.3
     # via pytest
@@ -80,7 +80,7 @@ pycparser==2.21
     # via cffi
 pycurl==7.44.1
     # via pyresttest
-pylint==2.11.1
+pylint==2.12.2
     # via -r requirements/test.in
 pyparsing==3.0.6
     # via packaging
@@ -116,7 +116,7 @@ toml==0.10.2
     # via
     #   pylint
     #   pytest
-typing-extensions==4.0.0
+typing-extensions==4.0.1
     # via
     #   astroid
     #   pylint
