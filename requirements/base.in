@@ -1,3 +1,5 @@
+-c constraints.txt
+
 boto3
 botocore
 jmespath
