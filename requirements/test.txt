@@ -6,7 +6,7 @@
 #
 astroid==2.9.0
     # via pylint
-attrs==21.2.0
+attrs==21.3.0
     # via pytest
 boto==2.49.0
     # via
@@ -64,13 +64,13 @@ mccabe==0.6.1
     # via pylint
 mock==4.0.3
     # via -r requirements/test.in
-moto==2.2.19
+moto==2.3.0
     # via -r requirements/test.in
 packaging==21.3
     # via pytest
 pep8==1.7.1
     # via -r requirements/test.in
-platformdirs==2.4.0
+platformdirs==2.4.1
     # via pylint
 pluggy==1.0.0
     # via pytest
