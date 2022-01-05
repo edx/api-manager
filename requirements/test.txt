@@ -4,19 +4,19 @@
 #
 #    make upgrade
 #
-astroid==2.9.0
+astroid==2.9.2
     # via pylint
-attrs==21.3.0
+attrs==21.4.0
     # via pytest
 boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.20.26
+boto3==1.20.28
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.23.26
+botocore==1.23.28
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -26,7 +26,7 @@ certifi==2021.10.8
     # via requests
 cffi==1.15.0
     # via cryptography
-charset-normalizer==2.0.9
+charset-normalizer==2.0.10
     # via requests
 cryptography==36.0.1
     # via moto
@@ -97,7 +97,7 @@ pytz==2021.3
     # via moto
 pyyaml==6.0
     # via pyresttest
-requests==2.26.0
+requests==2.27.0
     # via
     #   moto
     #   responses
