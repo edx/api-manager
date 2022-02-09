@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.20.46
+boto3==1.20.51
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.23.46
+botocore==1.23.51
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -86,7 +86,7 @@ pyparsing==3.0.7
     # via packaging
 pyresttest==1.7.1
     # via -r requirements/test.in
-pytest==6.2.5
+pytest==7.0.0
     # via -r requirements/test.in
 python-dateutil==2.8.2
     # via
@@ -101,9 +101,9 @@ requests==2.27.1
     # via
     #   moto
     #   responses
-responses==0.17.0
+responses==0.18.0
     # via moto
-s3transfer==0.5.0
+s3transfer==0.5.1
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -111,11 +111,10 @@ six==1.16.0
     # via
     #   -r requirements/base.txt
     #   python-dateutil
-    #   responses
 toml==0.10.2
-    # via
-    #   pylint
-    #   pytest
+    # via pylint
+tomli==2.0.1
+    # via pytest
 typing-extensions==4.0.1
     # via
     #   astroid
@@ -126,7 +125,7 @@ urllib3==1.26.8
     #   botocore
     #   requests
     #   responses
-werkzeug==2.0.2
+werkzeug==2.0.3
     # via moto
 wrapt==1.13.3
     # via astroid
