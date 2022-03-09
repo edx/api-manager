@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.21.10
+boto3==1.21.15
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.24.10
+botocore==1.24.15
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -64,7 +64,7 @@ mccabe==0.6.1
     # via pylint
 mock==4.0.3
     # via -r requirements/test.in
-moto==3.0.5
+moto==3.0.7
     # via -r requirements/test.in
 packaging==21.3
     # via pytest
@@ -101,7 +101,7 @@ requests==2.27.1
     # via
     #   moto
     #   responses
-responses==0.18.0
+responses==0.19.0
     # via moto
 s3transfer==0.5.2
     # via
