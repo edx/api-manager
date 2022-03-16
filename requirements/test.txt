@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.21.15
+boto3==1.21.20
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.24.15
+botocore==1.24.20
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -28,7 +28,7 @@ cffi==1.15.0
     # via cryptography
 charset-normalizer==2.0.12
     # via requests
-cryptography==36.0.1
+cryptography==36.0.2
     # via moto
 distro==1.7.0
     # via
@@ -55,7 +55,7 @@ jmespath==0.10.0
     #   botocore
 lazy-object-proxy==1.7.1
     # via astroid
-markupsafe==2.1.0
+markupsafe==2.1.1
     # via
     #   -r requirements/base.txt
     #   jinja2
@@ -64,7 +64,7 @@ mccabe==0.6.1
     # via pylint
 mock==4.0.3
     # via -r requirements/test.in
-moto==3.0.7
+moto==3.1.0
     # via -r requirements/test.in
 packaging==21.3
     # via pytest
@@ -78,7 +78,7 @@ py==1.11.0
     # via pytest
 pycparser==2.21
     # via cffi
-pycurl==7.44.1
+pycurl==7.45.1
     # via pyresttest
 pylint==2.12.2
     # via -r requirements/test.in
@@ -86,7 +86,7 @@ pyparsing==3.0.7
     # via packaging
 pyresttest==1.7.1
     # via -r requirements/test.in
-pytest==7.0.1
+pytest==7.1.0
     # via -r requirements/test.in
 python-dateutil==2.8.2
     # via
