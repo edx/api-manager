@@ -12,11 +12,11 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.21.34
+boto3==1.21.39
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.24.34
+botocore==1.24.39
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -82,9 +82,9 @@ pycparser==2.21
     # via cffi
 pycurl==7.45.1
     # via pyresttest
-pylint==2.13.4
+pylint==2.13.5
     # via -r requirements/test.in
-pyparsing==3.0.7
+pyparsing==3.0.8
     # via packaging
 pyresttest==1.7.1
     # via -r requirements/test.in
