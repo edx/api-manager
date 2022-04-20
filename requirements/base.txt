@@ -6,9 +6,9 @@
 #
 boto==2.49.0
     # via google-compute-engine
-boto3==1.21.39
+boto3==1.21.43
     # via -r requirements/base.in
-botocore==1.24.39
+botocore==1.24.43
     # via
     #   -r requirements/base.in
     #   boto3
