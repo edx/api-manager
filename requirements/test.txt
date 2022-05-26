@@ -7,16 +7,19 @@
 astroid==2.11.5
     # via pylint
 attrs==21.4.0
-    # via pytest
+    # via
+    #   -r requirements/base.txt
+    #   jsonschema
+    #   pytest
 boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.23.7
+boto3==1.23.8
     # via
     #   -r requirements/base.txt
     #   moto
-botocore==1.26.7
+botocore==1.26.8
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -42,6 +45,10 @@ google-compute-engine==2.8.13
     # via -r requirements/base.txt
 idna==3.3
     # via requests
+importlib-resources==5.7.1
+    # via
+    #   -r requirements/base.txt
+    #   jsonschema
 iniconfig==1.1.1
     # via pytest
 isort==5.10.1
@@ -55,6 +62,11 @@ jmespath==1.0.0
     #   -r requirements/base.txt
     #   boto3
     #   botocore
+jsonschema==4.5.1
+    # via
+    #   -r requirements/base.txt
+    #   openapi-schema-validator
+    #   openapi-spec-validator
 lazy-object-proxy==1.7.1
     # via astroid
 markupsafe==2.1.1
@@ -68,6 +80,12 @@ mock==4.0.3
     # via -r requirements/test.in
 moto==3.1.10
     # via -r requirements/test.in
+openapi-schema-validator==0.2.3
+    # via
+    #   -r requirements/base.txt
+    #   openapi-spec-validator
+openapi-spec-validator==0.4.0
+    # via -r requirements/base.txt
 packaging==21.3
     # via pytest
 pep8==1.7.1
@@ -88,6 +106,10 @@ pyparsing==3.0.9
     # via packaging
 pyresttest==1.7.1
     # via -r requirements/test.in
+pyrsistent==0.18.1
+    # via
+    #   -r requirements/base.txt
+    #   jsonschema
 pytest==7.1.2
     # via -r requirements/test.in
 python-dateutil==2.8.2
@@ -98,12 +120,15 @@ python-dateutil==2.8.2
 pytz==2022.1
     # via moto
 pyyaml==6.0
-    # via pyresttest
+    # via
+    #   -r requirements/base.txt
+    #   openapi-spec-validator
+    #   pyresttest
 requests==2.27.1
     # via
     #   moto
     #   responses
-responses==0.20.0
+responses==0.21.0
     # via moto
 s3transfer==0.5.2
     # via
@@ -133,6 +158,10 @@ wrapt==1.14.1
     # via astroid
 xmltodict==0.13.0
     # via moto
+zipp==3.8.0
+    # via
+    #   -r requirements/base.txt
+    #   importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
