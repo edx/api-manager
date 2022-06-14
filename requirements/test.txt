@@ -7,7 +7,15 @@
 astroid==2.11.5
     # via pylint
 attrs==21.4.0
-    # via pytest
+    # via
+    #   jschema-to-python
+    #   jsonschema
+    #   pytest
+    #   sarif-om
+aws-sam-translator==1.46.0
+    # via cfn-lint
+aws-xray-sdk==2.9.0
+    # via moto
 boto==2.49.0
     # via
     #   -r requirements/base.txt
@@ -15,10 +23,12 @@ boto==2.49.0
 boto3==1.24.4
     # via
     #   -r requirements/base.txt
+    #   aws-sam-translator
     #   moto
 botocore==1.27.4
     # via
     #   -r requirements/base.txt
+    #   aws-xray-sdk
     #   boto3
     #   moto
     #   s3transfer
@@ -26,22 +36,40 @@ certifi==2022.5.18.1
     # via requests
 cffi==1.15.0
     # via cryptography
+cfn-lint==0.61.0
+    # via moto
 charset-normalizer==2.0.12
     # via requests
 cryptography==37.0.2
-    # via moto
+    # via
+    #   moto
+    #   python-jose
+    #   sshpubkeys
 dill==0.3.5.1
     # via pylint
 distro==1.7.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
+docker==5.0.3
+    # via moto
+ecdsa==0.17.0
+    # via
+    #   moto
+    #   python-jose
+    #   sshpubkeys
 future==0.18.2
-    # via pyresttest
+    # via
+    #   aws-xray-sdk
+    #   pyresttest
 google-compute-engine==2.8.13
     # via -r requirements/base.txt
+graphql-core==3.2.1
+    # via moto
 idna==3.3
-    # via requests
+    # via
+    #   moto
+    #   requests
 iniconfig==1.1.1
     # via pytest
 isort==5.10.1
@@ -55,6 +83,24 @@ jmespath==1.0.0
     #   -r requirements/base.txt
     #   boto3
     #   botocore
+jschema-to-python==1.2.3
+    # via cfn-lint
+jsondiff==2.0.0
+    # via moto
+jsonpatch==1.32
+    # via cfn-lint
+jsonpickle==2.2.0
+    # via jschema-to-python
+jsonpointer==2.3
+    # via jsonpatch
+jsonschema==3.2.0
+    # via
+    #   aws-sam-translator
+    #   cfn-lint
+    #   openapi-schema-validator
+    #   openapi-spec-validator
+junit-xml==1.9
+    # via cfn-lint
 lazy-object-proxy==1.7.1
     # via astroid
 markupsafe==2.1.1
@@ -66,10 +112,20 @@ mccabe==0.7.0
     # via pylint
 mock==4.0.3
     # via -r requirements/test.in
-moto==3.1.12
+moto[cloudformation]==3.1.12
     # via -r requirements/test.in
+networkx==2.8.4
+    # via cfn-lint
+openapi-schema-validator==0.2.3
+    # via openapi-spec-validator
+openapi-spec-validator==0.4.0
+    # via moto
 packaging==21.3
     # via pytest
+pbr==5.9.0
+    # via
+    #   jschema-to-python
+    #   sarif-om
 pep8==1.7.1
     # via -r requirements/test.in
 platformdirs==2.5.2
@@ -78,6 +134,10 @@ pluggy==1.0.0
     # via pytest
 py==1.11.0
     # via pytest
+pyasn1==0.4.8
+    # via
+    #   python-jose
+    #   rsa
 pycparser==2.21
     # via cffi
 pycurl==7.45.1
@@ -85,9 +145,13 @@ pycurl==7.45.1
 pylint==2.14.1
     # via -r requirements/test.in
 pyparsing==3.0.9
-    # via packaging
+    # via
+    #   moto
+    #   packaging
 pyresttest==1.7.1
     # via -r requirements/test.in
+pyrsistent==0.18.1
+    # via jsonschema
 pytest==7.1.2
     # via -r requirements/test.in
 python-dateutil==2.8.2
@@ -95,24 +159,40 @@ python-dateutil==2.8.2
     #   -r requirements/base.txt
     #   botocore
     #   moto
+python-jose[cryptography]==3.3.0
+    # via moto
 pytz==2022.1
     # via moto
 pyyaml==6.0
-    # via pyresttest
+    # via
+    #   cfn-lint
+    #   moto
+    #   openapi-spec-validator
+    #   pyresttest
 requests==2.27.1
     # via
+    #   docker
     #   moto
     #   responses
 responses==0.21.0
     # via moto
+rsa==4.8
+    # via python-jose
 s3transfer==0.6.0
     # via
     #   -r requirements/base.txt
     #   boto3
+sarif-om==1.0.4
+    # via cfn-lint
 six==1.16.0
     # via
     #   -r requirements/base.txt
+    #   ecdsa
+    #   jsonschema
+    #   junit-xml
     #   python-dateutil
+sshpubkeys==3.3.1
+    # via moto
 tomli==2.0.1
     # via
     #   pylint
@@ -129,10 +209,14 @@ urllib3==1.26.9
     #   botocore
     #   requests
     #   responses
+websocket-client==1.3.2
+    # via docker
 werkzeug==2.1.2
     # via moto
 wrapt==1.14.1
-    # via astroid
+    # via
+    #   astroid
+    #   aws-xray-sdk
 xmltodict==0.13.0
     # via moto
 
