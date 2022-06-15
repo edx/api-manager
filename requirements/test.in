@@ -3,7 +3,7 @@
 
 -r base.txt
 
-moto
+moto[cloudformation]
 mock
 pep8
 pylint
