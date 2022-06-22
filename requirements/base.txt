@@ -6,9 +6,9 @@
 #
 boto==2.49.0
     # via google-compute-engine
-boto3==1.24.4
+boto3==1.24.14
     # via -r requirements/base.in
-botocore==1.27.4
+botocore==1.27.14
     # via
     #   -r requirements/base.in
     #   boto3
@@ -19,7 +19,7 @@ google-compute-engine==2.8.13
     # via -r requirements/base.in
 jinja2==3.1.2
     # via -r requirements/base.in
-jmespath==1.0.0
+jmespath==1.0.1
     # via
     #   -r requirements/base.in
     #   boto3
