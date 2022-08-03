@@ -6,7 +6,7 @@
 #
 astroid==2.11.7
     # via pylint
-attrs==21.4.0
+attrs==22.1.0
     # via
     #   jschema-to-python
     #   jsonschema
@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.24.38
+boto3==1.24.44
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.27.38
+botocore==1.27.44
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -36,7 +36,7 @@ certifi==2022.6.15
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.61.3
+cfn-lint==0.61.4
     # via moto
 charset-normalizer==2.1.0
     # via requests
@@ -210,7 +210,7 @@ urllib3==1.26.11
     #   responses
 websocket-client==1.3.3
     # via docker
-werkzeug==2.2.0
+werkzeug==2.2.1
     # via moto
 wrapt==1.14.1
     # via
