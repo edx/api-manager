@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.24.48
+boto3==1.24.53
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.27.48
+botocore==1.27.53
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -36,7 +36,7 @@ certifi==2022.6.15
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.61.4
+cfn-lint==0.61.5
     # via moto
 charset-normalizer==2.1.0
     # via requests
@@ -110,7 +110,7 @@ mccabe==0.7.0
     # via pylint
 mock==4.0.3
     # via -r requirements/test.in
-moto[cloudformation]==3.1.17
+moto[cloudformation]==3.1.18
     # via -r requirements/test.in
 networkx==2.8.5
     # via cfn-lint
@@ -120,7 +120,7 @@ openapi-spec-validator==0.4.0
     # via moto
 packaging==21.3
     # via pytest
-pbr==5.9.0
+pbr==5.10.0
     # via
     #   jschema-to-python
     #   sarif-om
@@ -159,7 +159,7 @@ python-dateutil==2.8.2
     #   moto
 python-jose[cryptography]==3.3.0
     # via moto
-pytz==2022.1
+pytz==2022.2.1
     # via moto
 pyyaml==6.0
     # via
@@ -195,7 +195,7 @@ tomli==2.0.1
     # via
     #   pylint
     #   pytest
-tomlkit==0.11.3
+tomlkit==0.11.4
     # via pylint
 typing-extensions==4.3.0
     # via
