@@ -12,7 +12,7 @@ attrs==22.1.0
     #   jsonschema
     #   pytest
     #   sarif-om
-aws-sam-translator==1.49.0
+aws-sam-translator==1.50.0
     # via cfn-lint
 aws-xray-sdk==2.10.0
     # via moto
@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.24.53
+boto3==1.24.58
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.27.53
+botocore==1.27.58
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -36,9 +36,9 @@ certifi==2022.6.15
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.61.5
+cfn-lint==0.62.0
     # via moto
-charset-normalizer==2.1.0
+charset-normalizer==2.1.1
     # via requests
 cryptography==37.0.4
     # via
@@ -51,7 +51,7 @@ distro==1.7.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-docker==5.0.3
+docker==6.0.0
     # via moto
 ecdsa==0.18.0
     # via
@@ -110,16 +110,18 @@ mccabe==0.7.0
     # via pylint
 mock==4.0.3
     # via -r requirements/test.in
-moto[cloudformation]==3.1.18
+moto[cloudformation]==4.0.0
     # via -r requirements/test.in
-networkx==2.8.5
+networkx==2.8.6
     # via cfn-lint
 openapi-schema-validator==0.2.3
     # via openapi-spec-validator
 openapi-spec-validator==0.4.0
     # via moto
 packaging==21.3
-    # via pytest
+    # via
+    #   docker
+    #   pytest
 pbr==5.10.0
     # via
     #   jschema-to-python
@@ -201,10 +203,11 @@ typing-extensions==4.3.0
     # via
     #   astroid
     #   pylint
-urllib3==1.26.11
+urllib3==1.26.12
     # via
     #   -r requirements/base.txt
     #   botocore
+    #   docker
     #   requests
     #   responses
 websocket-client==1.3.3
