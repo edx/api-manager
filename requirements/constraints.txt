@@ -10,3 +10,8 @@
 
 # This file contains all common constraints for edx-repos
 -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+
+# openapi-spec-validator==0.5.0 requires jsonschema>=4.0 but aws-sam-translator requires jsonschema~=3.2
+# This constraint can be removed once aws-sam-translator updates the constraint
+# and https://github.com/aws/serverless-application-model/issues/2426 is resolved.
+openapi-spec-validator<0.5.0
