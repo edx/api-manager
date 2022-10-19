@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.24.89
+boto3==1.24.93
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.27.89
+botocore==1.27.93
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -36,11 +36,11 @@ certifi==2022.9.24
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.67.0
+cfn-lint==0.68.0
     # via moto
 charset-normalizer==2.1.1
     # via requests
-cryptography==38.0.2
+cryptography==38.0.1
     # via
     #   moto
     #   python-jose
@@ -163,7 +163,7 @@ python-dateutil==2.8.2
     #   moto
 python-jose[cryptography]==3.3.0
     # via moto
-pytz==2022.4
+pytz==2022.5
     # via moto
 pyyaml==6.0
     # via
