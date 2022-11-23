@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-astroid==2.12.12
+astroid==2.12.13
     # via pylint
 attrs==22.1.0
     # via
@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.26.10
+boto3==1.26.15
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.29.10
+botocore==1.29.15
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -36,7 +36,7 @@ certifi==2022.9.24
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.71.1
+cfn-lint==0.72.0
     # via moto
 charset-normalizer==2.1.1
     # via requests
@@ -113,7 +113,7 @@ mccabe==0.7.0
     # via pylint
 mock==4.0.3
     # via -r requirements/test.in
-moto[cloudformation]==4.0.9
+moto[cloudformation]==4.0.10
     # via -r requirements/test.in
 networkx==2.8.8
     # via cfn-lint
@@ -145,7 +145,7 @@ pycparser==2.21
     # via cffi
 pycurl==7.45.1
     # via pyresttest
-pylint==2.15.5
+pylint==2.15.6
     # via -r requirements/test.in
 pyparsing==3.0.9
     # via
