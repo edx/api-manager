@@ -20,19 +20,19 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.26.24
+boto3==1.26.29
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.29.24
+botocore==1.29.29
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
     #   boto3
     #   moto
     #   s3transfer
-certifi==2022.9.24
+certifi==2022.12.7
     # via requests
 cffi==1.15.1
     # via cryptography
@@ -72,7 +72,7 @@ idna==3.4
     #   requests
 iniconfig==1.1.1
     # via pytest
-isort==5.10.1
+isort==5.11.2
     # via pylint
 jinja2==3.1.2
     # via
@@ -123,7 +123,7 @@ openapi-spec-validator==0.4.0
     # via
     #   -c requirements/constraints.txt
     #   moto
-packaging==21.3
+packaging==22.0
     # via
     #   docker
     #   pytest
@@ -133,7 +133,7 @@ pbr==5.11.0
     #   sarif-om
 pep8==1.7.1
     # via -r requirements/test.in
-platformdirs==2.5.4
+platformdirs==2.6.0
     # via pylint
 pluggy==1.0.0
     # via pytest
@@ -148,9 +148,7 @@ pycurl==7.45.1
 pylint==2.15.8
     # via -r requirements/test.in
 pyparsing==3.0.9
-    # via
-    #   moto
-    #   packaging
+    # via moto
 pyresttest==1.7.1
     # via -r requirements/test.in
 pyrsistent==0.19.2
