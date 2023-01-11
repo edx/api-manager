@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-astroid==2.12.13
+astroid==2.13.2
     # via pylint
 attrs==22.2.0
     # via
@@ -12,7 +12,7 @@ attrs==22.2.0
     #   jsonschema
     #   pytest
     #   sarif-om
-aws-sam-translator==1.55.0
+aws-sam-translator==1.56.0
     # via cfn-lint
 aws-xray-sdk==2.11.0
     # via moto
@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.26.42
+boto3==1.26.47
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.29.42
+botocore==1.29.47
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -36,7 +36,7 @@ certifi==2022.12.7
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.72.6
+cfn-lint==0.72.7
     # via moto
 charset-normalizer==2.1.1
     # via requests
@@ -67,10 +67,10 @@ google-compute-engine==2.8.13
 graphql-core==3.2.3
     # via moto
 idna==3.4
-    # via
-    #   moto
-    #   requests
-iniconfig==1.1.1
+    # via requests
+importlib-resources==5.10.2
+    # via jsonschema
+iniconfig==2.0.0
     # via pytest
 isort==5.11.4
     # via pylint
@@ -93,7 +93,7 @@ jsonpickle==3.0.1
     # via jschema-to-python
 jsonpointer==2.3
     # via jsonpatch
-jsonschema==3.2.0
+jsonschema==4.17.3
     # via
     #   aws-sam-translator
     #   cfn-lint
@@ -101,19 +101,18 @@ jsonschema==3.2.0
     #   openapi-spec-validator
 junit-xml==1.9
     # via cfn-lint
-lazy-object-proxy==1.8.0
+lazy-object-proxy==1.9.0
     # via astroid
 markupsafe==2.1.1
     # via
     #   -r requirements/base.txt
     #   jinja2
-    #   moto
     #   werkzeug
 mccabe==0.7.0
     # via pylint
-mock==5.0.0
+mock==5.0.1
     # via -r requirements/test.in
-moto[cloudformation]==4.0.12
+moto[cloudformation]==4.1.0
     # via -r requirements/test.in
 networkx==2.8.8
     # via cfn-lint
@@ -123,7 +122,7 @@ openapi-spec-validator==0.4.0
     # via
     #   -c requirements/constraints.txt
     #   moto
-packaging==22.0
+packaging==23.0
     # via
     #   docker
     #   pytest
@@ -133,6 +132,8 @@ pbr==5.11.0
     #   sarif-om
 pep8==1.7.1
     # via -r requirements/test.in
+pkgutil-resolve-name==1.3.10
+    # via jsonschema
 platformdirs==2.6.2
     # via pylint
 pluggy==1.0.0
@@ -145,7 +146,9 @@ pycparser==2.21
     # via cffi
 pycurl==7.45.2
     # via pyresttest
-pylint==2.15.9
+pydantic==1.10.4
+    # via aws-sam-translator
+pylint==2.15.10
     # via -r requirements/test.in
 pyparsing==3.0.9
     # via moto
@@ -187,7 +190,6 @@ six==1.16.0
     # via
     #   -r requirements/base.txt
     #   ecdsa
-    #   jsonschema
     #   junit-xml
     #   python-dateutil
 sshpubkeys==3.3.1
@@ -205,6 +207,8 @@ types-toml==0.10.8.1
 typing-extensions==4.4.0
     # via
     #   astroid
+    #   aws-sam-translator
+    #   pydantic
     #   pylint
 urllib3==1.26.13
     # via
@@ -223,6 +227,8 @@ wrapt==1.14.1
     #   aws-xray-sdk
 xmltodict==0.13.0
     # via moto
+zipp==3.11.0
+    # via importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
