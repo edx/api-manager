@@ -12,7 +12,7 @@ attrs==22.2.0
     #   jsonschema
     #   pytest
     #   sarif-om
-aws-sam-translator==1.56.0
+aws-sam-translator==1.57.0
     # via cfn-lint
 aws-xray-sdk==2.11.0
     # via moto
@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.26.47
+boto3==1.26.51
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.29.47
+botocore==1.29.51
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -36,9 +36,9 @@ certifi==2022.12.7
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.72.7
+cfn-lint==0.72.9
     # via moto
-charset-normalizer==2.1.1
+charset-normalizer==3.0.1
     # via requests
 cryptography==39.0.0
     # via
@@ -60,7 +60,7 @@ ecdsa==0.18.0
     #   sshpubkeys
 exceptiongroup==1.1.0
     # via pytest
-future==0.18.2
+future==0.18.3
     # via pyresttest
 google-compute-engine==2.8.13
     # via -r requirements/base.txt
@@ -103,7 +103,7 @@ junit-xml==1.9
     # via cfn-lint
 lazy-object-proxy==1.9.0
     # via astroid
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via
     #   -r requirements/base.txt
     #   jinja2
@@ -126,7 +126,7 @@ packaging==23.0
     # via
     #   docker
     #   pytest
-pbr==5.11.0
+pbr==5.11.1
     # via
     #   jschema-to-python
     #   sarif-om
@@ -156,7 +156,7 @@ pyresttest==1.7.1
     # via -r requirements/test.in
 pyrsistent==0.19.3
     # via jsonschema
-pytest==7.2.0
+pytest==7.2.1
     # via -r requirements/test.in
 python-dateutil==2.8.2
     # via
@@ -171,7 +171,7 @@ pyyaml==6.0
     #   moto
     #   openapi-spec-validator
     #   pyresttest
-requests==2.28.1
+requests==2.28.2
     # via
     #   docker
     #   moto
@@ -210,7 +210,7 @@ typing-extensions==4.4.0
     #   aws-sam-translator
     #   pydantic
     #   pylint
-urllib3==1.26.13
+urllib3==1.26.14
     # via
     #   -r requirements/base.txt
     #   botocore
