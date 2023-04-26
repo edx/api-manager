@@ -4,14 +4,14 @@
 #
 #    make upgrade
 #
-astroid==2.15.3
+astroid==2.15.4
     # via pylint
 attrs==23.1.0
     # via
     #   jschema-to-python
     #   jsonschema
     #   sarif-om
-aws-sam-translator==1.64.0
+aws-sam-translator==1.65.0
     # via cfn-lint
 aws-xray-sdk==2.12.0
     # via moto
@@ -19,12 +19,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.26.115
+boto3==1.26.120
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.29.115
+botocore==1.29.120
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -35,7 +35,7 @@ certifi==2022.12.7
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.77.1
+cfn-lint==0.77.3
     # via moto
 charset-normalizer==3.1.0
     # via requests
@@ -111,7 +111,7 @@ mccabe==0.7.0
     # via pylint
 mock==5.0.2
     # via -r requirements/test.in
-moto[cloudformation]==4.1.7
+moto[cloudformation]==4.1.8
     # via -r requirements/test.in
 mpmath==1.3.0
     # via sympy
@@ -135,13 +135,13 @@ pep8==1.7.1
     # via -r requirements/test.in
 pkgutil-resolve-name==1.3.10
     # via jsonschema
-platformdirs==3.2.0
+platformdirs==3.3.0
     # via pylint
 pluggy==1.0.0
     # via pytest
-py-partiql-parser==0.1.0
+py-partiql-parser==0.3.0
     # via moto
-pyasn1==0.4.8
+pyasn1==0.5.0
     # via
     #   python-jose
     #   rsa
@@ -151,7 +151,7 @@ pycurl==7.45.2
     # via pyresttest
 pydantic==1.10.7
     # via aws-sam-translator
-pylint==2.17.2
+pylint==2.17.3
     # via -r requirements/test.in
 pyparsing==3.0.9
     # via moto
@@ -225,7 +225,7 @@ urllib3==1.26.15
     #   responses
 websocket-client==1.5.1
     # via docker
-werkzeug==2.2.3
+werkzeug==2.3.0
     # via moto
 wrapt==1.15.0
     # via
