@@ -4,14 +4,14 @@
 #
 #    make upgrade
 #
-astroid==2.15.4
+astroid==2.15.5
     # via pylint
 attrs==23.1.0
     # via
     #   jschema-to-python
     #   jsonschema
     #   sarif-om
-aws-sam-translator==1.66.0
+aws-sam-translator==1.67.0
     # via cfn-lint
 aws-xray-sdk==2.12.0
     # via moto
@@ -19,12 +19,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.26.131
+boto3==1.26.135
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.29.131
+botocore==1.29.135
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -50,7 +50,7 @@ distro==1.8.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-docker==6.1.1
+docker==6.1.2
     # via moto
 ecdsa==0.18.0
     # via
@@ -135,7 +135,7 @@ pep8==1.7.1
     # via -r requirements/test.in
 pkgutil-resolve-name==1.3.10
     # via jsonschema
-platformdirs==3.5.0
+platformdirs==3.5.1
     # via pylint
 pluggy==1.0.0
     # via pytest
@@ -200,7 +200,7 @@ six==1.16.0
     #   python-dateutil
 sshpubkeys==3.3.1
     # via moto
-sympy==1.11.1
+sympy==1.12
     # via cfn-lint
 tomli==2.0.1
     # via
