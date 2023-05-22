@@ -5,3 +5,5 @@ updates:
     directory: "/"
     schedule:
         interval: "weekly"
+    reviewers:
+      - "edx/arbi-bom"
