@@ -19,12 +19,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.26.148
+boto3==1.26.153
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.29.148
+botocore==1.29.153
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -35,7 +35,7 @@ certifi==2023.5.7
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.77.6
+cfn-lint==0.77.8
     # via moto
 charset-normalizer==3.1.0
     # via requests
@@ -135,7 +135,7 @@ pep8==1.7.1
     # via -r requirements/test.in
 pkgutil-resolve-name==1.3.10
     # via jsonschema
-platformdirs==3.5.1
+platformdirs==3.5.3
     # via pylint
 pluggy==1.0.0
     # via pytest
@@ -149,7 +149,7 @@ pycparser==2.21
     # via cffi
 pycurl==7.45.2
     # via pyresttest
-pydantic==1.10.8
+pydantic==1.10.9
     # via aws-sam-translator
 pylint==2.17.4
     # via -r requirements/test.in
@@ -159,7 +159,7 @@ pyresttest==1.7.1
     # via -r requirements/test.in
 pyrsistent==0.19.3
     # via jsonschema
-pytest==7.3.1
+pytest==7.3.2
     # via -r requirements/test.in
 python-dateutil==2.8.2
     # via
@@ -223,9 +223,9 @@ urllib3==1.26.16
     #   docker
     #   requests
     #   responses
-websocket-client==1.5.2
+websocket-client==1.5.3
     # via docker
-werkzeug==2.3.4
+werkzeug==2.3.6
     # via moto
 wrapt==1.15.0
     # via
