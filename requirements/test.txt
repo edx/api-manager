@@ -11,7 +11,7 @@ attrs==23.1.0
     #   jschema-to-python
     #   jsonschema
     #   sarif-om
-aws-sam-translator==1.69.0
+aws-sam-translator==1.70.0
     # via cfn-lint
 aws-xray-sdk==2.12.0
     # via moto
@@ -19,12 +19,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.26.157
+boto3==1.26.162
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.29.157
+botocore==1.29.162
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -111,7 +111,7 @@ mccabe==0.7.0
     # via pylint
 mock==5.0.2
     # via -r requirements/test.in
-moto[cloudformation]==4.1.11
+moto[cloudformation]==4.1.12
     # via -r requirements/test.in
 mpmath==1.3.0
     # via sympy
@@ -135,9 +135,9 @@ pep8==1.7.1
     # via -r requirements/test.in
 pkgutil-resolve-name==1.3.10
     # via jsonschema
-platformdirs==3.7.0
+platformdirs==3.8.0
     # via pylint
-pluggy==1.0.0
+pluggy==1.2.0
     # via pytest
 py-partiql-parser==0.3.3
     # via moto
@@ -159,7 +159,7 @@ pyresttest==1.7.1
     # via -r requirements/test.in
 pyrsistent==0.19.3
     # via jsonschema
-pytest==7.3.2
+pytest==7.4.0
     # via -r requirements/test.in
 python-dateutil==2.8.2
     # via
@@ -223,7 +223,7 @@ urllib3==1.26.16
     #   docker
     #   requests
     #   responses
-websocket-client==1.6.0
+websocket-client==1.6.1
     # via docker
 werkzeug==2.3.6
     # via moto
