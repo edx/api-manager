@@ -136,6 +136,8 @@ if __name__ == '__main__':
                         help="Location of registrar IDA for request routing")
     parser.add_argument('--enterprise-catalog-host', required=True,
                         help="Location of enterprise catalog IDA for request routing")
+    parser.add_argument('--studio-host', required=True,
+                        help="Location of Studio IDA for request routing")
 
     args = parser.parse_args()
 
@@ -159,6 +161,7 @@ if __name__ == '__main__':
         'analytics_api_host': args.analytics_api_host,
         'registrar_host': args.registrar_host,
         'enterprise_catalog_host': args.enterprise_catalog_host,
+        'studio_host': args.studio_host,
     })
 
     # Apply stage setting updates.
