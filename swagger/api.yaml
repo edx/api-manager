@@ -73,7 +73,7 @@ paths:
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v2/enterpriseCustomerLearnerSummary"
 
   # Added by TNL team to support Studio content API
-  "api/contentstore/v1/file_asset/{proxy+}":
+  "/contentstore/v1/file_asset/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
@@ -86,7 +86,7 @@ paths:
           integration.request.path.proxy: "method.request.path.proxy"
 
   # Added by TNL team to support Studio content API
-  "api/contentstore/v1/video_asset/{proxy+}":
+  "/contentstore/v1/video_asset/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
@@ -99,7 +99,7 @@ paths:
           integration.request.path.proxy: "method.request.path.proxy"
 
   # Added by TNL team to support Studio content API
-  "api/contentstore/v1/xblock/{proxy+}":
+  "/contentstore/v1/xblock/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
