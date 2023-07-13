@@ -10,7 +10,6 @@ attrs==23.1.0
     # via
     #   jschema-to-python
     #   jsonschema
-    #   referencing
     #   sarif-om
 aws-sam-translator==1.71.0
     # via cfn-lint
@@ -36,7 +35,7 @@ certifi==2023.5.7
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.77.10
+cfn-lint==0.78.1
     # via moto
 charset-normalizer==3.2.0
     # via requests
@@ -69,9 +68,7 @@ graphql-core==3.2.3
 idna==3.4
     # via requests
 importlib-resources==6.0.0
-    # via
-    #   jsonschema
-    #   jsonschema-specifications
+    # via jsonschema
 iniconfig==2.0.0
     # via pytest
 isort==5.12.0
@@ -95,14 +92,12 @@ jsonpickle==3.0.1
     # via jschema-to-python
 jsonpointer==2.4
     # via jsonpatch
-jsonschema==4.18.0
+jsonschema==4.17.3
     # via
     #   aws-sam-translator
     #   cfn-lint
     #   openapi-schema-validator
     #   openapi-spec-validator
-jsonschema-specifications==2023.6.1
-    # via jsonschema
 junit-xml==1.9
     # via cfn-lint
 lazy-object-proxy==1.9.0
@@ -162,6 +157,8 @@ pyparsing==3.1.0
     # via moto
 pyresttest==1.7.1
     # via -r requirements/test.in
+pyrsistent==0.19.3
+    # via jsonschema
 pytest==7.4.0
     # via -r requirements/test.in
 python-dateutil==2.8.2
@@ -178,10 +175,6 @@ pyyaml==6.0
     #   openapi-spec-validator
     #   pyresttest
     #   responses
-referencing==0.29.1
-    # via
-    #   jsonschema
-    #   jsonschema-specifications
 regex==2023.6.3
     # via cfn-lint
 requests==2.31.0
@@ -191,10 +184,6 @@ requests==2.31.0
     #   responses
 responses==0.23.1
     # via moto
-rpds-py==0.8.10
-    # via
-    #   jsonschema
-    #   referencing
 rsa==4.9
     # via python-jose
 s3transfer==0.6.1
@@ -244,7 +233,7 @@ wrapt==1.15.0
     #   aws-xray-sdk
 xmltodict==0.13.0
     # via moto
-zipp==3.16.0
+zipp==3.16.1
     # via importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
