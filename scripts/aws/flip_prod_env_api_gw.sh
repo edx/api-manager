@@ -7,5 +7,5 @@
 #
 
 python3 ./scripts/aws/flip.py \
- --api-base-domain gwtst.edx.us.org  \
- --next-stage Cerulean
+ --api-base-domain api.edx.org  \
+ --next-stage $1

@@ -3,13 +3,13 @@
 #  8/28/2023 Created
 #  8/28/2023   new stage = Cerulean, yincludes Studio content host variable,
 
-# Usage assumes working directory to be the api-manager repo's base folder
-#
+# Usage (assumes working directory to be the api-manager repo's base folder)
+# ./scripts/aws/deploy_repo_to_prod_env_api_gw.sh <aws stage name>
 
 python3 ./scripts/aws/deploy.py \
   --tag  None
-  --api-base-domain gwtst.edx.us.org  # AWS Custom Domain Name that's been mapped to the selected API \
-  --swagger-filename ./swagger/api.json \
+  --api-base-domain $1  # AWS Custom Domain Name that's been mapped to the selected API \
+  --swagger-filename ./swagger/api.yaml \
   --landing-page https://stage.edx.org \
   --rotation-order Cerulean \
   --edxapp-host courses.stage.edx.org \
@@ -19,4 +19,3 @@ python3 ./scripts/aws/deploy.py \
   --catalog-host catalog.stage.edx.org \
   --enterprise-catalog-host enterprise-catalog.stage.edx.org \
   --studio-host courses.stage.edx.org
-

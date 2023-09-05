@@ -36,50 +36,117 @@ As the repo used to control the API Gateway, the `api-manager` repo, has fallen 
 - The last [substantive PR](https://github.com/edx/api-manager/pull/127) was on September 20, 2021, adding [v3 enterprise customer endpoints](https://github.com/edx/api-manager/pull/127/files)
   - That PR and merge line up with the last "go live" date for the prod environment API Gateway (`prod_black` stage)
 
+## Changes made with introduciton of a new API
+The registrar API was added to `api-manager` in commits dated 4/17/2019 through the merge #87 commit of 6/26/2019.
+
+They entail adding the proxy description of the API to `swagger/api.yaml`
+They entail adding a registrar host variable to `scripts/aws/deploy.py`
+
+Corresponding steps were taken to add the Studio content API
+
+## Command line arguments to `deploy.py` and `flip.py`
+
+Both these repo commands take multiple command-line arguments, yet the values supplied with deployment and "go-live"
+events are not documented in the repo.
+
+### Command line arguments for `deploy.py`
+
+The call to the boto/apigateway function that carries out deployments is as follows:
+
+>    deploy_api(apig, api_id, args.swagger_filename, new_stage, {
+>        'id': args.tag,
+>        'landing_page': args.landing_page,
+>        'edxapp_host': args.edxapp_host,
+>        'discovery_host': args.catalog_host,
+>        'enterprise_host': args.enterprise_host or args.edxapp_host,
+>        'gateway_host': args.api_base_domain,
+>        'analytics_api_host': args.analytics_api_host,
+>        'registrar_host': args.registrar_host,
+>        'enterprise_catalog_host': args.enterprise_catalog_host,
+>        'studio_host': args.studio_host,
+>    })
+
+Of the command line arguments used in this call (all the `args.something` vaiables), most are integration hosts, and
+the values that were supplied at script invocation time are persisted in AWS gateway objects, under 
+"Custom domain names -> api.edx.org -> API mappings tab -> prod_black link -> Stage variables". Once there, you also 
+find persisted values for `args.id` and `args.landing_page`.
+
+This leaves only the value used for the `args.swagger_filename` unaccounted for, and that's just the pathname for
+the `swagger/api.yaml` file in this repo.
+
+### Command line arguments for `flip.py`
+
+The call to the boto/apigateway function that promotes a new stage to live status is as follows:
+
+>         update_base_path_mapping(apig, args.api_base_domain, args.next_stage)
+
+Only two command line arguments are used. The first, `args.api_base_domain` is the API Gateway custom domain name
+associated with the API in question. The second, `args.next_stage` is the name of the stage going live in support
+of that API.
+
+
+
 # <a name="runbook"></a> SRE Runbook
 
-1. Review this document
+## Preliminaries
 
-## <a name="stage-runbook"></a> Deploy and test on stage
-
-2. Download this repo onto the EC2 instance hosting the prod API Gateway
-3. Checkout version prior to this PR's merge
-4. Verify that APIs on API Gateway are up and running on stage, as expected
-5. Checkout version with this PR's merge
-6. Import the Studio content API swagger specification to a new stage, chartreuse
-
-> ./scripts/aws/invocation_history/import_studio_to_stage_chartreuse.sh
-
-7. Verify that the public APIs on the stage environment API Gateway have suffered no regressions
-8. Verify that the studio API is now working as expected on stage
-
-If the above fails,
-
-9. Roll back to the former AWS stage that was live on the stage environment
-
-> ./scripts/aws/invocation_history/roll_back_to_yellow.sh
+- Review this document
+- Verify that APIs on API Gateway are up and running on stage and prod as expected
+- Verify that "yellow" is the live AWS stage on the api.stage.edx.org API Gateway custom domain
+- Verify that "prod_black" is the live AWS stage on the api.edx.org API Gateway custom domain
+- Download this `api-manager` repo onto the EC2 instance hosting the API Gateway
+  - Set the working directory on a shell you'll be using to run scripts on to this repo's root directory
 
 
-## <a name="prod-runbook"></a> Deploy and test on prod
+## <a name="stage-runbook"></a> Deploy, activate, and test on stage
+
+### Deploy
+
+- Deploy the API swagger specification with the Studio content API in it onto API Gateway resources, creating a new API Gateway stage, chartreuse
+
+> ./scripts/aws/invocation_history/stage/0001_deploy_studio_on_chartreuse.sh
+
+- Verify that the "yellow" AWS stage remains the active stage for the `api.stage.edx.org` custom domain
+- Verify that pre-Studio APIs on API Gateway on stage environment are up and running, as expected
+
+### Activate
+
+Go live with the newly imported Studio content API endpoints (API Gateway resources) with:
+
+> ./scripts/aws/invocation_history/stage/0002_chartreuse_goes_live.sh
+
+- Verify that the "chartreuse" AWS stage is now the active stage for the `api.stage.edx.org` custom domain
+- Verify that the public APIs on the stage environment API Gateway have suffered no regressions
+- Verify that the studio API on the stage environment is now working as expected
+
+### Roll back in case of failure
+
+- In case activation failed, roll back on the stage environment to the AWS stage that had been live prior to this exercise
+
+> ./scripts/aws/invocation_history/stage/1000_rollback_to_yellow.sh
+
+- Verify that the "yellow" API Gateway stage is now the active stage for the `api.stage.edx.org` custom domain
+- Verify that the public APIs on the stage environment API Gateway have suffered no regressions
+- Verify that the Studio content API endpoints are not offered
+
+### Restore yellow as active AWS stage for future Python upgrades
+
+The process we follow with python upgrades expects the active AWS stage to be 'yellow'. Make it so.
+This differs from the rollback step, in that here we want the live API Gateway to continue offering Studio content API endpoints
+
+> ./scripts/aws/invocation_history/stage/0003_deploy_studio_on_yellow.sh
+> ./scrits/aws/invocation_history/stage/0004_yellow_goes_live.sh
+
+- Verify that the "yellow" API Gateway stage is now the active stage for the `api.stage.edx.org` custom domain
+- Verify that the public APIs on the stage environment API Gateway have suffered no regressions
+- Verify that the studio API on the stage environment is now working as expected
 
 
-4. On AWS CloudShell on that instance, from this repo's root folder:
-   1. Bring the live public API stage, prod_black, up to date with Python upgrades since Septmeber of 2021
+## <a name="prod-runbook"></a> Deploy, activate, and test on prod
 
-> ./scripts/aws/invocation_history/deploy_to_prod_black.sh
+Follow the same flow as prescribed for the stage environment, but with scripts out of the `scripts/aws/invocation_history/prod` folder.
+Note that the name for the experimental API gateway stage we use here is `cerulean` (corresponding to our use of `chartreuse`
+on stage), and that we now use `prod_black` instead of `yellow` as the API gateway stage that had been live
 
-    2. Verify that public APIs on the API Gateway have suffered no regressions
-5. Checkout version with merge from this PR on `api-manager` repo
-6. Continue with CloudShell actions:
-   1. Import the Studio content API swagger specification to a new stage, Cerulean
-
-> ./scripts/aws/invocation_history/deploy_studio_api_to_prod_black.sh
-
-    2. Make the new stage go live
-
-> ./scripts/aws/invocation_history/cerulean_live.sh
-
-    3. Verify that public APIs on the API Gateway have suffered no regressions
-    4. Test the Studio content APIs
 
 
