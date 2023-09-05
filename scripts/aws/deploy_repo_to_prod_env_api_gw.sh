@@ -8,10 +8,10 @@
 
 python3 ./scripts/aws/deploy.py \
   --tag  None
-  --api-base-domain $1  # AWS Custom Domain Name that's been mapped to the selected API \
+  --api-base-domain api.edx.org  \
   --swagger-filename ./swagger/api.yaml \
   --landing-page https://stage.edx.org \
-  --rotation-order Cerulean \
+  --rotation-order $1 \
   --edxapp-host courses.stage.edx.org \
   --enterprise-host enterprise-catalog.stage.edx.org \
   --analytics-api-host stage-edx-analyticsapi.edx.org \
