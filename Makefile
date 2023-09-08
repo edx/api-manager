@@ -1,4 +1,4 @@
-SWAGGER_CODEGEN_JAR := https://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/3.0.22/swagger-codegen-cli-3.0.22.jar
+SWAGGER_CODEGEN_JAR := https://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.4.32/swa-cli-2.4.32.jar
 BUILD_OUTPUT_DIR := swagger-build-artifacts
 STUB_SERVER_DIR := edx-api-stub-server
 
