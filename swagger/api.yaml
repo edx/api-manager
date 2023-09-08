@@ -21,56 +21,56 @@ paths:
     $ref: "./index.yaml#/endpoints/index"
 
   # Heartbeat
-  "/heartbeat":
-    $ref: "./heartbeat.yaml#/endpoints/heartbeat"
+#  "/heartbeat":
+#    $ref: "./heartbeat.yaml#/endpoints/heartbeat"
 
   # OAuth2
-  "/oauth2/v1/access_token":
-    $ref: "./oauth.yaml#/endpoints/request_access_token"
+#  "/oauth2/v1/access_token":
+#    $ref: "./oauth.yaml#/endpoints/request_access_token"
 
   # Catalog IDA
-  "/catalog/v1/catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/b5c52c8/api.yaml#/endpoints/v1/catalogs"
-  "/catalog/v1/catalogs/{id}":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/b5c52c8/api.yaml#/endpoints/v1/catalogById"
-  "/catalog/v1/catalogs/{id}/courses":
-    $ref: "https://raw.githubusercontent.com/edx/course-discovery/b5c52c8/api.yaml#/endpoints/v1/catalogCourses"
+#  "/catalog/v1/catalogs":
+#    $ref: "https://raw.githubusercontent.com/edx/course-discovery/b5c52c8/api.yaml#/endpoints/v1/catalogs"
+#  "/catalog/v1/catalogs/{id}":
+#    $ref: "https://raw.githubusercontent.com/edx/course-discovery/b5c52c8/api.yaml#/endpoints/v1/catalogById"
+#  "/catalog/v1/catalogs/{id}/courses":
+#    $ref: "https://raw.githubusercontent.com/edx/course-discovery/b5c52c8/api.yaml#/endpoints/v1/catalogCourses"
 
   # Enterprise IDA
-  "/enterprise/v1/enterprise-catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogs"
-  "/enterprise/v1/enterprise-catalogs/{uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogByUuid"
-  "/enterprise/v1/enterprise-catalogs/{uuid}/course-runs/{course_run_id}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseRunByUuid"
-  "/enterprise/v1/enterprise-catalogs/{uuid}/courses/{course_key}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseByKey"
-  "/enterprise/v1/enterprise-catalogs/{uuid}/programs/{program_uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogProgramByUuid"
-  "/enterprise/v1/enterprise-customer/{uuid}/course-enrollments":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments"
-  "/enterprise/v1/enterprise-customer/{uuid}/learner-summary":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
+#  "/enterprise/v1/enterprise-catalogs":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogs"
+#  "/enterprise/v1/enterprise-catalogs/{uuid}":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogByUuid"
+#  "/enterprise/v1/enterprise-catalogs/{uuid}/course-runs/{course_run_id}":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseRunByUuid"
+#  "/enterprise/v1/enterprise-catalogs/{uuid}/courses/{course_key}":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseByKey"
+#  "/enterprise/v1/enterprise-catalogs/{uuid}/programs/{program_uuid}":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogProgramByUuid"
+#  "/enterprise/v1/enterprise-customer/{uuid}/course-enrollments":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments"
+#  "/enterprise/v1/enterprise-customer/{uuid}/learner-summary":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
   # Enterprise Catalog IDA
   # These are served from the enterprise catalog IDA, but we surface them with the rest of the enterprise endpoints
-  "/enterprise/v2/enterprise-catalogs":
-    $ref: "https://raw.githubusercontent.com/edx/enterprise-catalog/2877ad7/api.yaml#/endpoints/v2/enterpriseCatalogs"
-  "/enterprise/v2/enterprise-catalogs/{uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/enterprise-catalog/2877ad7/api.yaml#/endpoints/v2/enterpriseCatalogByUuid"
+#  "/enterprise/v2/enterprise-catalogs":
+#    $ref: "https://raw.githubusercontent.com/edx/enterprise-catalog/2877ad7/api.yaml#/endpoints/v2/enterpriseCatalogs"
+#  "/enterprise/v2/enterprise-catalogs/{uuid}":
+#    $ref: "https://raw.githubusercontent.com/edx/enterprise-catalog/2877ad7/api.yaml#/endpoints/v2/enterpriseCatalogByUuid"
   # Add the following v1 endpoints to v2 with the same implementation for ease of use by the ECS team
-  "/enterprise/v2/enterprise-catalogs/{uuid}/course-runs/{course_run_id}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseRunByUuid"
-  "/enterprise/v2/enterprise-catalogs/{uuid}/courses/{course_key}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseByKey"
-  "/enterprise/v2/enterprise-catalogs/{uuid}/programs/{program_uuid}":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogProgramByUuid"
-  "/enterprise/v2/enterprise-customer/{uuid}/course-enrollments":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments"
-  "/enterprise/v2/enterprise-customer/{uuid}/learner-summary":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
+#  "/enterprise/v2/enterprise-catalogs/{uuid}/course-runs/{course_run_id}":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseRunByUuid"
+#  "/enterprise/v2/enterprise-catalogs/{uuid}/courses/{course_key}":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogCourseByKey"
+#  "/enterprise/v2/enterprise-catalogs/{uuid}/programs/{program_uuid}":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogProgramByUuid"
+#  "/enterprise/v2/enterprise-customer/{uuid}/course-enrollments":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCourseEnrollments"
+#  "/enterprise/v2/enterprise-customer/{uuid}/learner-summary":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v1/enterpriseCustomerLearnerSummary"
   # Learner Summary endpoint powered by Learner Progress Report V1 API
-  "/enterprise/v3/enterprise-customer/{uuid}/learner-summary":
-    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v2/enterpriseCustomerLearnerSummary"
+#  "/enterprise/v3/enterprise-customer/{uuid}/learner-summary":
+#    $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v2/enterpriseCustomerLearnerSummary"
 
   # Added by TNL team to support Studio content API
   "/contentstore/v1/file_assets/{proxy+}":
@@ -146,62 +146,62 @@ paths:
   # This means that this specification must be updated each time a new version of the
   # registrar API is released.
 
-  "/registrar/api-docs":
-    x-amazon-apigateway-any-method:
-      x-amazon-apigateway-integration:
-        type: "http_proxy"
-        uri: "https://${stageVariables.registrar_host}/api-docs/"
-        httpMethod: "ANY"
-
-  "/registrar/login":
-    x-amazon-apigateway-any-method:
-      x-amazon-apigateway-integration:
-        type: "http_proxy"
-        uri: "https://${stageVariables.registrar_host}/login/"
-        httpMethod: "ANY"
-
-  "/registrar/logout":
-    x-amazon-apigateway-any-method:
-      x-amazon-apigateway-integration:
-        type: "http_proxy"
-        uri: "https://${stageVariables.registrar_host}/logout/"
-        httpMethod: "ANY"
-
-  "/registrar/static/{proxy+}":
-    x-amazon-apigateway-any-method:
-      parameters:
-      - name: "proxy"
-        in: "path"
-      x-amazon-apigateway-integration:
-        type: "http_proxy"
-        uri: "https://${stageVariables.registrar_host}/static/{proxy}"
-        httpMethod: "ANY"
-        requestParameters:
-          integration.request.path.proxy: "method.request.path.proxy"
-
-  "/registrar/v1/{proxy+}":
-    x-amazon-apigateway-any-method:
-      parameters:
-      - name: "proxy"
-        in: "path"
-      x-amazon-apigateway-integration:
-        type: "http_proxy"
-        uri: "https://${stageVariables.registrar_host}/api/v1/{proxy}/"
-        httpMethod: "ANY"
-        requestParameters:
-          integration.request.path.proxy: "method.request.path.proxy"
-
-  "/registrar/v2/{proxy+}":
-    x-amazon-apigateway-any-method:
-      parameters:
-      - name: "proxy"
-        in: "path"
-      x-amazon-apigateway-integration:
-        type: "http_proxy"
-        uri: "https://${stageVariables.registrar_host}/api/v2/{proxy}/"
-        httpMethod: "ANY"
-        requestParameters:
-          integration.request.path.proxy: "method.request.path.proxy"
+#  "/registrar/api-docs":
+#    x-amazon-apigateway-any-method:
+#      x-amazon-apigateway-integration:
+#        type: "http_proxy"
+#        uri: "https://${stageVariables.registrar_host}/api-docs/"
+#        httpMethod: "ANY"
+#
+#  "/registrar/login":
+#    x-amazon-apigateway-any-method:
+#      x-amazon-apigateway-integration:
+#        type: "http_proxy"
+#        uri: "https://${stageVariables.registrar_host}/login/"
+#        httpMethod: "ANY"
+#
+#  "/registrar/logout":
+#    x-amazon-apigateway-any-method:
+#      x-amazon-apigateway-integration:
+#        type: "http_proxy"
+#        uri: "https://${stageVariables.registrar_host}/logout/"
+#        httpMethod: "ANY"
+#
+#  "/registrar/static/{proxy+}":
+#    x-amazon-apigateway-any-method:
+#      parameters:
+#      - name: "proxy"
+#        in: "path"
+#      x-amazon-apigateway-integration:
+#        type: "http_proxy"
+#        uri: "https://${stageVariables.registrar_host}/static/{proxy}"
+#        httpMethod: "ANY"
+#        requestParameters:
+#          integration.request.path.proxy: "method.request.path.proxy"
+#
+#  "/registrar/v1/{proxy+}":
+#    x-amazon-apigateway-any-method:
+#      parameters:
+#      - name: "proxy"
+#        in: "path"
+#      x-amazon-apigateway-integration:
+#        type: "http_proxy"
+#        uri: "https://${stageVariables.registrar_host}/api/v1/{proxy}/"
+#        httpMethod: "ANY"
+#        requestParameters:
+#          integration.request.path.proxy: "method.request.path.proxy"
+#
+#  "/registrar/v2/{proxy+}":
+#    x-amazon-apigateway-any-method:
+#      parameters:
+#      - name: "proxy"
+#        in: "path"
+#      x-amazon-apigateway-integration:
+#        type: "http_proxy"
+#        uri: "https://${stageVariables.registrar_host}/api/v2/{proxy}/"
+#        httpMethod: "ANY"
+#        requestParameters:
+#          integration.request.path.proxy: "method.request.path.proxy"
 
 
 # edX extension point. Lists the vendors in use and their specific
