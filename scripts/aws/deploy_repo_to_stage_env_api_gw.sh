@@ -8,7 +8,7 @@
 #
 
 python3 ./scripts/aws/deploy.py \
-  --tag  None
+  --tag  None \
   --api-base-domain api.stage.edx.org \
   --swagger-filename ./swagger/api.yaml \
   --landing-page https://stage.edx.org \

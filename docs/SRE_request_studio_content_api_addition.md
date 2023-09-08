@@ -102,7 +102,8 @@ of that API.
 
 ### Deploy
 
-- Deploy the API swagger specification with the Studio content API in it onto API Gateway resources, creating a new API Gateway stage, chartreuse
+- Deploy the API swagger specification with the Studio content API in it onto API Gateway resources, 
+- creating a new API Gateway stage named chartreuse
 
 > ./scripts/aws/invocation_history/stage/0001_deploy_studio_on_chartreuse.sh
 

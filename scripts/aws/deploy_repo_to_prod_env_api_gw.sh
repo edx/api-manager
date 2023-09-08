@@ -7,7 +7,7 @@
 # ./scripts/aws/deploy_repo_to_prod_env_api_gw.sh <aws stage name>
 
 python3 ./scripts/aws/deploy.py \
-  --tag  None
+  --tag  None \
   --api-base-domain api.edx.org  \
   --swagger-filename ./swagger/api.yaml \
   --landing-page https://stage.edx.org \
