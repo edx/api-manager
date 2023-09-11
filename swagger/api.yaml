@@ -3,7 +3,7 @@
 #  are part of your Open edX installation's "public API".
 
 ---
-swagger: "2.0"
+openapi: "3.0"
 info:
   version: "1.0.0"
   title: "Open edX"
