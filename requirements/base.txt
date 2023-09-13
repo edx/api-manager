@@ -6,9 +6,9 @@
 #
 boto==2.49.0
     # via google-compute-engine
-boto3==1.28.2
+boto3==1.28.46
     # via -r requirements/base.in
-botocore==1.31.2
+botocore==1.31.46
     # via
     #   -r requirements/base.in
     #   boto3
@@ -28,7 +28,7 @@ markupsafe==2.1.3
     # via jinja2
 python-dateutil==2.8.2
     # via botocore
-s3transfer==0.6.1
+s3transfer==0.6.2
     # via boto3
 six==1.16.0
     # via
