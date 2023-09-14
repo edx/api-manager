@@ -9,10 +9,10 @@ As the repo used to control the API Gateway, the `api-manager` repo, has fallen 
 # <a name="background"></a> Background
 
 ## Discovery
- 
+
 - The TNL team is adding the Studio content public API and intends for that to be offered via our shared AWS API gateway.
 - TNL has conducted a [discovery activity](https://2u-internal.atlassian.net/browse/TNL-10899) surrounding use of this repo using the playground AWS account
-  - The repo hasn't received active attention for some time. 
+  - The repo hasn't received active attention for some time.
   - Generic API Gateway learnings from that activity are documented in "configuration_objects.md" in this folder
   - edX-specific learnings from that activity follow here and are incorporated into this document's [runbook](#runbook) section
 
@@ -67,8 +67,8 @@ The call to the boto/apigateway function that carries out deployments is as foll
 >    })
 
 Of the command line arguments used in this call (all the `args.something` vaiables), most are integration hosts, and
-the values that were supplied at script invocation time are persisted in AWS gateway objects, under 
-"Custom domain names -> api.edx.org -> API mappings tab -> prod_black link -> Stage variables". Once there, you also 
+the values that were supplied at script invocation time are persisted in AWS gateway objects, under
+"Custom domain names -> api.edx.org -> API mappings tab -> prod_black link -> Stage variables". Once there, you also
 find persisted values for `args.id` and `args.landing_page`.
 
 This leaves only the value used for the `args.swagger_filename` unaccounted for, and that's just the pathname for
@@ -91,18 +91,85 @@ of that API.
 ## Preliminaries
 
 - Review this document
-- Verify that APIs on API Gateway are up and running on stage and prod as expected
-- Verify that "yellow" is the live AWS stage on the api.stage.edx.org API Gateway custom domain
-- Verify that "prod_black" is the live AWS stage on the api.edx.org API Gateway custom domain
 - Download this `api-manager` repo onto the EC2 instance hosting the API Gateway
   - Set the working directory on a shell you'll be using to run scripts on to this repo's root directory
 
 
 ## <a name="stage-runbook"></a> Deploy, activate, and test on stage
 
-### Deploy
 
-- Deploy the API swagger specification with the Studio content API in it onto API Gateway resources, 
+### Generate an ACM certificate for use with the custom domain name we're about to create
+- go to AWS Certificate Manager (ACM) (off of top-level serices icon)
+- Push orange "Request" button
+- Push orange "Next" button with default "Request a public certificate" selected
+- Enter the fully qualified domain name "studio.api.stage.edx.org"
+- Push orange "Request" button (accepting defaults for everything else)
+- Back at ACM, should see a success banner with a "View Certificate" button. Push the button
+- Should now see the new certificate in a "Pending validation" state
+- In the "Domains" pane of this certificate display there is a "Create records in Route 53". You
+must take this action for this certificate to exit "Pending validation" state
+    - Push the "Create records in Route 53" button
+    - In the next screen, accept all defaults and push the "Create records" orange button
+    - You should be redirected to the certificate display screen, with a green success banner reading
+        "Successfully created DNS records in Amazon Route 53 ..."
+    - It will take maybe 10 minutes for the DNS records to match this newly created certificate. After some
+    such delay you'll see this comain name's status change to a green Success status
+- Your certificate is ready for use
+
+### Create a custom domain name
+
+- Select API Gateway "Custom domain names" menu link item
+- click on "Create" button
+- Enter `studio.api.stage.edx.org` as as the domain name to be created
+- Select your newly created certificate in the "Endpoint configuration" panel, under "ACM Certificate"
+- click the orange "Create domain name" button
+- On success you'll be redirected to the Custom domain names view, with a green "Successfully created domain name ..."
+banner
+
+
+### Create a placeholder API object with a single "GET" method
+    - Motivation:
+        - The `api-manager` scripts we'll be running expect a deployed API on the custom domain name as a starting point
+        - The newly created custom domain name currently has no APIs or deployments associated with it
+    - Select the API Gateway "APIs" menu item link
+    - Click the orange "Create API" button
+    - Go to the REST API panel and click the oranage "Build" button within it
+    - Enter "Studio content" as the API name and click the "Create API" button
+    - You'll be redirected to the Studio content API Resources view
+        - click the Actions button and select Create method
+        - in the new pull-down box you're offered, select GET
+        - click on the edit icon for this method
+            - select HTTP integration type
+            - enable "Use HTTP Proxy integration"
+            - enter a bogus http://example.com for Endpoint URL (we'll never actually use this method)
+            - click the Save button
+            - On success you'll be presented with a request flow diagram through the system
+
+### Deploy your placeholder API
+    - Select the API Gateway "APIs" menu item link
+    - select your newly created API
+    - You'll now be on the API:Studio content, resources view
+        - click the Actions button and select "Deploy API"
+        - In the dialog box you're presented, select new stage from the Deployment Stage pull down menu
+        - Enter Cerulean for the stage name and click the Deploy button
+        - On success you'll be on the API: Studio content, Stages view
+        - Select the "Deployment History" tab to see the deployment you just created
+
+### Map your newly created, deployed API to your custom domain name
+    - Select the API Gateway "Custom domain name" menu link item
+    - Select the studio.api.stage.edx.org custom domain name
+    - Click on the "API mappings" tab
+    - Click on the "Configure API mappings" button and then on the "Add new mapping" button
+    - Select the Studio content API on the API box
+    - Select the Cerulean stage on the Stage box
+    - Click on the "Save" button
+    - On success you'll be redirected to the custom domain names view, with a green success banner "Successfully
+    updated API mappings"
+    - In the displayed API Mappings tab, you'll now see the current stage for the Studio content API shown as Cerulean
+
+### Deploy the real Studio API (as opposed to the placeholder API deployed above)
+
+- Deploy the API swagger specification with the Studio content API in it onto API Gateway resources,
 - creating a new API Gateway stage named chartreuse
 
 > ./scripts/aws/invocation_history/stage/0001_deploy_studio_on_chartreuse.sh
@@ -122,25 +189,18 @@ Go live with the newly imported Studio content API endpoints (API Gateway resour
 
 ### Roll back in case of failure
 
-- In case activation failed, roll back on the stage environment to the AWS stage that had been live prior to this exercise
+The above steps in no way affect live deployments of currently deployed APIs. No rollback mechanism is required. Unless
+the scripts are edited, it's not even possible to "fat finger" the process, as the scripts are hard-wired for the new
+custom domain names.
 
-> ./scripts/aws/invocation_history/stage/1000_rollback_to_yellow.sh
+### Add metrics and alerts for new studio API
 
-- Verify that the "yellow" API Gateway stage is now the active stage for the `api.stage.edx.org` custom domain
-- Verify that the public APIs on the stage environment API Gateway have suffered no regressions
-- Verify that the Studio content API endpoints are not offered
+No additional work is required for AWS-based metrics and alerts. Existing metrics discriminate on the basis of API
+gateway, API ID, and stage. We're still operating with the existing API Gateway, and we've added a new API ID and a new
+stage. Existing metrics and alerts will continue to run, but will generate charts and alerts that identify
+that they're responding to traffic from the new API ID and the new stage.
 
-### Restore yellow as active AWS stage for future Python upgrades
-
-The process we follow with python upgrades expects the active AWS stage to be 'yellow'. Make it so.
-This differs from the rollback step, in that here we want the live API Gateway to continue offering Studio content API endpoints
-
-> ./scripts/aws/invocation_history/stage/0003_deploy_studio_on_yellow.sh
-> ./scrits/aws/invocation_history/stage/0004_yellow_goes_live.sh
-
-- Verify that the "yellow" API Gateway stage is now the active stage for the `api.stage.edx.org` custom domain
-- Verify that the public APIs on the stage environment API Gateway have suffered no regressions
-- Verify that the studio API on the stage environment is now working as expected
+It's possible that additional work is required for New Relic monitoring and alerting. This can occur at a later time.
 
 
 ## <a name="prod-runbook"></a> Deploy, activate, and test on prod

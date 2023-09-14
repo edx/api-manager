@@ -9,7 +9,7 @@
 
 python3 ./scripts/aws/deploy.py \
   --tag  None \
-  --api-base-domain api.stage.edx.org \
+  --api-base-domain studio.api.stage.edx.org \
   --swagger-filename ./swagger/api.yaml \
   --landing-page https://stage.edx.org \
   --rotation-order $1 \

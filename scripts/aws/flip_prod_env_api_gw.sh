@@ -7,5 +7,5 @@
 #
 
 python3 ./scripts/aws/flip.py \
- --api-base-domain api.edx.org  \
+ --api-base-domain studio.api.edx.org  \
  --next-stage $1
