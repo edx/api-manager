@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     parser.add_argument("--aws-region", required=False, default="us-east-1")
     parser.add_argument("--api-base-domain", required=True,
-                        help="The name of the API Gateway domain to be created.")
+                        help="The name of the API Gateway domain to be deployed to.")
     parser.add_argument("--swagger-filename", required=True,
                         help="The name of a complete Swagger 2.0 specification file with AWS vendor hooks.")
     parser.add_argument("--tag", required=True,
@@ -33,30 +33,15 @@ if __name__ == '__main__':
                         help="Default per-resource maximum rate limit")
     parser.add_argument("--landing-page", required=True,
                         help="Location of landing page for 'root' level requests")
-    parser.add_argument("--edxapp-host", required=True,
-                        help="Location of edxapp for request routing")
-    parser.add_argument("--catalog-host", required=True,
-                        help="Location of catalog IDA for request routing")
-    parser.add_argument("--enterprise-host", required=False, default='',
-                        help="Location of enterprise IDA for request routing")
-    parser.add_argument('--analytics-api-host', required=True,
-                        help="Location of analyitcs-api IDA for request routing")
-    parser.add_argument('--registrar-host', required=True,
-                        help="Location of registrar IDA for request routing")
-    parser.add_argument('--enterprise-catalog-host', required=True,
-                        help="Location of enterprise catalog IDA for request routing")
+    parser.add_argument('--studio-host', required=True,
+                        help="Location of Studio IDA for request routing")
 
+    args = parser.parse_args()
     cli_args = parser.parse_args()
     integration_settings = {
         'id': cli_args.tag,
         'landing_page': cli_args.landing_page,
-        'edxapp_host': cli_args.edxapp_host,
-        'discovery_host': cli_args.catalog_host,
-        'enterprise_host': cli_args.enterprise_host or cli_args.edxapp_host,
-        'gateway_host': cli_args.api_base_domain,
-        'analytics_api_host': cli_args.analytics_api_host,
-        'registrar_host': cli_args.registrar_host,
-        'enterprise_catalog_host': cli_args.enterprise_catalog_host,
+        'studio_host': cli_args.studio_host,
     }
     stage_settings = {
         'log_level': cli_args.log_level,
@@ -66,4 +51,3 @@ if __name__ == '__main__':
         'burst_limit': cli_args.burst_limit
     }
     deploy(cli_args, integration_settings, stage_settings)
-
