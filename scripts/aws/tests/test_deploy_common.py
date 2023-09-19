@@ -1,11 +1,11 @@
 """
-Tests for scripts/aws/deploy.py
+Tests for scripts/aws/deploy_common.py
 """
 import boto3
 import pytest
 from moto import mock_apigateway
 from unittest import TestCase
-from deploy import get_api_id, get_next_stage, deploy_api, update_stage
+from deploy_common import get_api_id, get_next_stage, deploy_api, update_stage
 
 
 class DeployTest(TestCase):
