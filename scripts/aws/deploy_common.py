@@ -2,7 +2,6 @@
 
 """Various functions for day-to-day management of AWS API Gateway instances."""
 
-import argparse
 import logging
 import botocore.session
 import botocore.exceptions
@@ -96,6 +95,7 @@ def update_stage(client, rest_api_id, stage_name, stage_settings):
                  rest_api_id, stage_name, response['methodSettings'])
 
     return response
+
 
 def deploy(cli_args, integration_settings, stage_settings):
     session = botocore.session.get_session()

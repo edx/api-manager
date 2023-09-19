@@ -4,7 +4,7 @@
 
 import argparse
 import logging
-from deploy_common import deploy
+from .deploy_common import deploy
 
 if __name__ == '__main__':
 
@@ -66,4 +66,3 @@ if __name__ == '__main__':
         'burst_limit': cli_args.burst_limit
     }
     deploy(cli_args, integration_settings, stage_settings)
-

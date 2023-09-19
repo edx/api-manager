@@ -4,7 +4,7 @@
 
 import argparse
 import logging
-from deploy_common import deploy
+from .deploy_common import deploy
 
 if __name__ == '__main__':
 
@@ -33,6 +33,8 @@ if __name__ == '__main__':
                         help="Default per-resource maximum rate limit")
     parser.add_argument("--landing-page", required=True,
                         help="Location of landing page for 'root' level requests")
+    parser.add_argument("--edxapp-host", required=True,
+                        help="Location of edxapp for request routing")
     parser.add_argument('--studio-host', required=True,
                         help="Location of Studio IDA for request routing")
 
@@ -41,6 +43,7 @@ if __name__ == '__main__':
     integration_settings = {
         'id': cli_args.tag,
         'landing_page': cli_args.landing_page,
+        'edxapp_host': cli_args.edxapp_host,
         'studio_host': cli_args.studio_host,
     }
     stage_settings = {
