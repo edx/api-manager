@@ -4,14 +4,17 @@
 #
 #    make upgrade
 #
+annotated-types==0.5.0
+    # via pydantic
 astroid==2.15.6
     # via pylint
 attrs==23.1.0
     # via
     #   jschema-to-python
     #   jsonschema
+    #   referencing
     #   sarif-om
-aws-sam-translator==1.74.0
+aws-sam-translator==1.75.0
     # via cfn-lint
 aws-xray-sdk==2.12.0
     # via moto
@@ -19,12 +22,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.28.46
+boto3==1.28.51
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.31.46
+botocore==1.31.51
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -35,11 +38,11 @@ certifi==2023.7.22
     # via requests
 cffi==1.15.1
     # via cryptography
-cfn-lint==0.79.10
+cfn-lint==0.80.2
     # via moto
 charset-normalizer==3.2.0
     # via requests
-cryptography==41.0.3
+cryptography==41.0.4
     # via
     #   moto
     #   python-jose
@@ -68,7 +71,9 @@ graphql-core==3.2.3
 idna==3.4
     # via requests
 importlib-resources==6.0.1
-    # via jsonschema
+    # via
+    #   jsonschema
+    #   jsonschema-specifications
 iniconfig==2.0.0
     # via pytest
 isort==5.12.0
@@ -92,12 +97,14 @@ jsonpickle==3.0.2
     # via jschema-to-python
 jsonpointer==2.4
     # via jsonpatch
-jsonschema==4.17.3
+jsonschema==4.19.0
     # via
     #   aws-sam-translator
     #   cfn-lint
     #   openapi-schema-validator
     #   openapi-spec-validator
+jsonschema-specifications==2023.7.1
+    # via jsonschema
 junit-xml==1.9
     # via cfn-lint
 lazy-object-proxy==1.9.0
@@ -111,7 +118,7 @@ mccabe==0.7.0
     # via pylint
 mock==5.1.0
     # via -r requirements/test.in
-moto[cloudformation]==4.2.2
+moto[cloudformation]==4.2.3
     # via -r requirements/test.in
 mpmath==1.3.0
     # via sympy
@@ -139,7 +146,7 @@ platformdirs==3.10.0
     # via pylint
 pluggy==1.3.0
     # via pytest
-py-partiql-parser==0.3.6
+py-partiql-parser==0.3.7
     # via moto
 pyasn1==0.5.0
     # via
@@ -149,16 +156,16 @@ pycparser==2.21
     # via cffi
 pycurl==7.45.2
     # via pyresttest
-pydantic==1.10.12
+pydantic==2.3.0
     # via aws-sam-translator
+pydantic-core==2.6.3
+    # via pydantic
 pylint==2.17.5
     # via -r requirements/test.in
 pyparsing==3.1.1
     # via moto
 pyresttest==1.7.1
     # via -r requirements/test.in
-pyrsistent==0.19.3
-    # via jsonschema
 pytest==7.4.2
     # via -r requirements/test.in
 python-dateutil==2.8.2
@@ -175,6 +182,10 @@ pyyaml==6.0.1
     #   openapi-spec-validator
     #   pyresttest
     #   responses
+referencing==0.30.2
+    # via
+    #   jsonschema
+    #   jsonschema-specifications
 regex==2023.8.8
     # via cfn-lint
 requests==2.31.0
@@ -184,6 +195,10 @@ requests==2.31.0
     #   responses
 responses==0.23.3
     # via moto
+rpds-py==0.10.3
+    # via
+    #   jsonschema
+    #   referencing
 rsa==4.9
     # via python-jose
 s3transfer==0.6.2
@@ -210,11 +225,13 @@ tomlkit==0.12.1
     # via pylint
 types-pyyaml==6.0.12.11
     # via responses
-typing-extensions==4.7.1
+typing-extensions==4.8.0
     # via
+    #   annotated-types
     #   astroid
     #   aws-sam-translator
     #   pydantic
+    #   pydantic-core
     #   pylint
 urllib3==1.26.16
     # via
@@ -233,7 +250,7 @@ wrapt==1.15.0
     #   aws-xray-sdk
 xmltodict==0.13.0
     # via moto
-zipp==3.16.2
+zipp==3.17.0
     # via importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
