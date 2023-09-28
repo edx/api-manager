@@ -4,7 +4,7 @@
 
 import argparse
 import logging
-from .deploy_common import deploy
+from .common.deploy import deploy
 
 if __name__ == '__main__':
 
