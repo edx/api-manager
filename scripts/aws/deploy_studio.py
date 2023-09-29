@@ -4,7 +4,7 @@
 
 import argparse
 import logging
-from aws.common.deploy import deploy
+from scripts.aws.common.deploy import deploy
 
 if __name__ == '__main__':
 
