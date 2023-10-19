@@ -138,6 +138,17 @@ paths:
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
+  # CMS API (Studio ingestion)
+  "/cms/v1/file_assets/{proxy+}":
+    $ref: "./cms.yaml#/endpoints/file_assets/{proxy+}"
+  "/cms/v1/videos/uploads/{proxy+}":
+    $ref: "./cms.yaml#/endpoints/videos/uploads/{proxy+}"
+  "/cms/v1/videos/images/{proxy+}":
+    $ref: "./cms.yaml#/endpoints/videos/images/{proxy+}"
+  "/cms/v1/video_transcripts/{proxy+}":
+    $ref: "./cms.yaml#/endpoints/video_transcripts/{proxy+}"
+  "/cms/v1/xblock/{proxy+}":
+    $ref: "./cms.yaml#/endpoints/xblock/{proxy+}"
 
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
@@ -155,4 +166,4 @@ x-edx-api-vendors:
     - "analytics_api_host"
     - "registrar_host"
     - "enterprise_catalog_host"
-    - "studio_host"
+    - "cms_host"

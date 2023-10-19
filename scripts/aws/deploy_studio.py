@@ -35,8 +35,8 @@ if __name__ == '__main__':
                         help="Location of landing page for 'root' level requests")
     parser.add_argument("--edxapp-host", required=True,
                         help="Location of edxapp for request routing")
-    parser.add_argument('--studio-host', required=True,
-                        help="Location of Studio IDA for request routing")
+    parser.add_argument('--cms-host', required=True,
+                        help="Location of CMS for request routing")
 
     args = parser.parse_args()
     cli_args = parser.parse_args()
@@ -44,7 +44,7 @@ if __name__ == '__main__':
         'id': cli_args.tag,
         'landing_page': cli_args.landing_page,
         'edxapp_host': cli_args.edxapp_host,
-        'studio_host': cli_args.studio_host,
+        'cms_host': cli_args.cms_host,
     }
     stage_settings = {
         'log_level': cli_args.log_level,
