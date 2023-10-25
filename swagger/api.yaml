@@ -138,18 +138,18 @@ paths:
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
-  # CMS API (content ingestion)
-  "cms/v0/file_assets/{proxy+}":
-    x-amazon-apigateway-any-method:
-      parameters:
-      - name: "proxy"
-        in: "path"
-      x-amazon-apigateway-integration:
-        type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v1/file_assets/{proxy}"
-        httpMethod: "ANY"
-        requestParameters:
-          integration.request.path.proxy: "method.request.path.proxy"
+#  # CMS API (content ingestion)
+#  "cms/v0/file_assets/{proxy+}":
+#    x-amazon-apigateway-any-method:
+#      parameters:
+#      - name: "proxy"
+#        in: "path"
+#      x-amazon-apigateway-integration:
+#        type: "http_proxy"
+#        uri: "https://${stageVariables.cms_host}/api/contentstore/v1/file_assets/{proxy}"
+#        httpMethod: "ANY"
+#        requestParameters:
+#          integration.request.path.proxy: "method.request.path.proxy"
 
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
