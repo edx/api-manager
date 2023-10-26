@@ -139,7 +139,7 @@ paths:
           integration.request.path.proxy: "method.request.path.proxy"
 
   # CMS API (content ingestion)
-  "cms/v1/file_assets/{proxy+}":
+  "/cms/v1/file_assets/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
