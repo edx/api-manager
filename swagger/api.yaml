@@ -139,7 +139,7 @@ paths:
           integration.request.path.proxy: "method.request.path.proxy"
 
   # CMS API (content ingestion)
-  "/cms/v0/file_assets/{proxy+}":
+  "/authoring/v0/file_assets/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
@@ -151,7 +151,7 @@ paths:
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
-  "/cms/v0/videos/uploads/{proxy+}":
+  "/authoring/v0/videos/uploads/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
@@ -163,7 +163,7 @@ paths:
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
-  "/cms/v0/videos/images/{proxy+}":
+  "/authoring/v0/videos/images/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
@@ -175,7 +175,7 @@ paths:
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
-  "/cms/v0/video_transcripts/{proxy+}":
+  "/authoring/v0/video_transcripts/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
@@ -187,7 +187,7 @@ paths:
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
-  "/cms/v0/xblock/{proxy+}":
+  "/authoring/v0/xblock/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
