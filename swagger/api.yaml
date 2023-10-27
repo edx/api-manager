@@ -158,43 +158,43 @@ paths:
         in: "path"
       x-amazon-apigateway-integration:
         type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v1/videos/uploads/{proxy}"
+        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/videos/uploads/{proxy}"
         httpMethod: "ANY"
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
-  "/cms/videos/images/{proxy+}":
+  "/cms/v0/videos/images/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
         in: "path"
       x-amazon-apigateway-integration:
         type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v1/videos/images/{proxy}"
+        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/videos/images/{proxy}"
         httpMethod: "ANY"
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
-  "/cms/video_transcripts/{proxy+}":
+  "/cms/v0/video_transcripts/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
         in: "path"
       x-amazon-apigateway-integration:
         type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v1/video_transcripts/{proxy}"
+        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/video_transcripts/{proxy}"
         httpMethod: "ANY"
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
-  "/cms/xblock/{proxy+}":
+  "/cms/v0/xblock/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
       - name: "proxy"
         in: "path"
       x-amazon-apigateway-integration:
         type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v1/xblock/{proxy}"
+        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/xblock/{proxy}"
         httpMethod: "ANY"
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
