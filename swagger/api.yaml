@@ -138,7 +138,7 @@ paths:
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
-  # CMS API (content ingestion)
+  # Authoring Domain API (e.g. content ingestion via CMS)
   "/authoring/v0/file_assets/{proxy+}":
     x-amazon-apigateway-any-method:
       parameters:
