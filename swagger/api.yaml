@@ -138,6 +138,68 @@ paths:
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
 
+  # Authoring Domain API (e.g. content ingestion via CMS)
+  "/authoring/v0/file_assets/{proxy+}":
+    x-amazon-apigateway-any-method:
+      parameters:
+      - name: "proxy"
+        in: "path"
+      x-amazon-apigateway-integration:
+        type: "http_proxy"
+        uri: "https://${stageVariables.cms_host}/api/contentstore/v1/file_assets/{proxy}"
+        httpMethod: "ANY"
+        requestParameters:
+          integration.request.path.proxy: "method.request.path.proxy"
+
+  "/authoring/v0/videos/uploads/{proxy+}":
+    x-amazon-apigateway-any-method:
+      parameters:
+      - name: "proxy"
+        in: "path"
+      x-amazon-apigateway-integration:
+        type: "http_proxy"
+        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/videos/uploads/{proxy}"
+        httpMethod: "ANY"
+        requestParameters:
+          integration.request.path.proxy: "method.request.path.proxy"
+
+  "/authoring/v0/videos/images/{proxy+}":
+    x-amazon-apigateway-any-method:
+      parameters:
+      - name: "proxy"
+        in: "path"
+      x-amazon-apigateway-integration:
+        type: "http_proxy"
+        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/videos/images/{proxy}"
+        httpMethod: "ANY"
+        requestParameters:
+          integration.request.path.proxy: "method.request.path.proxy"
+
+  "/authoring/v0/video_transcripts/{proxy+}":
+    x-amazon-apigateway-any-method:
+      parameters:
+      - name: "proxy"
+        in: "path"
+      x-amazon-apigateway-integration:
+        type: "http_proxy"
+        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/video_transcripts/{proxy}"
+        httpMethod: "ANY"
+        requestParameters:
+          integration.request.path.proxy: "method.request.path.proxy"
+
+  "/authoring/v0/xblock/{proxy+}":
+    x-amazon-apigateway-any-method:
+      parameters:
+      - name: "proxy"
+        in: "path"
+      x-amazon-apigateway-integration:
+        type: "http_proxy"
+        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/xblock/{proxy}"
+        httpMethod: "ANY"
+        requestParameters:
+          integration.request.path.proxy: "method.request.path.proxy"
+
+
 
 # edX extension point. Lists the vendors in use and their specific
 #  parameters that are expected by upstream refs.
@@ -155,4 +217,4 @@ x-edx-api-vendors:
     - "analytics_api_host"
     - "registrar_host"
     - "enterprise_catalog_host"
-    - "studio_host"
+    - "cms_host"
