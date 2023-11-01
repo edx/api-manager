@@ -146,7 +146,7 @@ paths:
         in: "path"
       x-amazon-apigateway-integration:
         type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v1/file_assets/{proxy}"
+        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/file_assets/{proxy}"
         httpMethod: "ANY"
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
