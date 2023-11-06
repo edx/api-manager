@@ -146,7 +146,7 @@ paths:
         in: "path"
       x-amazon-apigateway-integration:
         type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/file_assets/{proxy}"
+        uri: "https://${stageVariables.authoring_host}/api/contentstore/v0/file_assets/{proxy}"
         httpMethod: "ANY"
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
@@ -158,7 +158,7 @@ paths:
         in: "path"
       x-amazon-apigateway-integration:
         type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/videos/uploads/{proxy}"
+        uri: "https://${stageVariables.authoring_host}/api/contentstore/v0/videos/uploads/{proxy}"
         httpMethod: "ANY"
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
@@ -170,7 +170,7 @@ paths:
         in: "path"
       x-amazon-apigateway-integration:
         type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/videos/images/{proxy}"
+        uri: "https://${stageVariables.authoring_host}/api/contentstore/v0/videos/images/{proxy}"
         httpMethod: "ANY"
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
@@ -182,7 +182,7 @@ paths:
         in: "path"
       x-amazon-apigateway-integration:
         type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/video_transcripts/{proxy}"
+        uri: "https://${stageVariables.authoring_host}/api/contentstore/v0/video_transcripts/{proxy}"
         httpMethod: "ANY"
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
@@ -194,7 +194,7 @@ paths:
         in: "path"
       x-amazon-apigateway-integration:
         type: "http_proxy"
-        uri: "https://${stageVariables.cms_host}/api/contentstore/v0/xblock/{proxy}"
+        uri: "https://${stageVariables.authoring_host}/api/contentstore/v0/xblock/{proxy}"
         httpMethod: "ANY"
         requestParameters:
           integration.request.path.proxy: "method.request.path.proxy"
@@ -217,4 +217,4 @@ x-edx-api-vendors:
     - "analytics_api_host"
     - "registrar_host"
     - "enterprise_catalog_host"
-    - "cms_host"
+    - "authoring_host"
