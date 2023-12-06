@@ -14,7 +14,7 @@ attrs==23.1.0
     #   jsonschema
     #   referencing
     #   sarif-om
-aws-sam-translator==1.80.0
+aws-sam-translator==1.82.0
     # via cfn-lint
 aws-xray-sdk==2.12.1
     # via moto
@@ -22,12 +22,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.29.5
+boto3==1.33.8
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.32.5
+botocore==1.33.8
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -38,11 +38,11 @@ certifi==2023.11.17
     # via requests
 cffi==1.16.0
     # via cryptography
-cfn-lint==0.83.3
+cfn-lint==0.83.4
     # via moto
 charset-normalizer==3.3.2
     # via requests
-cryptography==41.0.5
+cryptography==41.0.7
     # via
     #   moto
     #   python-jose
@@ -68,7 +68,7 @@ google-compute-engine==2.8.13
     # via -r requirements/base.txt
 graphql-core==3.2.3
     # via moto
-idna==3.4
+idna==3.6
     # via requests
 importlib-resources==6.1.1
     # via
@@ -106,7 +106,7 @@ jsonschema==4.20.0
     #   openapi-spec-validator
 jsonschema-path==0.3.2
     # via openapi-spec-validator
-jsonschema-specifications==2023.11.1
+jsonschema-specifications==2023.11.2
     # via
     #   jsonschema
     #   openapi-schema-validator
@@ -123,7 +123,7 @@ mccabe==0.7.0
     # via pylint
 mock==5.1.0
     # via -r requirements/test.in
-moto[cloudformation]==4.2.9
+moto[cloudformation]==4.2.11
     # via -r requirements/test.in
 mpmath==1.3.0
     # via sympy
@@ -147,10 +147,8 @@ pep8==1.7.1
     # via -r requirements/test.in
 pkgutil-resolve-name==1.3.10
     # via jsonschema
-platformdirs==3.11.0
-    # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
-    #   pylint
+platformdirs==4.1.0
+    # via pylint
 pluggy==1.3.0
     # via pytest
 py-partiql-parser==0.4.2
@@ -163,9 +161,9 @@ pycparser==2.21
     # via cffi
 pycurl==7.45.2
     # via pyresttest
-pydantic==2.5.1
+pydantic==2.5.2
     # via aws-sam-translator
-pydantic-core==2.14.3
+pydantic-core==2.14.5
     # via pydantic
 pylint==3.0.2
     # via -r requirements/test.in
@@ -191,7 +189,7 @@ pyyaml==6.0.1
     #   moto
     #   pyresttest
     #   responses
-referencing==0.31.0
+referencing==0.31.1
     # via
     #   jsonschema
     #   jsonschema-path
@@ -208,13 +206,13 @@ responses==0.24.1
     # via moto
 rfc3339-validator==0.1.4
     # via openapi-schema-validator
-rpds-py==0.13.1
+rpds-py==0.13.2
     # via
     #   jsonschema
     #   referencing
 rsa==4.9
     # via python-jose
-s3transfer==0.7.0
+s3transfer==0.8.2
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -252,7 +250,7 @@ urllib3==1.26.18
     #   docker
     #   requests
     #   responses
-websocket-client==1.6.4
+websocket-client==1.7.0
     # via docker
 werkzeug==3.0.1
     # via moto
