@@ -71,6 +71,10 @@ paths:
   # Learner Summary endpoint powered by Learner Progress Report V1 API
   "/enterprise/v3/enterprise-customer/{uuid}/learner-summary":
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise-data/eb793cf/api.yaml#/endpoints/v2/enterpriseCustomerLearnerSummary"
+  # License Manager IDA
+  # These are served from the license manager IDA, but we surface them with the rest of the enterprise endpoints
+  "/enterprise/v1/subscriptions/{uuid}/licenses/assign":
+    $ref: "https://raw.githubusercontent.com/edx/license-manager/f2f38ee/api.yaml#/endpoints/v1/assignLicenses"
 
   # Registrar API Proxy
   # Note: There's an unresolved issue involving trailing slashes with proxy integrations in API Gateway.
@@ -218,3 +222,4 @@ x-edx-api-vendors:
     - "registrar_host"
     - "enterprise_catalog_host"
     - "authoring_host"
+    - "license_manager_host"
