@@ -245,3 +245,37 @@
     - method: 'GET'
     - headers: {'Content-Type': 'application/json'}
     - expected_status: [400]
+
+- test:
+    - name: 'License assign endpoint returns HTTP 200'
+    - url: '/enterprise/v1/subscriptions/9101d3de36156cba/licenses/assign'
+    - method: 'POST'
+    - headers: {'Authorization': 'aeiou', 'Content-Type': 'application/json'}
+    - body: >
+        [
+            {
+                "user_emails": ["edx@example.com", "abc@example.com"],
+                "user_sfids": ["efghijk", "abcdefg"],
+                "greeting": "hello",
+                "closing": "bye",
+                "notify_users": true
+            }
+        ]
+    - expected_status: [200]
+
+- test:
+    - name: 'License assign endpoint rejected without authorization HTTP 200'
+    - url: '/enterprise/v1/subscriptions/9101d3de36156cba/licenses/assign'
+    - method: 'POST'
+    - headers: {'Content-Type': 'application/json'}
+    - body: >
+        [
+            {
+                "user_emails": ["edx@example.com", "abc@example.com"],
+                "user_sfids": ["efghijk", "abcdefg"],
+                "greeting": "hello",
+                "closing": "bye",
+                "notify_users": true
+            }
+        ]
+    - expected_status: [400]

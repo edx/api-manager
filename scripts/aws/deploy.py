@@ -47,6 +47,8 @@ if __name__ == '__main__':
                         help="Location of enterprise catalog IDA for request routing")
     parser.add_argument('--authoring-host', required=True,
                         help="Location of Studio for authoring request routing")
+    parser.add_argument('--license-manager-host', required=True,
+                        help="Location of License Manager IDA for request routing")
 
     cli_args = parser.parse_args()
     integration_settings = {
@@ -59,7 +61,8 @@ if __name__ == '__main__':
         'analytics_api_host': cli_args.analytics_api_host,
         'registrar_host': cli_args.registrar_host,
         'enterprise_catalog_host': cli_args.enterprise_catalog_host,
-        'authoring_host': cli_args.authoring_host
+        'authoring_host': cli_args.authoring_host,
+        'license_manager_host': cli_args.license_manager_host
     }
     stage_settings = {
         'log_level': cli_args.log_level,
