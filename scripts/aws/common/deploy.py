@@ -60,7 +60,12 @@ def deploy_api(client, rest_api_id, swagger_filename, stage_name, stage_variable
 
     swagger = open(swagger_filename, 'r', encoding="utf-8")  # pylint: disable=consider-using-with
 
-    api_response = client.put_rest_api(restApiId=rest_api_id, mode='overwrite', body=swagger.read())
+    api_response = client.put_rest_api(
+        restApiId=rest_api_id,
+        mode='overwrite',
+        body=swagger.read(),
+        parameters={'binaryMediaTypes': 'multipart/form-data'},  # This MIME needs to be binary for file uploads
+    )
     logging.info('Existing API ID "%s" updated (name "%s")', api_response['id'], api_response['name'])
 
     deployment_response = client.create_deployment(
