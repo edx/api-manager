@@ -264,7 +264,7 @@
     - expected_status: [200]
 
 - test:
-    - name: 'License assign endpoint rejected without authorization HTTP 200'
+    - name: 'License assign endpoint rejected without authorization HTTP 400'
     - url: '/enterprise/v1/subscriptions/9101d3de36156cba/licenses/assign'
     - method: 'POST'
     - headers: {'Content-Type': 'application/json'}
@@ -277,5 +277,75 @@
                 "closing": "bye",
                 "notify_users": true
             }
+        ]
+    - expected_status: [400]
+
+- test:
+    - name: 'License revokes endpoint returns HTTP 200'
+    - url: '/enterprise/v1/subscriptions/9101d3de36156cba/licenses/bulk-revoke/'
+    - method: 'POST'
+    - headers: {'Authorization': 'aeiou', 'Content-Type': 'application/json'}
+    - body: >
+        [
+            {
+                "user_emails": ["edx@example.com", "abc@example.com"]            }
+        ]
+    - expected_status: [200]
+
+- test:
+    - name: 'License revokes endpoint rejected without authorization HTTP 400'
+    - url: '/enterprise/v1/subscriptions/9101d3de36156cba/licenses/bulk-revoke/'
+    - method: 'POST'
+    - headers: {'Content-Type': 'application/json'}
+    - body: >
+        [
+            {
+                "filters": [{"status_in": ['activated', 'assigned']}]
+            }
+        ]
+    - expected_status: [400]
+
+- test:
+    - name: 'Bulk learner enrollment in given list of courses endpoint returns HTTP 200'
+    - url: '/enterprise/v1/bulk-license-enrollment?enterprise_customer_uuid=234555'
+    - method: 'POST'
+    - headers: {'Authorization': 'aeiou', 'Content-Type': 'application/json'}
+    - body: >
+        [
+          {
+               "emails": ["edx@example.com"],
+               "course_run_keys": ["testX"],
+               "notify": true
+          }
+        ]
+    - expected_status: [200]
+
+- test:
+    - name: 'Bulk learner enrollment in given list of courses endpoint returns HTTP 400 without enterprise_customer_uuid'
+    - url: '/enterprise/v1/bulk-license-enrollment'
+    - method: 'POST'
+    - headers: {'Authorization': 'aeiou', 'Content-Type': 'application/json'}
+    - body: >
+        [
+          {
+               "emails": ["edx@example.com"],
+               "course_run_keys": ["testX"],
+               "notify": true
+          }
+        ]
+    - expected_status: [400]
+
+- test:
+    - name: 'Bulk learner enrollment in given list of courses endpoint rejected without authorization HTTP 400'
+    - url: '/enterprise/v1/bulk-license-enrollment'
+    - method: 'POST'
+    - headers: {'Content-Type': 'application/json'}
+    - body: >
+        [
+          {
+               "emails": ["edx@example.com"],
+               "course_run_keys": ["testX"],
+               "notify": true
+          }
         ]
     - expected_status: [400]
