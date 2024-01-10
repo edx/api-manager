@@ -55,6 +55,10 @@ paths:
   # These are served from the license manager IDA, but we surface them with the rest of the enterprise endpoints
   "/enterprise/v1/subscriptions/{uuid}/licenses/assign":
     $ref: "https://raw.githubusercontent.com/edx/license-manager/eb9407e/api.yaml#/endpoints/v1/assignLicenses"
+  "/enterprise/v1/subscriptions/{uuid}/licenses/bulk-revoke":
+      $ref: "https://raw.githubusercontent.com/edx/license-manager/1f3037b/api.yaml#/endpoints/v1/revokeLicenses"
+  "/enterprise/v1/bulk-license-enrollment":
+    $ref: "https://raw.githubusercontent.com/edx/license-manager/1f3037b/api.yaml#/endpoints/v1/bulkLicenseEnrollment"
   # Enterprise Catalog IDA
   # These are served from the enterprise catalog IDA, but we surface them with the rest of the enterprise endpoints
   "/enterprise/v2/enterprise-catalogs":
