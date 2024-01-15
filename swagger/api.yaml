@@ -56,7 +56,7 @@ paths:
   "/enterprise/v1/subscriptions/{uuid}/licenses/assign":
     $ref: "https://raw.githubusercontent.com/edx/license-manager/eb9407e/api.yaml#/endpoints/v1/assignLicenses"
   "/enterprise/v1/subscriptions/{uuid}/licenses/bulk-revoke":
-      $ref: "https://raw.githubusercontent.com/edx/license-manager/f9c95bd/api.yaml#/endpoints/v1/revokeLicenses"
+      $ref: "https://raw.githubusercontent.com/edx/license-manager/ccede3e/api.yaml#/endpoints/v1/revokeLicenses"
   "/enterprise/v1/bulk-license-enrollment":
     $ref: "https://raw.githubusercontent.com/edx/license-manager/227342c/api.yaml#/endpoints/v1/bulkLicenseEnrollment"
   # Enterprise Catalog IDA
