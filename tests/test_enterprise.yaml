@@ -288,7 +288,8 @@
     - body: >
         [
             {
-                "user_emails": ["edx@example.com", "abc@example.com"]            }
+                "user_emails": ["edx@example.com", "abc@example.com"]
+            }
         ]
     - expected_status: [200]
 
@@ -300,7 +301,7 @@
     - body: >
         [
             {
-                "filters": [{"status_in": ['activated', 'assigned']}]
+                "user_emails": ["edx@example.com", "abc@example.com"]
             }
         ]
     - expected_status: [400]
