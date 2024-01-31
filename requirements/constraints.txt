@@ -10,3 +10,7 @@
 
 # This file contains all common constraints for edx-repos
 -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+
+# moto==5.0 contains breaking changes in test env
+# neeeds to be fixed in a separate pr
+moto<5.0

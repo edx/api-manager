@@ -123,8 +123,10 @@ mccabe==0.7.0
     # via pylint
 mock==5.1.0
     # via -r requirements/test.in
-moto[cloudformation]==5.0.0
-    # via -r requirements/test.in
+moto[cloudformation]==4.2.14
+    # via
+    #   -c requirements/constraints.txt
+    #   -r requirements/test.in
 mpmath==1.3.0
     # via sympy
 networkx==3.1
