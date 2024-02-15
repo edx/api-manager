@@ -281,6 +281,19 @@
     - expected_status: [400]
 
 - test:
+    - name: 'Subscription Summary endpoint returns HTTP 200'
+    - url: '/enterprise/v1/subscriptions/'
+    - method: 'GET'
+    - headers: {'Authorization': 'aeiou'}
+    - expected_status: [200]
+
+- test:
+    - name: 'Subscription Summary endpoint rejected without authorization HTTP 400'
+    - url: '/enterprise/v1/subscriptions/'
+    - method: 'GET'
+    - expected_status: [400]
+
+- test:
     - name: 'License revokes endpoint returns HTTP 200'
     - url: '/enterprise/v1/subscriptions/9101d3de36156cba/licenses/bulk-revoke/'
     - method: 'POST'
