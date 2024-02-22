@@ -22,12 +22,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.34.44
+boto3==1.34.46
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.34.44
+botocore==1.34.46
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -94,7 +94,7 @@ jsondiff==2.0.0
     # via moto
 jsonpatch==1.33
     # via cfn-lint
-jsonpickle==3.0.2
+jsonpickle==3.0.3
     # via jschema-to-python
 jsonpointer==2.4
     # via jsonpatch
