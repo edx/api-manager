@@ -14,20 +14,20 @@ attrs==23.2.0
     #   jsonschema
     #   referencing
     #   sarif-om
-aws-sam-translator==1.85.0
+aws-sam-translator==1.86.0
     # via cfn-lint
-aws-xray-sdk==2.12.1
+aws-xray-sdk==2.13.0
     # via moto
 boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.34.51
+boto3==1.34.66
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.34.51
+botocore==1.34.66
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -38,7 +38,7 @@ certifi==2024.2.2
     # via requests
 cffi==1.16.0
     # via cryptography
-cfn-lint==0.85.3
+cfn-lint==0.86.0
     # via moto
 charset-normalizer==3.3.2
     # via requests
@@ -70,7 +70,7 @@ graphql-core==3.2.3
     # via moto
 idna==3.6
     # via requests
-importlib-resources==6.1.2
+importlib-resources==6.3.2
     # via
     #   jsonschema
     #   jsonschema-specifications
@@ -135,7 +135,7 @@ openapi-schema-validator==0.6.2
     # via openapi-spec-validator
 openapi-spec-validator==0.7.1
     # via moto
-packaging==23.2
+packaging==24.0
     # via
     #   docker
     #   pytest
@@ -163,19 +163,19 @@ pycparser==2.21
     # via cffi
 pycurl==7.45.3
     # via pyresttest
-pydantic==2.6.3
+pydantic==2.6.4
     # via aws-sam-translator
 pydantic-core==2.16.3
     # via pydantic
 pylint==3.1.0
     # via -r requirements/test.in
-pyparsing==3.1.1
+pyparsing==3.1.2
     # via moto
 pyresttest==1.7.1
     # via -r requirements/test.in
-pytest==8.0.2
+pytest==8.1.1
     # via -r requirements/test.in
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via
     #   -r requirements/base.txt
     #   botocore
@@ -212,7 +212,7 @@ rpds-py==0.18.0
     #   referencing
 rsa==4.9
     # via python-jose
-s3transfer==0.10.0
+s3transfer==0.10.1
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -256,7 +256,7 @@ wrapt==1.16.0
     # via aws-xray-sdk
 xmltodict==0.13.0
     # via moto
-zipp==3.17.0
+zipp==3.18.1
     # via importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
