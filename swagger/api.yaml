@@ -36,6 +36,10 @@ paths:
   "/catalog/v1/catalogs/{id}/courses":
     $ref: "https://raw.githubusercontent.com/edx/course-discovery/b5c52c8/api.yaml#/endpoints/v1/catalogCourses"
 
+  # Enterprise Access IDA
+  "/enterprise-access/v1/assignment-configurations/{assignment_configuration_uuid}/admin/assignments/cancel/":
+    $ref: "https://raw.githubusercontent.com/openedx/enterprise-access/31185ee/api.yaml#/endpoints/v1/learnerContentAssignmentCancelRequest"
+
   # Enterprise IDA
   "/enterprise/v1/enterprise-catalogs":
     $ref: "https://raw.githubusercontent.com/edx/edx-enterprise/260055b/api.yaml#/endpoints/v1/enterpriseCustomerCatalogs"
