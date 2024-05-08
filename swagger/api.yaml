@@ -36,9 +36,7 @@ paths:
   "/catalog/v1/catalogs/{id}/courses":
     $ref: "https://raw.githubusercontent.com/edx/course-discovery/b5c52c8/api.yaml#/endpoints/v1/catalogCourses"
 
-  # Enterprise Access IDA
-  "/enterprise-access/v1/assignment-configurations/{assignment_configuration_uuid}/admin/assignments/cancel/":
-    $ref: "https://raw.githubusercontent.com/openedx/enterprise-access/31185ee/api.yaml#/endpoints/v1/learnerContentAssignmentCancelRequest"
+
 
   # Enterprise IDA
   "/enterprise/v1/enterprise-catalogs":
@@ -65,6 +63,12 @@ paths:
       $ref: "https://raw.githubusercontent.com/edx/license-manager/b9e9ec9/api.yaml#/endpoints/v1/revokeLicenses"
   "/enterprise/v1/bulk-license-enrollment":
     $ref: "https://raw.githubusercontent.com/edx/license-manager/b9e9ec9/api.yaml#/endpoints/v1/bulkLicenseEnrollment"
+  # Enterprise Access IDA
+  # These are served from the enterprise-access IDA, but we surface them with the rest of the enterprise endpoints
+  "/enterprise/v1/assignment-configurations/{assignment_configuration_uuid}/admin/assignments/cancel/":
+    $ref: "https://raw.githubusercontent.com/openedx/enterprise-access/747d8b9/api.yaml#/endpoints/v1/learnerContentAssignmentCancelRequest"
+  "/enterprise/v1/assignment-configurations/{assignment_configuration_uuid}/admin/assignments/remind/":
+    $ref: "https://raw.githubusercontent.com/openedx/enterprise-access/747d8b9/api.yaml#/endpoints/v1/learnerContentAssignmentRemindRequest"
   # Enterprise Catalog IDA
   # These are served from the enterprise catalog IDA, but we surface them with the rest of the enterprise endpoints
   "/enterprise/v2/enterprise-catalogs":
@@ -233,3 +237,4 @@ x-edx-api-vendors:
     - "enterprise_catalog_host"
     - "authoring_host"
     - "license_manager_host"
+    - "enterprise_access_host"
