@@ -3,6 +3,27 @@
     - testset: 'Enterprise Access API'
 
 - test:
+    - name: 'Policy Allocation endpoint returns HTTP 200'
+    - url: '/enterprise/v1/policy-allocation/9101d3de36156cba/allocate?content_key=edx+DemoX&content_price_cents=55&learner_emails=["abc@example.com"]'
+    - method: 'POST'
+    - headers: { 'Authorization': 'aeiou', 'Content-Type': 'application/json' }
+    - expected_status: [200]
+
+- test:
+    - name: 'Policy Allocation endpoint rejected without Authorization'
+    - url: '/enterprise/v1/policy-allocation/9101d3de36156cba/allocate?content_key=edx+DemoX&content_price_cents=55&learner_emails=["abc@example.com"]'
+    - method: 'POST'
+    - expected_status: [400]
+
+- test:
+    - name: 'Policy Allocation endpoint returns HTTP 400 when required query param is missing'
+    - url: '/enterprise/v1/policy-allocation/9101d3de36156cba/allocate'
+    - method: 'POST'
+    - headers: { 'Authorization': 'aeiou', 'Content-Type': 'application/json' }
+    - expected_status: [400]
+
+
+- test:
     - name: 'Assignment configuration cancel endpoint returns HTTP 200'
     - url: '/enterprise/v1/assignment-configurations/9101d3de36156cba/admin/assignments/cancel/'
     - method: 'POST'
@@ -16,7 +37,7 @@
     - expected_status: [200]
 
 - test:
-    - name: 'GET rejected without authorization'
+    - name: 'POST rejected without authorization'
     - url: '/enterprise/v1/assignment-configurations/0123456789abcdefg/admin/assignments/cancel/'
     - method: 'POST'
     - expected_status: [400]
@@ -35,7 +56,7 @@
     - expected_status: [200]
 
 - test:
-    - name: 'GET rejected without authorization'
+    - name: 'POST rejected without authorization'
     - url: '/enterprise/v1/assignment-configurations/0123456789abcdefg/admin/assignments/remind/'
     - method: 'POST'
     - expected_status: [400]
