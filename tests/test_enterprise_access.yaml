@@ -61,3 +61,22 @@
     - method: 'POST'
     - expected_status: [400]
 
+- test:
+    - name: 'Subsidy Access Policy list endpoint returns HTTP 200'
+    - url: '/enterprise/v1/subsidy-access-policies/?active=true&enterprise_customer_uuid=9101d3de36156cba&page=1&page_size=10&ploicy_type=content'
+    - method: 'GET'
+    - headers: { 'Authorization': 'aeiou', 'Content-Type': 'application/json' }
+    - expected_status: [200]
+
+- test:
+    - name: 'Subsidy Access Policy list endpoint rejected without authorization'
+    - url: '/enterprise/v1/subsidy-access-policies/'
+    - method: 'GET'
+    - expected_status: [400]
+
+- test:
+    - name: 'Subsidy Access Policy list endpoint returns HTTP 400 when required query param is missing'
+    - url: '/enterprise/v1/subsidy-access-policies/'
+    - method: 'GET'
+    - headers: { 'Authorization': 'aeiou', 'Content-Type': 'application/json' }
+    - expected_status: [400]
