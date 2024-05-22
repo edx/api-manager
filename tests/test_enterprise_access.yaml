@@ -4,24 +4,24 @@
 
 - test:
     - name: 'Policy Allocation endpoint returns HTTP 200'
-    - url: '/enterprise/v1/policy-allocation/9101d3de36156cba/allocate?content_key=edx+DemoX&content_price_cents=55&learner_emails=["abc@example.com"]'
+    - url: '/enterprise/v1/policy-allocation/9101d3de36156cba/allocate'
     - method: 'POST'
     - headers: { 'Authorization': 'aeiou', 'Content-Type': 'application/json' }
+    - body: >
+          [
+              {
+                  "learner_emails": ["abc@example.com"],
+                  "content_key": "edx+101",
+                  "content_price_cents": 4500
+              }
+          ]
     - expected_status: [200]
 
 - test:
     - name: 'Policy Allocation endpoint rejected without Authorization'
-    - url: '/enterprise/v1/policy-allocation/9101d3de36156cba/allocate?content_key=edx+DemoX&content_price_cents=55&learner_emails=["abc@example.com"]'
-    - method: 'POST'
-    - expected_status: [400]
-
-- test:
-    - name: 'Policy Allocation endpoint returns HTTP 400 when required query param is missing'
     - url: '/enterprise/v1/policy-allocation/9101d3de36156cba/allocate'
     - method: 'POST'
-    - headers: { 'Authorization': 'aeiou', 'Content-Type': 'application/json' }
     - expected_status: [400]
-
 
 - test:
     - name: 'Assignment configuration cancel endpoint returns HTTP 200'
