@@ -72,7 +72,7 @@ paths:
   "/enterprise/v1/policy-allocation/{policy_uuid}/allocate/":
     $ref: "https://raw.githubusercontent.com/openedx/enterprise-access/7b79f45/api.yaml#/endpoints/v1/subsidyAccessPolicyAllocation"
   "/enterprise/v1/subsidy-access-policies/":
-    $ref: "https://raw.githubusercontent.com/openedx/enterprise-access/849a740/api.yaml#/endpoints/v1/subsidyAccessPolicies"
+    $ref: "https://raw.githubusercontent.com/openedx/enterprise-access/5a8ea18/api.yaml#/endpoints/v1/subsidyAccessPolicies"
   # Enterprise Catalog IDA
   # These are served from the enterprise catalog IDA, but we surface them with the rest of the enterprise endpoints
   "/enterprise/v2/enterprise-catalogs":
