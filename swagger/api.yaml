@@ -65,6 +65,8 @@ paths:
     $ref: "https://raw.githubusercontent.com/edx/license-manager/b9e9ec9/api.yaml#/endpoints/v1/bulkLicenseEnrollment"
   # Enterprise Access IDA
   # These are served from the enterprise-access IDA, but we surface them with the rest of the enterprise endpoints
+  "/enterprise/v1/assignment-configurations/{assignment_configuration_uuid}/admin/assignments/":
+    $ref: "https://raw.githubusercontent.com/openedx/enterprise-access/b2d181e/api.yaml#/endpoints/v1/learnerContentAssignmentListRequest"
   "/enterprise/v1/assignment-configurations/{assignment_configuration_uuid}/admin/assignments/cancel/":
     $ref: "https://raw.githubusercontent.com/openedx/enterprise-access/7b79f45/api.yaml#/endpoints/v1/learnerContentAssignmentCancelRequest"
   "/enterprise/v1/assignment-configurations/{assignment_configuration_uuid}/admin/assignments/remind/":
