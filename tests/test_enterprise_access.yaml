@@ -31,6 +31,13 @@
     - expected_status: [200]
 
 - test:
+    - name: 'Assignment configuration list endpoint returns HTTP 200 with query params'
+    - url: '/enterprise/v1/assignment-configurations/9101d3de36156cba/admin/assignments/?learner_state=notifying&state=allocated&state__in=allocated&state__in=accepted'
+    - method: 'GET'
+    - headers: { 'Authorization': 'aeiou', 'Content-Type': 'application/json' }
+    - expected_status: [200]
+
+- test:
     - name: 'Assignment configuration list request rejected without authorization'
     - url: '/enterprise/v1/assignment-configurations/0123456789abcdefg/admin/assignments/'
     - method: 'GET'
