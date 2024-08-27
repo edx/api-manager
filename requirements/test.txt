@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.35.4
+boto3==1.35.6
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.35.4
+botocore==1.35.6
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -64,7 +64,7 @@ google-compute-engine==2.8.13
     # via -r requirements/base.txt
 graphql-core==3.2.3
     # via moto
-idna==3.7
+idna==3.8
     # via requests
 iniconfig==2.0.0
     # via pytest
@@ -145,7 +145,7 @@ pydantic-core==2.20.1
     # via pydantic
 pylint==3.2.6
     # via -r requirements/test.in
-pyparsing==3.1.2
+pyparsing==3.1.4
     # via moto
 pyresttest==1.7.1
     # via -r requirements/test.in

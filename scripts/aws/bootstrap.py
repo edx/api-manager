@@ -14,8 +14,7 @@ CLOUDFRONT_HOSTED_ZONE = "Z2FDTNDATAQYW2"
 
 def get_domain(api_base):
     """Returns a dictionary response for the specified domain or None if the domain does not exit"""
-
-    client = boto3.client('apigateway', region_name=args.aws_region)  # pylint: disable=used-before-assignment
+    client = boto3.client('apigateway', region_name=args.aws_region)  # pylint: disable=possibly-used-before-assignment
 
     try:
         response = client.get_domain_name(domainName=api_base)
