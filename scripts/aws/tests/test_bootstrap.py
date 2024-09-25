@@ -3,7 +3,6 @@ Tests for scripts/aws/bootstrap.py
 """
 import boto3
 import pytest
-from moto import mock_apigateway, mock_route53
 from unittest import TestCase
 from bootstrap import get_domain, get_base_path, create_apigw_custom_domain_name,\
     create_route53_rs, bootstrap_api, create_base_path_mapping, file_arg_to_string
