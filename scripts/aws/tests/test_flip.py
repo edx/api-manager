@@ -3,7 +3,6 @@ Tests for scripts/aws/flip.py
 """
 import boto3
 import pytest
-from moto import mock_apigateway
 from unittest import TestCase
 from flip import get_live_stage, update_base_path_mapping
 
