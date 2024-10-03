@@ -39,3 +39,4 @@ swagger.yaml
 .swagger-codegen-ignore
 edx-api-stub-server/
 swagger-build-artifacts/
+venv
