@@ -58,7 +58,7 @@ paths:
   "/enterprise/v1/subscriptions":
     $ref: "https://raw.githubusercontent.com/edx/license-manager/b7dc6e0/api.yaml#/endpoints/v1/subscriptionsList"
   "/enterprise/v1/subscriptions/{uuid}/licenses/assign":
-    $ref: "https://raw.githubusercontent.com/edx/license-manager/b9e9ec9/api.yaml#/endpoints/v1/assignLicenses"
+    $ref: "https://raw.githubusercontent.com/edx/license-manager/ef94bee/api.yaml#/endpoints/v1/assignLicenses"
   "/enterprise/v1/subscriptions/{uuid}/licenses/bulk-revoke":
       $ref: "https://raw.githubusercontent.com/edx/license-manager/b9e9ec9/api.yaml#/endpoints/v1/revokeLicenses"
   "/enterprise/v1/bulk-license-enrollment":
