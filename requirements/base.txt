@@ -6,9 +6,9 @@
 #
 boto==2.49.0
     # via google-compute-engine
-boto3==1.35.6
+boto3==1.35.51
     # via -r requirements/base.in
-botocore==1.35.6
+botocore==1.35.51
     # via
     #   -r requirements/base.in
     #   boto3
@@ -24,17 +24,17 @@ jmespath==1.0.1
     #   -r requirements/base.in
     #   boto3
     #   botocore
-markupsafe==2.1.5
+markupsafe==3.0.2
     # via jinja2
 python-dateutil==2.9.0.post0
     # via botocore
-s3transfer==0.10.2
+s3transfer==0.10.3
     # via boto3
 six==1.16.0
     # via
     #   -r requirements/base.in
     #   python-dateutil
-urllib3==2.2.2
+urllib3==2.2.3
     # via botocore
 
 # The following packages are considered to be unsafe in a requirements file:
