@@ -3,7 +3,7 @@ Tests for scripts/aws/common/deploy.py
 """
 import boto3
 import pytest
-from moto import mock_apigateway
+from moto import mock_aws
 from unittest import TestCase
 from common.deploy import get_api_id, get_next_stage, deploy_api, update_stage
 
@@ -13,7 +13,7 @@ class DeployTest(TestCase):
     TestCase class for testing deploy.py
     """
 
-    @mock_apigateway
+    @mock_aws
     def setUp(self):
         self.rotation = ['red', 'black', 'turquoise']
         self.current_stage = 'black'
@@ -21,7 +21,7 @@ class DeployTest(TestCase):
         self.swagger_filename = 'fixtures/swagger.json'
 
     @pytest.mark.skip(reason="moto does not yet support AWS:ApiGateway:GetBasePathMapping")
-    @mock_apigateway
+    @mock_aws
     def test_get_api_id(self):
         pass
 
@@ -45,11 +45,11 @@ class DeployTest(TestCase):
             get_next_stage([], 'red')
 
     @pytest.mark.skip(reason="moto does not yet support AWS:ApiGateway:PutRestApi")
-    @mock_apigateway
+    @mock_aws
     def test_deploy_api(self):
         pass
 
     @pytest.mark.skip(reason="moto does not yet support AWS:ApiGateway:UpdateStage")
-    @mock_apigateway
+    @mock_aws
     def test_update_stage(self):
         pass
