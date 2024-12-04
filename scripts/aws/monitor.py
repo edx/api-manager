@@ -21,7 +21,9 @@
 # --acct-id 000 --lambda-timeout 10 --lambda-memory 512 --kms-key xxxx-xx-xx-xxx
 # --subnet-list subnet-112 subnet-113 --sg-list sg-899 sg-901 --environment stage --deployment edx
 #
-
+"""
+Api Gateway monitoring scripts
+"""
 import logging
 import time
 import argparse
@@ -49,7 +51,7 @@ def get_api_id(client, api_base_domain):
     return (response['restApiId'], response['stage'])
 
 
-def create_api_alarm(cw_session, alarm_name, metric,
+def create_api_alarm(*, cw_session, alarm_name, metric,
                      namespace, stat, comparison, description,
                      threshold, period, eval_period, dimensions, topic):
     """Puts data to the metric, then creates the alarm for appropriate metric in API Gateway"""
@@ -92,7 +94,7 @@ def create_lambda_function_zip(jinja_env, temp_dir, splunk_host, splunk_token, l
     return zip_file
 
 
-def get_lambda_exec_policy(jinja_env, temp_dir, region, acct_id, func_name, kms_key):
+def get_lambda_exec_policy(*, jinja_env, temp_dir, region, acct_id, func_name, kms_key):
     """updates the policy json and returns it"""
     resource_values = {
         'region': region,
@@ -165,7 +167,7 @@ def create_role_with_managed_policy(iam, role_name, assume_role_policy_document,
     return response['Role']['Arn']
 
 
-def create_lambda_function(client, function_name, runtime, role,
+def create_lambda_function(*, client, function_name, runtime, role,
                            handler, zip_file, description, timeout, mem_size, vpc):
     """Creates a lambda function to pull data from cloudwatch event.
     It only works works in VPC"""
@@ -248,20 +250,27 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     session = botocore.session.get_session()
-    j2_env = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
-                         trim_blocks=False)
+    j2_env = Environment(
+        loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
+        trim_blocks=False
+    )
     tmpdirname = tempfile.mkdtemp()
-    lambda_role_name = args.environment + '-' + args.deployment + '-' + 'lambda-basic-execution-monitor-cloudwatch-logs'
+    lambda_role_name = (
+        args.environment + '-' + args.deployment + '-' +
+        'lambda-basic-execution-monitor-cloudwatch-logs'
+    )
     lambda_function_name = args.environment + '-' + args.deployment + '-' + 'cloudwatch-logs-splunk'
 
     iam_client = session.create_client('iam', args.aws_region)
-    cloudwatch_log_role_arn = create_role_with_managed_policy(iam_client, 'apigateway-to-cloudwatch-logs',
-                                                              '{"Version": "2012-10-17","Statement": '
-                                                              '[{"Sid": "","Effect": "Allow","Principal": '
-                                                              '{"Service": "apigateway.amazonaws.com"},'
-                                                              '"Action": "sts:AssumeRole"}]}',
-                                                              'arn:aws:iam::aws:policy/service-role/'
-                                                              'AmazonAPIGatewayPushToCloudWatchLogs')
+    cloudwatch_log_role_arn = \
+        create_role_with_managed_policy(iam_client,
+                                        'apigateway-to-cloudwatch-logs',
+                                        '{"Version": "2012-10-17","Statement": '
+                                        '[{"Sid": "","Effect": "Allow","Principal": '
+                                        '{"Service": "apigateway.amazonaws.com"},'
+                                        '"Action": "sts:AssumeRole"}]}',
+                                        'arn:aws:iam::aws:policy/service-role/'
+                                        'AmazonAPIGatewayPushToCloudWatchLogs')
 
     logging.info('Waiting for the newly created role to be available')
     # Sleep for 10 seconds to allow the role created above to be avialable
@@ -274,45 +283,81 @@ if __name__ == '__main__':
     sns_client = session.create_client('sns', args.aws_region)
     cw = session.create_client('cloudwatch', args.aws_region)
 
-    create_api_alarm(cw, 'api-gateway-count', 'Count', 'ApiGateway',
-                     'Average', 'GreaterThanOrEqualToThreshold',
-                     'Average API count for a period of 5 min', 50, 300, 1,
-                     [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Stage', 'Value': api_stage}, {'Name': 'ApiId', 'Value': api_id}],
-                     get_topic_arn(sns_client, 'aws-non-critical-alert'))
+    create_api_alarm(
+        cw_session=cw, alarm_name='api-gateway-count', metric='Count', namespace='ApiGateway',
+        stat='Average', comparison='GreaterThanOrEqualToThreshold',
+        description='Average API count for a period of 5 min',
+        threshold=50, period=300, eval_period=1,
+        dimensions=[
+            {'Name': 'ApiName', 'Value': api_gateway_name},
+            {'Name': 'Stage', 'Value': api_stage},
+            {'Name': 'ApiId', 'Value': api_id}
+        ],
+        topic=get_topic_arn(sns_client, 'aws-non-critical-alert')
+    )
 
-    create_api_alarm(cw, 'api-gateway-latency', 'Latency', 'ApiGateway', 'Average',
-                     'GreaterThanOrEqualToThreshold', 'Average API Latency for a period of 5 min', 3, 300, 1,
-                     [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Stage', 'Value': api_stage}, {'Name': 'ApiId', 'Value': api_id}],
-                     get_topic_arn(sns_client, 'aws-non-critical-alert'))
+    create_api_alarm(
+        cw_session=cw, alarm_name='api-gateway-latency', metric='Latency', namespace='ApiGateway',
+        stat='Average', comparison='GreaterThanOrEqualToThreshold',
+        description='Average API Latency for a period of 5 min',
+        threshold=3, period=300, eval_period=1,
+        dimensions=[
+            {'Name': 'ApiName', 'Value': api_gateway_name},
+            {'Name': 'Stage', 'Value': api_stage},
+            {'Name': 'ApiId', 'Value': api_id}
+        ],
+        topic=get_topic_arn(sns_client, 'aws-non-critical-alert')
+    )
 
-    create_api_alarm(cw, 'api-gateway-errors-4xx', '4XXError', 'ApiGateway', 'Average',
-                     'GreaterThanOrEqualToThreshold', 'Average 4XX errors for a period of 5 min', 4, 300, 1,
-                     [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Stage', 'Value': api_stage}, {'Name': 'ApiId', 'Value': api_id}],
-                     get_topic_arn(sns_client, 'aws-non-critical-alert'))
+    create_api_alarm(
+        cw_session=cw, alarm_name='api-gateway-errors-4xx', metric='4XXError',
+        namespace='ApiGateway', stat='Average', comparison='GreaterThanOrEqualToThreshold',
+        description='Average 4XX errors for a period of 5 min',
+        threshold=4, period=300, eval_period=1,
+        dimensions=[
+            {'Name': 'ApiName', 'Value': api_gateway_name},
+            {'Name': 'Stage', 'Value': api_stage},
+            {'Name': 'ApiId', 'Value': api_id}
+        ],
+        topic=get_topic_arn(sns_client, 'aws-non-critical-alert')
+    )
 
-    create_api_alarm(cw, 'api-gateway-errors-5xx', '5XXError', 'ApiGateway', 'Average',
-                     'GreaterThanOrEqualToThreshold', 'Average 5XX errors for a period of 5 min', 4, 300, 1,
-                     [{'Name': 'ApiName', 'Value': api_gateway_name},
-                      {'Name': 'Stage', 'Value': api_stage}, {'Name': 'ApiId', 'Value': api_id}],
-                     get_topic_arn(sns_client, 'aws-non-critical-alert'))
+    create_api_alarm(
+        cw_session=cw, alarm_name='api-gateway-errors-5xx', metric='5XXError',
+        namespace='ApiGateway', stat='Average', comparison='GreaterThanOrEqualToThreshold',
+        description='Average 5XX errors for a period of 5 min',
+        threshold=4, period=300, eval_period=1,
+        dimensions=[
+            {'Name': 'ApiName', 'Value': api_gateway_name},
+            {'Name': 'Stage', 'Value': api_stage},
+            {'Name': 'ApiId', 'Value': api_id}
+        ],
+        topic=get_topic_arn(sns_client, 'aws-non-critical-alert')
+    )
 
-    lambda_exec_role_arn = create_role_with_inline_policy(iam_client, lambda_role_name,
-                                                          '{"Version": "2012-10-17","Statement": '
-                                                          '[{"Effect": "Allow","Principal": '
-                                                          '{"Service": "lambda.amazonaws.com"},'
-                                                          '"Action": "sts:AssumeRole"}]}',
-                                                          open(get_lambda_exec_policy(j2_env, tmpdirname,  # pylint: disable=consider-using-with
-                                                                                      args.aws_region,
-                                                                                      args.acct_id,
-                                                                                      lambda_function_name,
-                                                                                      args.kms_key),
-                                                               encoding='utf-8').read())
+    with open(
+        get_lambda_exec_policy(
+            jinja_env=j2_env,
+            temp_dir=tmpdirname,
+            region=args.aws_region,
+            acct_id=args.acct_id,
+            func_name=lambda_function_name,
+            kms_key=args.kms_key
+        ),
+        encoding='utf-8'
+    ) as f:
+        lambda_exec_role_arn = create_role_with_inline_policy(
+            iam_client,
+            lambda_role_name,
+            '{"Version": "2012-10-17",'
+            '"Statement": [{"Effect": "Allow","Principal": {"Service": "lambda.amazonaws.com"},'
+            '"Action": "sts:AssumeRole"}]}',
+            f.read()
+        )
 
     logging.info('Waiting for the newly created role to be available')
-    # Sleep for 10 seconds to allow the role created above to be avialable for lambda function creation
+    # Sleep for 10 seconds to allow the role created above
+    # to be available for lambda function creation
     time.sleep(10)
     attach_managed_policy(iam_client, lambda_role_name,
                           'arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole')
@@ -320,11 +365,21 @@ if __name__ == '__main__':
     zip_file_name = create_lambda_function_zip(j2_env, tmpdirname, args.splunk_host,
                                                args.splunk_token, lambda_function_name)
     vpc_config = {'SubnetIds': args.subnet_list, 'SecurityGroupIds': args.sg_list}
-    create_lambda_function(lambda_client, lambda_function_name, 'nodejs18.x', lambda_exec_role_arn,
-                           'index.handler', zip_file_name,
-                           'Demonstrates logging events to Splunk HTTP Event '
-                           'Collector, accessing resources in a VPC', args.lambda_timeout, args.lambda_memory,
-                           vpc_config)
+    create_lambda_function(
+        client=lambda_client,
+        function_name=lambda_function_name,
+        runtime='nodejs18.x',
+        role=lambda_exec_role_arn,
+        handler='index.handler',
+        zip_file=zip_file_name,
+        description=(
+            'Demonstrates logging events to Splunk HTTP Event Collector,'
+            ' accessing resources in a VPC'
+        ),
+        timeout=args.lambda_timeout,
+        mem_size=args.lambda_memory,
+        vpc=vpc_config
+    )
     try:
         shutil.rmtree(tmpdirname)
     except OSError as exc:

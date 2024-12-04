@@ -103,6 +103,7 @@ def update_stage(client, rest_api_id, stage_name, stage_settings):
 
 
 def deploy(cli_args, integration_settings, stage_settings):
+    """Deploys an API to a new stage based on provided settings and domain."""
     session = botocore.session.get_session()
     apig = session.create_client('apigateway', cli_args.aws_region)
 
