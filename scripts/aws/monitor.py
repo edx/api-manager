@@ -49,7 +49,7 @@ def get_api_id(client, api_base_domain):
     return (response['restApiId'], response['stage'])
 
 
-def create_api_alarm(cw_session, alarm_name, metric,
+def create_api_alarm(*, cw_session, alarm_name, metric,
                      namespace, stat, comparison, description,
                      threshold, period, eval_period, dimensions, topic):
     """Puts data to the metric, then creates the alarm for appropriate metric in API Gateway"""
@@ -92,7 +92,7 @@ def create_lambda_function_zip(jinja_env, temp_dir, splunk_host, splunk_token, l
     return zip_file
 
 
-def get_lambda_exec_policy(jinja_env, temp_dir, region, acct_id, func_name, kms_key):
+def get_lambda_exec_policy(*, jinja_env, temp_dir, region, acct_id, func_name, kms_key):
     """updates the policy json and returns it"""
     resource_values = {
         'region': region,
@@ -165,7 +165,7 @@ def create_role_with_managed_policy(iam, role_name, assume_role_policy_document,
     return response['Role']['Arn']
 
 
-def create_lambda_function(client, function_name, runtime, role,
+def create_lambda_function(*, client, function_name, runtime, role,
                            handler, zip_file, description, timeout, mem_size, vpc):
     """Creates a lambda function to pull data from cloudwatch event.
     It only works works in VPC"""
