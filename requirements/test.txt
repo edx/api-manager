@@ -6,7 +6,7 @@
 #
 annotated-types==0.7.0
     # via pydantic
-astroid==3.2.4
+astroid==3.3.5
     # via pylint
 attrs==24.2.0
     # via
@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.35.73
+boto3==1.35.74
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.35.73
+botocore==1.35.74
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -129,14 +129,12 @@ pycparser==2.22
     # via cffi
 pycurl==7.45.3
     # via pyresttest
-pydantic==2.10.2
+pydantic==2.10.3
     # via aws-sam-translator
 pydantic-core==2.27.1
     # via pydantic
-pylint==3.2.6
-    # via
-    #   -c requirements/constraints.txt
-    #   -r requirements/test.in
+pylint==3.3.2
+    # via -r requirements/test.in
 pyparsing==3.2.0
     # via moto
 pyresttest==1.7.1
@@ -173,7 +171,7 @@ responses==0.25.3
     # via moto
 rfc3339-validator==0.1.4
     # via openapi-schema-validator
-rpds-py==0.22.0
+rpds-py==0.22.1
     # via
     #   jsonschema
     #   referencing

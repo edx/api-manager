@@ -13,44 +13,82 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--aws-region", required=False, default="us-east-1")
-    parser.add_argument("--api-base-domain", required=True,
-                        help="The name of the API Gateway domain to be created.")
-    parser.add_argument("--swagger-filename", required=True,
-                        help="The name of a complete Swagger 2.0 specification file with AWS vendor hooks.")
-    parser.add_argument("--tag", required=True,
-                        help="Unique identifier for this deployment (such as a git hash)")
-    parser.add_argument("--rotation-order", required=True, nargs='+',
-                        help="Ordered list of stages in the deployment ring (ex: 'red black')")
-    parser.add_argument("--log-level", required=False, default="OFF", choices=['OFF', 'ERROR', 'INFO'],
-                        help="Verbosity of messages sent to CloudWatch Logs")
-    parser.add_argument("--metrics", required=False, default="false", choices=['false', 'true'],
-                        help="Enable CloudWatch metrics")
-    parser.add_argument("--caching", required=False, default="false", choices=['false', 'true'],
-                        help="Enable API Gateway caching feature")
-    parser.add_argument("--rate-limit", required=False, default="500", type=str,
-                        help="Default per-resource average rate limit")
-    parser.add_argument("--burst-limit", required=False, default="1000", type=str,
-                        help="Default per-resource maximum rate limit")
-    parser.add_argument("--landing-page", required=True,
-                        help="Location of landing page for 'root' level requests")
-    parser.add_argument("--edxapp-host", required=True,
-                        help="Location of edxapp for request routing")
-    parser.add_argument("--catalog-host", required=True,
-                        help="Location of catalog IDA for request routing")
-    parser.add_argument("--enterprise-host", required=False, default='',
-                        help="Location of enterprise IDA for request routing")
-    parser.add_argument('--analytics-api-host', required=True,
-                        help="Location of analyitcs-api IDA for request routing")
-    parser.add_argument('--registrar-host', required=True,
-                        help="Location of registrar IDA for request routing")
-    parser.add_argument('--enterprise-catalog-host', required=True,
-                        help="Location of enterprise catalog IDA for request routing")
-    parser.add_argument('--authoring-host', required=True,
-                        help="Location of Studio for authoring request routing")
-    parser.add_argument('--license-manager-host', required=True,
-                        help="Location of License Manager IDA for request routing")
-    parser.add_argument('--enterprise-access-host', required=True,
-                        help="Location of Enterprise Access IDA for request routing")
+    parser.add_argument(
+        "--api-base-domain", required=True,
+        help="The name of the API Gateway domain to be created."
+    )
+    parser.add_argument(
+        "--swagger-filename", required=True,
+        help="The name of a complete Swagger 2.0 specification file with AWS vendor hooks."
+    )
+    parser.add_argument(
+        "--tag", required=True,
+        help="Unique identifier for this deployment (such as a git hash)"
+    )
+    parser.add_argument(
+        "--rotation-order", required=True, nargs='+',
+        help="Ordered list of stages in the deployment ring (ex: 'red black')"
+    )
+    parser.add_argument(
+        "--log-level", required=False, default="OFF", choices=['OFF', 'ERROR', 'INFO'],
+        help="Verbosity of messages sent to CloudWatch Logs"
+    )
+    parser.add_argument(
+        "--metrics", required=False, default="false", choices=['false', 'true'],
+        help="Enable CloudWatch metrics"
+    )
+    parser.add_argument(
+        "--caching", required=False, default="false", choices=['false', 'true'],
+        help="Enable API Gateway caching feature"
+    )
+    parser.add_argument(
+        "--rate-limit", required=False, default="500", type=str,
+        help="Default per-resource average rate limit"
+    )
+    parser.add_argument(
+        "--burst-limit", required=False, default="1000", type=str,
+        help="Default per-resource maximum rate limit"
+    )
+    parser.add_argument(
+        "--landing-page", required=True,
+        help="Location of landing page for 'root' level requests"
+    )
+    parser.add_argument(
+        "--edxapp-host", required=True,
+        help="Location of edxapp for request routing"
+    )
+    parser.add_argument(
+        "--catalog-host", required=True,
+        help="Location of catalog IDA for request routing"
+    )
+    parser.add_argument(
+        "--enterprise-host", required=False, default='',
+        help="Location of enterprise IDA for request routing"
+    )
+    parser.add_argument(
+        '--analytics-api-host', required=True,
+        help="Location of analyitcs-api IDA for request routing"
+    )
+    parser.add_argument(
+        '--registrar-host', required=True,
+        help="Location of registrar IDA for request routing"
+    )
+    parser.add_argument(
+        '--enterprise-catalog-host', required=True,
+        help="Location of enterprise catalog IDA for request routing"
+    )
+    parser.add_argument(
+        '--authoring-host', required=True,
+        help="Location of Studio for authoring request routing"
+    )
+    parser.add_argument(
+        '--license-manager-host', required=True,
+        help="Location of License Manager IDA for request routing"
+    )
+    parser.add_argument(
+        '--enterprise-access-host', required=True,
+        help="Location of Enterprise Access IDA for request routing"
+    )
 
     cli_args = parser.parse_args()
     integration_settings = {

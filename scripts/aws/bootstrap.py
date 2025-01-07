@@ -119,7 +119,7 @@ def create_base_path_mapping(rest_api_id, api_base, stage_name):
 
 
 def file_arg_to_string(filename):
-
+    """Returns file content as string"""
     with open(filename, "r", encoding='utf-8') as fin:
         body = fin.read()
 
