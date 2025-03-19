@@ -8,7 +8,7 @@ annotated-types==0.7.0
     # via pydantic
 astroid==3.3.9
     # via pylint
-attrs==25.1.0
+attrs==25.3.0
     # via
     #   jsonschema
     #   referencing
@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.37.11
+boto3==1.37.15
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.37.11
+botocore==1.37.15
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -36,7 +36,7 @@ certifi==2025.1.31
     # via requests
 cffi==1.17.1
     # via cryptography
-cfn-lint==1.29.1
+cfn-lint==1.31.1
     # via moto
 charset-normalizer==3.4.1
     # via requests
