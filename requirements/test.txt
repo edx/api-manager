@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.37.15
+boto3==1.37.20
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.37.15
+botocore==1.37.20
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -36,7 +36,7 @@ certifi==2025.1.31
     # via requests
 cffi==1.17.1
     # via cryptography
-cfn-lint==1.31.1
+cfn-lint==1.32.1
     # via moto
 charset-normalizer==3.4.1
     # via requests
@@ -60,7 +60,7 @@ graphql-core==3.2.6
     # via moto
 idna==3.10
     # via requests
-iniconfig==2.0.0
+iniconfig==2.1.0
     # via pytest
 isort==6.0.1
     # via pylint
@@ -117,7 +117,7 @@ pathable==0.4.4
     # via jsonschema-path
 pep8==1.7.1
     # via -r requirements/test.in
-platformdirs==4.3.6
+platformdirs==4.3.7
     # via pylint
 pluggy==1.5.0
     # via pytest
@@ -131,9 +131,9 @@ pydantic==2.10.6
     # via aws-sam-translator
 pydantic-core==2.27.2
     # via pydantic
-pylint==3.3.5
+pylint==3.3.6
     # via -r requirements/test.in
-pyparsing==3.2.1
+pyparsing==3.2.3
     # via moto
 pyresttest==1.7.1
     # via -r requirements/test.in
