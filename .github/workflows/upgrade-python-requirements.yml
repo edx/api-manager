@@ -23,12 +23,12 @@ jobs:
       - name: setup target branch
         run: echo "target_branch=$(if ['${{ github.event.inputs.branch }}' = '']; then echo 'master'; else echo '${{ github.event.inputs.branch }}'; fi)" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ env.target_branch }}
 
       - name: setup python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -55,7 +55,7 @@ jobs:
           --target-branch="${{ env.target_branch }}" --base-branch-name="upgrade-python-requirements" \
           --commit-message="chore: Updating Python Requirements" --pr-title="Python Requirements Update" \
           --pr-body="Python requirements update.Please review the [changelogs](https://openedx.atlassian.net/wiki/spaces/TE/pages/1001521320/Python+Package+Changelogs) for the upgraded packages." \
-          --user-reviewers="" --team-reviewers="arbi-bom" --delete-old-pull-requests
+          --user-reviewers="" --team-reviewers="orbi-bom" --delete-old-pull-requests
 
       - name: Send failure notification
         if: ${{ failure() }}
@@ -66,6 +66,6 @@ jobs:
           username: ${{secrets.EDX_SMTP_USERNAME}}
           password: ${{secrets.EDX_SMTP_PASSWORD}}
           subject: Upgrade python requirements workflow failed in ${{github.repository}}
-          to: arbi-bom@edx.org
+          to: orbi-bom-upgrade-prs@2u-internal.jsmalerts.atlassian.net
           from: github-actions <github-actions@edx.org>
           body: Upgrade python requirements workflow in ${{github.repository}} failed! For details see "github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
