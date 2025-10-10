@@ -57,8 +57,9 @@ jobs:
           --pr-body="Python requirements update.Please review the [changelogs](https://openedx.atlassian.net/wiki/spaces/TE/pages/1001521320/Python+Package+Changelogs) for the upgraded packages." \
           --user-reviewers="" --team-reviewers="orbi-bom" --delete-old-pull-requests
 
-      - name: Send notification
-        uses: dawidd6/action-send-mail@v4
+      - name: Send failure notification
+        if: ${{ failure() }}
+        uses: dawidd6/action-send-mail@v6
         with:
           server_address: email-smtp.us-east-1.amazonaws.com
           server_port: 465
