@@ -6,13 +6,13 @@
 #
 annotated-types==0.7.0
     # via pydantic
-astroid==3.3.9
+astroid==3.3.11
     # via pylint
 attrs==25.3.0
     # via
     #   jsonschema
     #   referencing
-aws-sam-translator==1.95.0
+aws-sam-translator==1.100.0
     # via cfn-lint
 aws-xray-sdk==2.14.0
     # via moto
@@ -20,31 +20,31 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.37.25
+boto3==1.40.42
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.37.25
+botocore==1.40.42
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
     #   boto3
     #   moto
     #   s3transfer
-certifi==2025.1.31
+certifi==2025.8.3
     # via requests
-cffi==1.17.1
+cffi==2.0.0
     # via cryptography
-cfn-lint==1.32.1
+cfn-lint==1.40.0
     # via moto
-charset-normalizer==3.4.1
+charset-normalizer==3.4.3
     # via requests
-cryptography==44.0.2
+cryptography==46.0.2
     # via
     #   joserfc
     #   moto
-dill==0.3.9
+dill==0.4.0
     # via pylint
 distro==1.9.0
     # via
@@ -73,26 +73,26 @@ jmespath==1.0.1
     #   -r requirements/base.txt
     #   boto3
     #   botocore
-joserfc==1.0.4
+joserfc==1.3.4
     # via moto
 jsonpatch==1.33
     # via cfn-lint
 jsonpointer==3.0.0
     # via jsonpatch
-jsonschema==4.23.0
+jsonschema==4.25.1
     # via
     #   aws-sam-translator
     #   openapi-schema-validator
     #   openapi-spec-validator
 jsonschema-path==0.3.4
     # via openapi-spec-validator
-jsonschema-specifications==2024.10.1
+jsonschema-specifications==2025.9.1
     # via
     #   jsonschema
     #   openapi-schema-validator
-lazy-object-proxy==1.10.0
+lazy-object-proxy==1.12.0
     # via openapi-spec-validator
-markupsafe==3.0.2
+markupsafe==3.0.3
     # via
     #   -r requirements/base.txt
     #   jinja2
@@ -101,50 +101,52 @@ mccabe==0.7.0
     # via pylint
 mock==5.2.0
     # via -r requirements/test.in
-moto[cloudformation]==5.1.2
+moto[cloudformation]==5.1.13
     # via -r requirements/test.in
 mpmath==1.3.0
     # via sympy
-networkx==3.4.2
+networkx==3.5
     # via cfn-lint
 openapi-schema-validator==0.6.3
     # via openapi-spec-validator
-openapi-spec-validator==0.7.1
+openapi-spec-validator==0.7.2
     # via moto
-packaging==24.2
+packaging==25.0
     # via pytest
 pathable==0.4.4
     # via jsonschema-path
 pep8==1.7.1
     # via -r requirements/test.in
-platformdirs==4.3.7
+platformdirs==4.4.0
     # via pylint
-pluggy==1.5.0
+pluggy==1.6.0
     # via pytest
 py-partiql-parser==0.6.1
     # via moto
-pycparser==2.22
+pycparser==2.23
     # via cffi
-pycurl==7.45.6
+pycurl==7.45.7
     # via pyresttest
-pydantic==2.11.1
+pydantic==2.11.9
     # via aws-sam-translator
-pydantic-core==2.33.0
+pydantic-core==2.33.2
     # via pydantic
-pylint==3.3.6
+pygments==2.19.2
+    # via pytest
+pylint==3.3.8
     # via -r requirements/test.in
-pyparsing==3.2.3
+pyparsing==3.2.5
     # via moto
 pyresttest==1.7.1
     # via -r requirements/test.in
-pytest==8.3.5
+pytest==8.4.2
     # via -r requirements/test.in
 python-dateutil==2.9.0.post0
     # via
     #   -r requirements/base.txt
     #   botocore
     #   moto
-pyyaml==6.0.2
+pyyaml==6.0.3
     # via
     #   cfn-lint
     #   jsonschema-path
@@ -156,23 +158,23 @@ referencing==0.36.2
     #   jsonschema
     #   jsonschema-path
     #   jsonschema-specifications
-regex==2024.11.6
+regex==2025.9.18
     # via cfn-lint
-requests==2.32.3
+requests==2.32.5
     # via
     #   docker
     #   jsonschema-path
     #   moto
     #   responses
-responses==0.25.7
+responses==0.25.8
     # via moto
 rfc3339-validator==0.1.4
     # via openapi-schema-validator
-rpds-py==0.24.0
+rpds-py==0.27.1
     # via
     #   jsonschema
     #   referencing
-s3transfer==0.11.4
+s3transfer==0.14.0
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -181,11 +183,11 @@ six==1.17.0
     #   -r requirements/base.txt
     #   python-dateutil
     #   rfc3339-validator
-sympy==1.13.3
+sympy==1.14.0
     # via cfn-lint
-tomlkit==0.13.2
+tomlkit==0.13.3
     # via pylint
-typing-extensions==4.13.0
+typing-extensions==4.15.0
     # via
     #   aws-sam-translator
     #   cfn-lint
@@ -193,11 +195,10 @@ typing-extensions==4.13.0
     #   pydantic-core
     #   referencing
     #   typing-inspection
-typing-inspection==0.4.0
+typing-inspection==0.4.2
     # via pydantic
-urllib3==2.2.3
+urllib3==2.5.0
     # via
-    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.txt
     #   botocore
     #   docker
@@ -205,9 +206,9 @@ urllib3==2.2.3
     #   responses
 werkzeug==3.1.3
     # via moto
-wrapt==1.17.2
+wrapt==1.17.3
     # via aws-xray-sdk
-xmltodict==0.14.2
+xmltodict==1.0.2
     # via moto
 
 # The following packages are considered to be unsafe in a requirements file:
