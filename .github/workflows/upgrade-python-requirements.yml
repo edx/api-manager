@@ -69,3 +69,16 @@ jobs:
           to: orbi-bom-upgrade-prs@2u-internal.jsmalerts.atlassian.net
           from: github-actions <github-actions@edx.org>
           body: Upgrade python requirements workflow in ${{github.repository}} failed! For details see "github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Send success notification
+        if: ${{ success() }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: email-smtp.us-east-1.amazonaws.com
+          server_port: 465
+          username: ${{secrets.EDX_SMTP_USERNAME}}
+          password: ${{secrets.EDX_SMTP_PASSWORD}}
+          subject: Upgrade python requirements workflow executed successfully in ${{github.repository}}
+          to: 'orbi-bom-upgrade-prs@2u-internal.jsmalerts.atlassian.net'
+          from: github-actions <github-actions@edx.org>
+          body: Upgrade python requirements workflow successfully executed in ${{ github.repository }}. For details see "github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
