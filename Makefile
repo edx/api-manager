@@ -36,11 +36,11 @@ ifeq ($(HAS_APT),)
 	@exit 1
 endif
 	@echo "Installing Python $(PYTHON_VERSION) using apt-get..."
-	sudo apt-get update
-	sudo apt-get install -y software-properties-common
-	sudo add-apt-repository -y ppa:deadsnakes/ppa
-	sudo apt-get update
-	sudo apt-get install -y python$(PYTHON_VERSION) python$(PYTHON_VERSION)-venv python$(PYTHON_VERSION)-dev
+	apt-get update
+	apt-get install -y software-properties-common
+	add-apt-repository -y ppa:deadsnakes/ppa
+	apt-get update
+	apt-get install -y python$(PYTHON_VERSION) python$(PYTHON_VERSION)-venv python$(PYTHON_VERSION)-dev
 	@echo "Python $(PYTHON_VERSION) installed successfully"
 else
 	@echo "Found python3.11 at $(PYTHON311)"
