@@ -20,12 +20,12 @@ boto==2.49.0
     # via
     #   -r requirements/base.txt
     #   google-compute-engine
-boto3==1.42.31
+boto3==1.42.36
     # via
     #   -r requirements/base.txt
     #   aws-sam-translator
     #   moto
-botocore==1.42.31
+botocore==1.42.36
     # via
     #   -r requirements/base.txt
     #   aws-xray-sdk
@@ -40,7 +40,7 @@ cfn-lint==1.41.0
     # via moto
 charset-normalizer==3.4.4
     # via requests
-cryptography==46.0.3
+cryptography==46.0.4
     # via
     #   joserfc
     #   moto
@@ -68,7 +68,7 @@ jinja2==3.1.6
     # via
     #   -r requirements/base.txt
     #   moto
-jmespath==1.0.1
+jmespath==1.1.0
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -111,7 +111,7 @@ openapi-schema-validator==0.6.3
     # via openapi-spec-validator
 openapi-spec-validator==0.7.2
     # via moto
-packaging==25.0
+packaging==26.0
     # via pytest
 pathable==0.4.4
     # via jsonschema-path
@@ -123,7 +123,7 @@ pluggy==1.6.0
     # via pytest
 py-partiql-parser==0.6.3
     # via moto
-pycparser==2.23
+pycparser==3.0
     # via cffi
 pycurl==7.45.7
     # via pyresttest
@@ -135,7 +135,7 @@ pygments==2.19.2
     # via pytest
 pylint==4.0.4
     # via -r requirements/test.in
-pyparsing==3.3.1
+pyparsing==3.3.2
     # via moto
 pyresttest==1.7.1
     # via -r requirements/test.in
