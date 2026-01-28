@@ -10,3 +10,11 @@
 
 # This file contains all common constraints for edx-repos
 -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+
+# Need to pin this as long as we're on Python 3.8 in this codebase
+# https://pypi.org/project/boto3/1.38.0/
+boto3<1.38
+
+# 7.0 dropped support for Python 3.8
+# https://pypi.org/project/pip-tools/7.0.0/
+pip-tools<7.0
