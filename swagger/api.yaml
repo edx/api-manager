@@ -56,13 +56,13 @@ paths:
   # License Manager IDA
   # These are served from the license manager IDA, but we surface them with the rest of the enterprise endpoints
   "/enterprise/v1/subscriptions":
-    $ref: "https://raw.githubusercontent.com/edx/license-manager/b7dc6e0/api.yaml#/endpoints/v1/subscriptionsList"
+    $ref: "https://raw.githubusercontent.com/edx/license-manager/d3b22695/api.yaml#/endpoints/v1/subscriptionsList"
   "/enterprise/v1/subscriptions/{uuid}/licenses/assign":
-    $ref: "https://raw.githubusercontent.com/edx/license-manager/ef94bee/api.yaml#/endpoints/v1/assignLicenses"
+    $ref: "https://raw.githubusercontent.com/edx/license-manager/d3b22695/api.yaml#/endpoints/v1/assignLicenses"
   "/enterprise/v1/subscriptions/{uuid}/licenses/bulk-revoke":
-      $ref: "https://raw.githubusercontent.com/edx/license-manager/b9e9ec9/api.yaml#/endpoints/v1/revokeLicenses"
+      $ref: "https://raw.githubusercontent.com/edx/license-manager/d3b22695/api.yaml#/endpoints/v1/revokeLicenses"
   "/enterprise/v1/bulk-license-enrollment":
-    $ref: "https://raw.githubusercontent.com/edx/license-manager/b9e9ec9/api.yaml#/endpoints/v1/bulkLicenseEnrollment"
+    $ref: "https://raw.githubusercontent.com/edx/license-manager/d3b22695/api.yaml#/endpoints/v1/bulkLicenseEnrollment"
   # Enterprise Access IDA
   # These are served from the enterprise-access IDA, but we surface them with the rest of the enterprise endpoints
   "/enterprise/v1/assignment-configurations/{assignment_configuration_uuid}/admin/assignments/":
